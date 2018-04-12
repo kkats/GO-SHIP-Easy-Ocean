@@ -3,8 +3,8 @@ User friendly WOCE/GO-SHIP data
 
 ## Resources
 
-#### [Clean Ocean Section](https://agu.confex.com/agu/os18/meetingapp.cgi/Paper/319661) by J.Swift (product available as [Java OceanAtlas](http://joa.ucsd.edu/data/best.html)
-
+#### [Clean Ocean Section](https://agu.confex.com/agu/os18/meetingapp.cgi/Paper/319661) by J.Swift (product available as [Java OceanAtlas](http://joa.ucsd.edu/data/best.html))
+For bottle data
 1. Remove bad (WOCE QC 4) and uncertain (WOCE QC 3) and replace with WOCE missing values
 1. Remove bad (usually leaking; WOCE QC 4) botles
 1. Eliminates extra bottles (large volume samples) -- usually bottles with no oxygen, nutrients, etc.
@@ -13,6 +13,7 @@ User friendly WOCE/GO-SHIP data
 1. **Eliminate stations not on the section line, duplicate stations, incomplete stations, mearge multiple casts, and sort the stations geographically**
 1. Plot bottle S, Do, Si to assess whether any additional stations be removed due to large numbers of missing values that distort plots
 1. **Join long sections carried out over multiple cruises into single ocean-spanning transects. Eliminate any overlapping stations & section segments with an eye to data continuity**
+1. Convert depth (m) to pressure (db)
 
 
 #### [WOCE clean sections](http://sam.ucsd.edu/vertical_sections/.index.html) by L.Talley
