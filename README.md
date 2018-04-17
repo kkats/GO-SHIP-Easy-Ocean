@@ -50,4 +50,6 @@ As practicable as possible. Extended table of Kawano et al. [(2006)](https://lin
 
 
 
-
+## Trivia
++ Use two digit section number (i.e. `P06` not `P6`).
++ Use `-999` for missing data as per [WHP Exchange](https://exchange-format.readthedocs.io/en/latest/common.html#parameter-and-unit-lines)
