@@ -1,6 +1,12 @@
 # WOCE-GO-SHIP-clean-sections
 User friendly WOCE/GO-SHIP data
 
+## Requirements
+#### [Matlab](https://stackoverflow.blog/2017/10/31/disliked-programming-languages/)
+
+#### [TEOS-10](http://www.teos-10.org/software.htm)
+We use v3.06 for Matlab	 at the time of writing.
+
 ## Resources
 
 #### [Clean Ocean Section](https://agu.confex.com/agu/os18/meetingapp.cgi/Paper/319661) by J.Swift (product available as [Java OceanAtlas](http://joa.ucsd.edu/data/best.html))
@@ -53,3 +59,4 @@ As practicable as possible. Extended table of Kawano et al. [(2006)](https://lin
 ## Trivia
 + Use two digit section number (i.e. `P06` not `P6`).
 + Use `-999` for missing data as per [WHP Exchange](https://exchange-format.readthedocs.io/en/latest/common.html#parameter-and-unit-lines)
++ Do not use negative logitude (i.e. longitude always in [0,360]).
