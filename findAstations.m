@@ -1,4 +1,4 @@
-function isInA =findAstations(headerfname, stations)
+function isInA =findAstations(stations, headerfname)
 %
 % Find station in WOCE Atlas header file from our stations(:)
 %

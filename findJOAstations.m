@@ -1,4 +1,4 @@
-function isInJOA = findJOAstations(csvJOAfname, stations)
+function isInJOA = findJOAstations(stations, csvJOAfname)
 %
 % Find stations in JOA's CSV output from our stations(:)
 %
@@ -57,6 +57,7 @@ while 1
     else
         % No CCHDO statations near JOA station
         not_found = [joa(n); not_found];
+        continue;
     end
     % double check
     % compare (1) first 3 characters of stnnum
@@ -71,6 +72,7 @@ while 1
         % closest station found but fails comparison (1)(2)(3)
         joa(n).pair = ig1;
         not_match = [joa(n); not_match];
+        continue;
     end
     % found!
     isInJOA(ig1) = true;

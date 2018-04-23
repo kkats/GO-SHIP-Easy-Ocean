@@ -127,9 +127,6 @@ te(te_flg ~= 2) = NaN;
 sa(sa_flg ~= 2) = NaN;
 ox(ox_flg ~= 2) = NaN;
 
-% output stations files
-print_stations(stations, [outputfilename '.station']);
-
 % finally save .mat files
 eval(['save ''' outputfilename '''.mat stations pr te sa ox']);
 end % function read_ctd_nc

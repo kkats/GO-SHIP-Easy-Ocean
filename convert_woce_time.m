@@ -6,6 +6,8 @@ function mtime = parse_woce_time(w_date, w_time, flag)
 % Default is 'yyyymmdd' for w_date, but when `flag' exists
 % 'ddmmyy' is expected.
 %
+
+% w_date and w_time are in Int16
 wd = double(w_date);
 wt = double(w_time);
 if nargin < 3
