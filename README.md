@@ -1,6 +1,11 @@
 # WOCE-GO-SHIP-clean-sections
 User friendly WOCE/GO-SHIP data
 
+## Documents
++ [READEME.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/README.md) This file.
++ [Procedure.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/Procedure.md) What to do.
++ [DataStructure.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/DataStructure.md) Internal data structure.
+
 ## Requirements
 #### [Matlab](https://stackoverflow.blog/2017/10/31/disliked-programming-languages/)
 
@@ -59,4 +64,4 @@ As practicable as possible. Extended table of Kawano et al. [(2006)](https://lin
 ## Trivia
 + Use two digit section number (i.e. `P06` not `P6`).
 + Use `-999` for missing data as per [WHP Exchange](https://exchange-format.readthedocs.io/en/latest/common.html#parameter-and-unit-lines)
-+ Do not use negative logitude (i.e. longitude always in [0,360]).
++ Do not use negative logitude (i.e. longitude always in [0,360]). Special treatment needed for sections which run across the Greenwich Meridian (maybe use longitude in [180,540]?).

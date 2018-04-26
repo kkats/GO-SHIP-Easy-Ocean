@@ -1,4 +1,4 @@
-function read_ctd_nc(directory, outputfilename)
+function read_ctd_nc(directory, outputfname)
 %
 % Input: Directory where NetCDF CTD files have been unzipped
 %        and outputfilename (optional)
@@ -15,10 +15,10 @@ function read_ctd_nc(directory, outputfilename)
 %
 %
 if nargin < 1
-    error('Usage: read_ctd_nc(directory_of_unzipped_CTD, output_filename)');
+    error('Usage: read_ctd_nc(directory_of_unzipped_CTD [, output_filename])');
 end
 if nargin < 2
-    outputfilename = 'unnamed';
+    outputfname = 'unnamed';
 end
 files = dir([directory filesep '*.nc']);
 
@@ -128,7 +128,7 @@ sa(sa_flg ~= 2) = NaN;
 ox(ox_flg ~= 2) = NaN;
 
 % finally save .mat files
-eval(['save ''' outputfilename '''.mat stations pr te sa ox']);
+eval(['save ''' outputfname '''.mat stations pr te sa ox']);
 end % function read_ctd_nc
 %
 % utility funtion
