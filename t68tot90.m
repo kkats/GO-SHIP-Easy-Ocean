@@ -1,6 +1,6 @@
-function t68 = t90tot68(t90);
+function t90 = t68tot90(t68);
 %
 % http://www.seabird.com/faq/what-difference-temperature-expressions-between-ipts-68-and-its-90
 %
-t68 = 1.00024*t90;
+t90 = t68 / 1.00024;
 end

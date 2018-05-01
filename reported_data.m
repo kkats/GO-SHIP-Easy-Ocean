@@ -57,6 +57,7 @@ end
 %%%
 [m, dummy] = size(pr);
 [ctdprs, ctdsal, ctdtem, ctdoxy] = deal(NaN(m, nstn));
+[ctdSA, ctdCT] = deal(NaN(m, nstn));
 stationlist = cell(nstn,1);
 for i = 1:nstn
     k = good(idx(i));
@@ -78,10 +79,22 @@ for i = 1:nstn
     else % any cruise in ml/L?
         error('reported_data.m: Unknown oxgen unit');
     end
+    %
+    % add TEOS-10
+    %
+    [SA, in_ocean] = gsw_SA_from_SP(ctdsal(:,i), ctdprs(:,i), s.Lon, s.Lat);
+    if any(in_ocean < 1)
+        error('reported_data.m: gsw_SA_from_SP, in_ocean == 0');
+    end
+    ctdSA(:,i) = SA;
+    CT = gsw_CT_from_t(SA, t68tot90(ctdtem(:,i)), ctdprs(:,i));
+    ctdCT(:,i) = CT;
 end
 D_reported = struct('Station', {stationlist}, ...
                     'CTDprs', ctdprs, ...
                     'CTDsal', ctdsal, ...
                     'CTDtem', ctdtem, ...
-                    'CTDoxy', ctdoxy);
+                    'CTDoxy', ctdoxy, ...
+                    'CTDCT', ctdCT, ...
+                    'CTDSA', ctdSA);
 end

@@ -34,8 +34,8 @@ D_r(1) = struct('Station', {stnW(1), stnW(3), ..} ...
 + `D_r(1)` is the first occupation (mostly WOCE). `D_r(2)` is the second occupation (mostly CLIVAR/GO-SHIP). `stnW(:)` is the station structure defined above.
 + No vertical interpolation. No horizontal interpolation.
 + But stations have been chosen to form one *clean* section.
-+ Temperature is in IPTS-68 (*not ITS-90).
-+ Flag information have been incorporated (i.e. *Bad* (however defined) data have been removed or replaced with `-999`).
++ Temperature is in IPTS-68 (*not* ITS-90). This is useful to apply [gamma surface calculation](http://www.teos-10.org/preteos10_software/neutral_density.html).
++ Flag information have been incorporated (i.e. *Bad* (however defined) data have been removed or replaced with `NaN`).
 + Number of entries is not fixed.
 + Lat/Lon, depths,... etc. can be retrieved by, e.g.,
 ~~~

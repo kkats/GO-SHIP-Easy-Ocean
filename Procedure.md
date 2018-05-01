@@ -3,7 +3,7 @@
 It is necessary to repeat the following procedure for each section.
 
 ## 0. Salinity offset and user defined interpolator
-For each section, the user must define the [salinity batch offset](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/SalinityOffset/README.md). It is a function of `k`. Here `k` is found in the first column of the station list and *not the original station number*. The function is found in `configuration.m`.
+For each section, the user must define the [salinity batch offset](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/SaltBatchOffset/README.md). It is a function of `k`. Here `k` is found in the first column of the station list and *not the original station number*. The function is found in `configuration.m`.
 
 It is also necessary to define Matlab functions used in the vertical and horizontal interpolations. Each function *must* have the following argument list;
 ~~~
@@ -44,7 +44,7 @@ using Matlab's function handle. Feel free to change.
 >> flagA = findAstations(stations, 'P06/1992/Atlas/info/p6.header');
 ~~~
 At this stage, it is likely a few (or more!) warnings pop out which have to be manually checked. See [P06/README.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/P06/README.md), for example.
-1. Write the station list
+3. Write the station list
 ~~~
 >> station_list(stations, flagJ, flagP, flagA, 'P06/1992/p06_1992.list');
 ~~~
@@ -52,7 +52,7 @@ If any flag is missing, use `zeros(length(stations), 1)` as a dummy flag.
 
 ## 2. Clean reported data
 
-The station list prepared above is the seed of the clean data. Those stations listed in the station list will be incorporated in the output. Those stations commented out will not be.
+The station list prepared above is the seed of the clean data. Those stations listed in the station list will be incorporated in the output. Those stations commented out will not.
 
 1. Use your favourite editor to edit the station list (`p06_1992.list`). Comment out (by `#` or `%`) those stations to be excluded.
 1. Run `reported_data()`;

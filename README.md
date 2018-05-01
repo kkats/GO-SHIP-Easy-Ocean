@@ -45,7 +45,7 @@ e.g. [I08N](http://whpP-atlas.ucsd.edu/whp_atlas/indian/i08n/info/bathy.htm)
 
 ## Decisions
 #### Two products (at least)
-One with vertical interpolation only. The other with horizontal interpolation gridded on Lat/Lon.
+One without interpolation. The other with interpolation on a grid.
 
 #### Use [TEOS-10](http://www.teos-10.org)
 With measured TS retained
