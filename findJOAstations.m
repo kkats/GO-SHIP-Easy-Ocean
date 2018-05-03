@@ -46,9 +46,9 @@ while 1
     end
     % if more than 1 candidate, then find closest by distance
     if length(ig) > 1
-        dx = [];
-        for j = ig
-           dx = [gsw_distance([stations(j).Lon, joa(n).lon], [stations(j).Lat, joa(n).lat]), dx];
+        dx = NaN(size(ig));
+        for k = 1:length(ig)
+           dx(k) = gsw_distance([stations(ig(k)).Lon, joa(n).lon], [stations(ig(k)).Lat, joa(n).lat]);
         end
         [dummy, idx] = sort(dx);
         ig1 = ig(idx(1));

@@ -63,18 +63,21 @@ for i = 1:nstn
     k = good(idx(i));
     s = stations(k); stationlist{i} = s;
     ctdprs(:,i) = pr(:,k);
-    if strncmp(s.CTDtemUnit, 'its-90', 6) || strncmp(s.CTDtemUnit, 'ITS-90', 6) ...
-       || strncmp(s.CTDtemUnit, 'its90', 5) || strncmp(s.CTDtemUnit, 'ITS90', 5)
+    if ~isempty(strfind(s.CTDtemUnit, 'its-90')) ...
+       || ~isempty(strfind(s.CTDtemUnit, 'ITS-90')) ...
+       || ~isempty(strfind(s.CTDtemUnit, 'its90')) ...
+       || ~isempty(strfind(s.CTDtemUnit, 'ITS90'))
         ctdtem(:,i) = t90tot68(te(:,k));
     else % assume everything else is in IPTS-68
         ctdtem(:,i) = tem(:,k);
     end
-    if strncmp(s.CTDsalUnit, 'PSS-78', 6) || strncmp(s.CTDsalUnit, 'pss-78', 6)
+    if ~isempty(strfind(s.CTDsalUnit, 'PSS-78')) ...
+     || ~isempty(strfind(s.CTDsalUnit, 'pss-78'))
         ctdsal(:,i) = sa(:,k) - ones(m,1) * soffset_handle(k);
     else
         error('reported_data.m: Unknown salinity unit');
     end
-    if strncmp(s.CTDoxyUnit, 'umol/kg', 7)
+    if strfind(s.CTDoxyUnit, 'mol/kg')
         ctdoxy(:,i) = ox(:,k);
     else % any cruise in ml/L?
         error('reported_data.m: Unknown oxgen unit');

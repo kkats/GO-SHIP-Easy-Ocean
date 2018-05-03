@@ -7,6 +7,11 @@ p = p1(ig);
 z = z1(ig);
 dp = mode(diff(p));
 nfilt = round(80 / dp);
-z2 = filtend(z, nfilt);
-zsmooth = interp1(p, z2, p_grid, 'linear', NaN); % no extrapolation
+if length(ig) > nfilt
+    z2 = filtend(z, nfilt);
+    zsmooth = interp1(p, z2, p_grid, 'linear', NaN); % no extrapolation
+else
+    zsmooth = NaN(size(p_grid));
 end
+end
+

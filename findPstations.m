@@ -16,7 +16,7 @@ n = 0;
 for i = 1:length(D_ctd_s.lat)
     lat = D_ctd_s.lat(i);
     lon = D_ctd_s.lon(i);
-    ig = []; 
+    ig = []; % is good
     for j = 1:N
         % any stations within 0.1 deree Lat/Lon
         if abs(stations(j).Lat - lat) < 0.1 && abs(stations(j).Lon - lon) < 0.1
@@ -25,9 +25,9 @@ for i = 1:length(D_ctd_s.lat)
     end
     % if more than 1 candidate, then find closest by distance
     if length(ig) > 1
-        dx = [];
-        for k = ig
-           dx = [gsw_distance([stations(k).Lon, lon], [stations(k).Lat, lat]), dx];
+        dx = NaN(size(ig));
+        for k = 1:length(ig)
+            dx(k) = gsw_distance([stations(ig(k)).Lon, lon], [stations(ig(k)).Lat, lat]);
         end
         [dummy, idx] = sort(dx);
         ig1 = ig(idx(1));
