@@ -57,9 +57,8 @@ With measured TS retained
 As practicable as possible. Extended table of Kawano et al. [(2006)](https://link.springer.com/article/10.1007/s10872-006-0097-8).
 
 #### Basic format in [WHP Exchange](https://cchdo.ucsd.edu/formats)
-
-
-
+This format can be read by [Ocean Data View](https://odv.awi.de/) using `Import` menu,
+and by [Java Ocean Atlas](http://joa.ucsd.edu/joa) using `File` menu.
 
 ## Trivia
 + Use two digit section number (i.e. `P06` not `P6`).

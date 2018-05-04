@@ -14,6 +14,10 @@ not_match = [];
 
 % read CSV -- Matlab's csvread() does not work with unexplainable errors
 fid = fopen(csvJOAfname, 'r');
+if fid < 0
+    msg = ferror(fid);
+    error(['findJOAstations.m : cannot open ' msg]);
+end
 fgetl(fid); % skip header
 
 n = 0;
