@@ -10,7 +10,7 @@ function D_reported = reported_data(fname_list, fname_raw)
 %
 
 %%%
-%%% Use defined functions
+%%% User defined functions
 %%%
 configuration;
 %%%
@@ -73,7 +73,7 @@ for i = 1:nstn
     end
     if ~isempty(strfind(s.CTDsalUnit, 'PSS-78')) ...
      || ~isempty(strfind(s.CTDsalUnit, 'pss-78'))
-        ctdsal(:,i) = sa(:,k) - ones(m,1) * soffset_handle(k);
+        ctdsal(:,i) = sa(:,k) + ones(m,1) * soffset_handle(k); % offset is correction, i.e. ADD
     else
         error('reported_data.m: Unknown salinity unit');
     end

@@ -4,8 +4,7 @@ function gridded_XYZ(gd, fname, ll_grid, pr_grid)
 %
 fid = fopen(fname, 'w');
 if fid < 0
-    msg = ferror(fid);
-    error(['gridded_XYZ.m: cannot open, ' msg]);
+    error(['gridded_XYZ.m: cannot open ' fname]);
 end
 
 fprintf(fid, '# Lat/Lon   CTDPRS  CTDTMP     CTDSAL     CTDOXY      CTDCT      CTDSA\n');

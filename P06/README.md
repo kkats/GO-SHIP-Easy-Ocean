@@ -29,18 +29,21 @@
 Warning: not found( 1)  32-1     -32.5010    273.4500 1992-05-13 d=3917
 ~~~
 JOA's longitude is 86.55W = 273.45E, while CTD files has 86.0W = 274.0E. The SUM file supports the latter.
+
 2. Not match
 ~~~
 Warning: 1 JOA     3-1     -32.5013    288.3323 1992-05-04 d=5818
 Warning: 1 CCHDO   5-1     -32.5013    288.3323 1992-05-04 d= 486
 ~~~
 CTD file for station 3 does not exist.
+
 3. Not match
 ~~~
 Warning: 2 JOA    32-1     -32.5010    273.4500 1992-05-13 d=3917
 Warning: 2 CCHDO  33-1     -32.5135    273.3270 1992-05-13 d=3782
 ~~~
-As explained above in 3.1.1.
+As explained above.
+
 4. Not match
 ~~~
 Warning: 3 JOA   234-1     -30.0845    156.5153 1992-07-23 d=4826
@@ -55,11 +58,13 @@ JOA's location corresponds to that at BO in the SUM. CTD files for station 234 h
 Warning: not found( 1) 997-1     -30.0000    152.9500 2003-08-03 d=  19
 ~~~
 Too shallow.
+
 2. Not match
 ~~~
 Warning: 1 JOA   998-1     -32.5000    288.5500 2003-10-12 d=  19
 Warning: 1 CCHDO   4-1     -32.5003    288.4997 2003-10-12 d= 122
 ~~~
+
 3. Not match
 ~~~
 Warning: 2 JOA   166-99     -32.5085    186.3292 2003-08-20 d=5698

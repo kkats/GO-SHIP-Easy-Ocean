@@ -7,8 +7,7 @@ for n = 1:nstn
     filename = sprintf('%s_%04d_ct1.csv', fname, n)
     fid = fopen(filename, 'w');
     if fid < 0
-        msg = ferror(fid);
-        error(['rd_WHPX.m: cannot open, ' msg]);
+        error(['rd_WHPX.m: cannot open ' filename]);
     end
 
     % header

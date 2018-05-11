@@ -15,8 +15,7 @@ not_match = [];
 % read CSV -- Matlab's csvread() does not work with unexplainable errors
 fid = fopen(csvJOAfname, 'r');
 if fid < 0
-    msg = ferror(fid);
-    error(['findJOAstations.m : cannot open ' msg]);
+    error(['findJOAstations.m : cannot open ' csvJOAfname]);
 end
 fgetl(fid); % skip header
 
@@ -111,19 +110,23 @@ function stns = bottle2station(bots)
 %
 % Use station-cast pair as key to convert bottle -> station
 %
-j = 1;
-done(j) = struct('station', bots(1).stnnum, ...
-                 'cast', bots(1).cast, ...
-                 'self', bots(1));
-for i = 2:length(bots)
-    if strncmp(bots(i).stnnum, done(j).station, 5) ~= true || bots(i).cast ~= done(j).cast
-        j = j + 1;
-        done(j) = struct('station', bots(i).stnnum, ...
-                         'cast', bots(i).cast, ...
-                         'self', bots(i));
+if isempty(bots)
+    stns = [];
+else
+    j = 1;
+    done(j) = struct('station', bots(1).stnnum, ...
+                     'cast', bots(1).cast, ...
+                    'self', bots(1));
+    for i = 2:length(bots)
+        if strncmp(bots(i).stnnum, done(j).station, 5) ~= true || bots(i).cast ~= done(j).cast
+            j = j + 1;
+            done(j) = struct('station', bots(i).stnnum, ...
+                             'cast', bots(i).cast, ...
+                             'self', bots(i));
+        end
     end
-end
-for i = 1:j
-    stns(i) = done(i).self;
-end
+    for i = 1:j
+        stns(i) = done(i).self;
+    end
+end % if isempty(..
 end

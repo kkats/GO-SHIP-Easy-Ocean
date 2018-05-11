@@ -7,5 +7,5 @@ function so = salt_offset(k)
 %
 % Given station number, returns salinity offset
 %
-so = 0.7 * 1.0e-3; % P149/P150  what about P151 (station xxx-250)
+so = 1.0e-3 * 0.7; % P149/P150  what about P151 (station xxx-250)
 end

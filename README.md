@@ -30,7 +30,7 @@ For bottle data
 #### [WOCE clean sections](http://sam.ucsd.edu/vertical_sections/.index.html) by L.Talley
 
 #### [WOCE ATLAS](http://woceatlas.ucsd.edu/) has bathymetry data and station info
-e.g. [I08N](http://whpP-atlas.ucsd.edu/whp_atlas/indian/i08n/info/bathy.htm)
+e.g. [I08N](http://whp-atlas.ucsd.edu/whp_atlas/indian/i08n/info/bathy.htm)
 
 #### [GLODAPv2](https://cdiac3.ornl.gov/waves/glodapv2/) for bottle data
 
