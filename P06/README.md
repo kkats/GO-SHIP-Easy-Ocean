@@ -1,7 +1,7 @@
 # P06
 ## 1. Source
 [Jim's table](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/Data%20Project%20Section%20List.xlsx) has 4 occupations.
-### 1967
+### (1967 not used)
 + ?
 
 ### 1992

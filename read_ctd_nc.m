@@ -36,7 +36,7 @@ stations(1:N) = struct('EXPO',       '', ...
                        'CTDsalUnit', '', ...
                        'CTDoxyUnit', '');
 
-for i = 1:length(files)
+for i = 1:N
     filename = [directory filesep files(i).name]
 
     %check name structure;
@@ -128,6 +128,9 @@ sa(sa_flg ~= 2) = NaN;
 ox(ox_flg ~= 2) = NaN;
 
 % finally save .mat files
+if length(outputfname) > 4 && strcmp(outputfname(end-3:end), '.mat')
+    outputfname = outputfname(1:end-4);
+end
 eval(['save ''' outputfname '''.mat stations pr te sa ox']);
 end % function read_ctd_nc
 %

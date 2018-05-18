@@ -1,4 +1,4 @@
-function mtime = parse_woce_time(w_date, w_time, flag)
+function mtime = convert_woce_time(w_date, w_time, flag)
 %
 % parse WOCE date (as INT, e.g. 19920516) and WOCE time (also as INT, e.g., 1926)
 % and convert to matlab time

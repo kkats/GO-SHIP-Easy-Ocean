@@ -1,10 +1,10 @@
 # P16
 ## 1. Source
 [Jim's table](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/Data%20Project%20Section%20List.xlsx) has 7 occupations.
-### 1980
+### (1980, not used)
 + [32NM19800810](https://cchdo.ucsd.edu/cruise/32NM19800810)
 
-### 1984
+### (1984, not used)
 + [31WTMARAII](https://cchdo.ucsd.edu/cruise/31WTMARAII)
 
 ### 1991
