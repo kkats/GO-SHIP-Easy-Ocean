@@ -33,16 +33,26 @@ while 1
     lons(n) = lon;
     label(n) = m;
 end
+
+% meridional section. sort by lat
+if max(lats) - min(lats) > max(lons) - min(lons)
+    [dummy, idx] = sort(lats);
+% zonal section. sort by lon
+else
+    [dummy, idx] = sort(lons);
+end
 %
 % station distance
 %
 cum = 0;
 for i = 2:n
-    dx = gsw_distance([lons(i), lons(i-1)], [lats(i), lats(i-1)]) / 1852;
+    j0 = idx(i);
+    j1 = idx(i-1);
+    dx = gsw_distance([lons(j0), lons(j1)], [lats(j0), lats(j1)]) / 1852;
     cum = cum + dx;
     %fprintf(2, '%3d -- %3d  %8.2f nm %8.2f nm\n', label(i-1), label(i), dx, cum);
-    fprintf(2, '%3d -- %3d  %8.2f nm\n', label(i-1), label(i), dx);
+    fprintf(2, '%3d -- %3d  %8.2f nm\n', label(j1), label(j0), dx);
 end
 
-clf;
-plot(lons, lats, 'o');
+plot(lons, lats, 'o', 'Color', 'b');
+%plot(lons, lats, 'x', 'Color', 'r');

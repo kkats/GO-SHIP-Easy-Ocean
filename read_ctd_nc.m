@@ -131,7 +131,7 @@ ox(ox_flg ~= 2) = NaN;
 if length(outputfname) > 4 && strcmp(outputfname(end-3:end), '.mat')
     outputfname = outputfname(1:end-4);
 end
-eval(['save ''' outputfname '''.mat stations pr te sa ox']);
+eval(['save ''' outputfname '.mat'' stations pr te sa ox']);
 end % function read_ctd_nc
 %
 % utility funtion

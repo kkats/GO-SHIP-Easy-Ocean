@@ -20,7 +20,7 @@ We use `P06` section as an example.
 1. (optional. When Purkey's product is available for this occupation;) Find stations in JOA, Purkey's product, and in the WOCE Atlas.
 1. (optional. When WOCE Atlas header is available for this occupation;) Find stations in WOCE Atlas.
 ~~~
->> flagJ = findJOAstations(stations, 'P06/JOA/P06_1992_bottle.csv');
+>> flagJ = findJstations(stations, 'P06/JOA/P06_1992_bottle.csv');
 >> load P06/ctd_all_gridded_P06.mat % Purkey's product
 >> flagP = findPstations(stations, D_ctd(1));
 >> flagA = findAstations(stations, 'P06/1992/Atlas/info/p6.header');
@@ -33,7 +33,7 @@ At this stage, it is likely a few (or more!) warnings pop out which have to be m
 ~~~
 >> station_list(stations, flagJ, flagP, flagA, 'P06/1992/p06_1992.list');
 ~~~
-If any flag is missing, use `zeros(length(stations), 1)` as a dummy flag.
+If any flag is missing, use `zeros(1,length(stations))` as a dummy flag.
 
 The `station list`'s prepared above are the seed of the clean data. Those stations listed in the station list will be incorporated in the output. Those stations commented out will not.
 
@@ -110,3 +110,77 @@ It is necessary to use the right `configuration.m` file. Here `%` is Shell promp
 >> gridded_XYZ(D_pr(4), 'output/reported/P06/P06_2017.xyz');
 >> save 'output/gridded/P06_gridded.mat' D_pr
 ~~~
+
+## 4. Patches
+### 4-1. When bottom depth data are missing in the CTD file
+This often happens. If depth data are available in the SUM file, follow these steps.
+First, extract the depth data with `awk`.
+For example
+~~~
+# for I05, 2002
+tail -146 i05_74AB20020301su.txt| awk '{print $3, $4, $16}' > i05_2002.depth
+~~~
+or
+~~~
+# for I05, 2009
+cat i05_33rr20090320su.txt | awk '/ROS/ && /BO/ {print $3, $4, $16}' > i05_2009.depth
+~~~
+
+Then apply the following patch to `grid_data_pressure.m`.
+~~~
+--- grid_data_pressure.m        2018-05-31 15:38:50.547560300 -0700
++++ grid_data_pressure_DEPTHFILE.m      2018-06-06 17:35:36.712872300 -0700
+@@ -10,6 +10,9 @@
+ configuration;
+ %%%
+
++load 'I05/i05_2002.depth';
++dtable = i05_2002;
++
+ % lat/lon and depth
+ stations = D_reported.Station;
+ nstn = length(stations);
+@@ -17,7 +20,20 @@
+ for i = 1:nstn
+     lats(i) = stations{i}.Lat;
+     lons(i) = stations{i}.Lon;
+-    d = (-1) * double(stations{i}.Depth);
++    d = NaN;
++    for j = 1:size(dtable, 1)
++        if strcmp(stations{i}.Stnnbr, num2str(dtable(j,1))) && stations{i}.Cast == dtable(j,2)
++            d = (-1) * dtable(j,3);
++            break;
++        end
++    end
++    if isnan(d) || d == 999 % missing data
++        good = find(~isnan(D_reported.CTDprs(:,i)) ...
++                  & ~isnan(D_reported.CTDtem(:,i)) ...
++                  & ~isnan(D_reported.CTDsal(:,i)));
++        % assume deepest data 10 m above the botttom
++        d = -(D_reported.CTDprs(max(good), i) + 10.0);
++    end
+     deps(i) = gsw_p_from_z(d, lats(i)); % depth in pressure, not in meters
+ end
+~~~
+
+### 4-2. When bottom depth data are missing and the SUM file is unavailable.
+Assume all CTD casts were terminated at exactly 10 dbar above the bottom. Apply the following patch to `grid_data_pressure.m`.
+~~~
+--- grid_data_pressure.m        2018-05-31 15:38:50.547560300 -0700
++++ grid_data_pressure_NODEPTH.m        2018-05-31 15:39:16.118117000 -0700
+@@ -18,6 +18,14 @@
+     lats(i) = stations{i}.Lat;
+     lons(i) = stations{i}.Lon;
+     d = (-1) * double(stations{i}.Depth);
++    % missing depth
++    if d == 999
++        good = find(~isnan(D_reported.CTDprs(:,i)) ...
++                  & ~isnan(D_reported.CTDtem(:,i)) ...
++                  & ~isnan(D_reported.CTDsal(:,i)));
++        % assume deepest data 10 m above the botttom
++        d = -(D_reported.CTDprs(max(good), i) + 10.0);
++    end
+     deps(i) = gsw_p_from_z(d, lats(i)); % depth in pressure, not in meters
+ end
+~~~
+

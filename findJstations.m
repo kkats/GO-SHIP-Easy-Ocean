@@ -8,7 +8,7 @@ function isInJOA = findJOAstations(stations, csvJOAfname)
 % 4. Check if (station_number, cast, time) match between the two.
 %
 N = length(stations);
-isInJOA = false(N,1);
+isInJOA = false(1,N);
 not_found = [];
 not_match = [];
 

@@ -8,7 +8,7 @@ function isInP = findPstations(stations, D_ctd_s)
 % 4. Check if time matches between the two.
 %
 N = length(stations);
-isInP = false(N,1);
+isInP = false(1,N);
 not_found = [];
 not_match = [];
 

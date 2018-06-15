@@ -13,7 +13,7 @@ configuration;
 % lat/lon and depth
 stations = D_reported.Station;
 nstn = length(stations);
-[lats, lons, deps] = deal(NaN(nstn, 1));
+[lats, lons, deps] = deal(NaN(1, nstn));
 for i = 1:nstn
     lats(i) = stations{i}.Lat;
     lons(i) = stations{i}.Lon;

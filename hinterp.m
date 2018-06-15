@@ -12,6 +12,9 @@ function [zinterp, maxpinterp] = hinterp(z, latlon, maxp, pr_grid, ll_grid)
 zinterp = NaN(length(pr_grid), length(ll_grid));
 for j = 1:length(pr_grid)
     ig = find(isfinite(z(j,:)));
+    if isempty(ig)
+        continue;
+    end
     if length(ig) > 2
         zinterp(j,:) = interp1(latlon(ig), z(j,ig), ll_grid, 'pchip');
     end

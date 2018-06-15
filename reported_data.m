@@ -20,6 +20,9 @@ configuration;
 eval(['load ''' fname_raw ''' stations pr te sa ox']);
 
 fid = fopen(fname_list, 'r');
+if fid < 0
+    error(['reported_data: cannot find file (', fname_list, ')']);
+end
 
 % stations to be included
 good = [];
@@ -37,7 +40,7 @@ while 1
 end
 
 nstn = length(good)
-[lats, lons] = deal(NaN(nstn,1));
+[lats, lons] = deal(NaN(1,nstn));
 
 for i = 1:nstn
     lats(i) = stations(good(i)).Lat;
@@ -79,8 +82,10 @@ for i = 1:nstn
     end
     if strfind(s.CTDoxyUnit, 'mol/kg')
         ctdoxy(:,i) = ox(:,k);
-    else % any cruise in ml/L?
-        error('reported_data.m: Unknown oxgen unit');
+    elseif strfind(s.CTDoxyUnit, 'ml/l')
+        ctdoxy(:,i) = NaN; %%% XXX TODO
+    else
+        error('reported_data.m: Unknown oxygen unit');
     end
     %
     % add TEOS-10

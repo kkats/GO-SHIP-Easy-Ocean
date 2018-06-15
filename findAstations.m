@@ -4,7 +4,7 @@ function isInA =findAstations(stations, headerfname)
 %
 %
 N = length(stations);
-isInA = false(N,1);
+isInA = false(1,N);
 
 fid = fopen(headerfname, 'r');
 % skip header

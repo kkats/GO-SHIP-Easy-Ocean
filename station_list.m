@@ -9,6 +9,9 @@ if nargin > 4
 else
     fid = 1  % matlab stdout (https://www.mathworks.com/matlabcentral/fileexchange/4871-printf--stdout--stderr)
 end
+if fid < 0
+    error(['station_list: cannot open ', filename]);
+end
 fprintf(fid, '#   flag      latitude     longitude date       time      depth    expo     stn_num  cast\n');
 for i = 1:length(s)
     flag = [];
