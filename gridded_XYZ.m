@@ -1,4 +1,4 @@
-function gridded_XYZ(gd, fname, ll_grid, pr_grid)
+function gridded_xyz(gd, fname, ll_grid, pr_grid)
 %
 % Output reported_data (`gd`) to GMT readable xyz file `fname`
 %

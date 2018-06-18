@@ -29,6 +29,26 @@ Warning: 1 CCHDO  15-1     -32.5467     33.4117 1987-11-17 d=3485
 The [documentation](https://cchdo.ucsd.edu/data/2179/i05pdo.txt) says 3491 m.
 
 ## 2002
+The CTD data `i05_00024_00001_ctd.nc` has two apparently the same profiles packed into one.
+It was necessary to manually truncate them in `read_ctd_nc.m' using this patch;
+~~~
+--- read_ctd_nc.m       2018-06-15 13:32:13.104829300 -0700
++++ read_ctd_nc_I05_2002.m      2018-06-15 16:29:55.953007200 -0700
+@@ -131,6 +131,12 @@
+ sa(sa_flg ~= 2) = NaN;
+ ox(ox_flg ~= 2) = NaN;
+
++% manual truncation
++pr(1478:end,24) = NaN;
++te(1478:end,24) = NaN;
++sa(1478:end,24) = NaN;
++ox(1478:end,24) = NaN;
++
+ % finally save .mat files
+ if length(outputfname) > 4 && strcmp(outputfname(end-3:end), '.mat')
+     outputfname = outputfname(1:end-4);
+~~~
+
 All CTD stations have `BOTTOM_DEPTH_METERS = 4`.
 See section 4-1 of [Procedure.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/Procedure.md).
 

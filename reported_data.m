@@ -40,11 +40,12 @@ while 1
 end
 
 nstn = length(good)
-[lats, lons] = deal(NaN(1,nstn));
+[lats, lons, deps] = deal(NaN(1,nstn));
 
 for i = 1:nstn
     lats(i) = stations(good(i)).Lat;
     lons(i) = stations(good(i)).Lon;
+    deps(i) = stations(good(i)).Depth;
 end
 
 % meridional section. sort by latitude
@@ -62,9 +63,13 @@ end
 [ctdprs, ctdsal, ctdtem, ctdoxy] = deal(NaN(m, nstn));
 [ctdSA, ctdCT] = deal(NaN(m, nstn));
 stationlist = cell(nstn,1);
+[latlist, lonlist, deplist] = deal(NaN(1, nstn));
 for i = 1:nstn
     k = good(idx(i));
     s = stations(k); stationlist{i} = s;
+    latlist(i) = lats(idx(i));
+    lonlist(i) = lons(idx(i));
+    deplist(i) = deps(idx(i));
     ctdprs(:,i) = pr(:,k);
     if ~isempty(strfind(s.CTDtemUnit, 'its-90')) ...
        || ~isempty(strfind(s.CTDtemUnit, 'ITS-90')) ...
@@ -72,7 +77,7 @@ for i = 1:nstn
        || ~isempty(strfind(s.CTDtemUnit, 'ITS90'))
         ctdtem(:,i) = t90tot68(te(:,k));
     else % assume everything else is in IPTS-68
-        ctdtem(:,i) = tem(:,k);
+        ctdtem(:,i) = te(:,k);
     end
     if ~isempty(strfind(s.CTDsalUnit, 'PSS-78')) ...
      || ~isempty(strfind(s.CTDsalUnit, 'pss-78'))
@@ -99,6 +104,9 @@ for i = 1:nstn
     ctdCT(:,i) = CT;
 end
 D_reported = struct('Station', {stationlist}, ...
+                    'latlist', latlist, ...
+                    'lonlist', lonlist, ...
+                    'deplist', deplist, ...
                     'CTDprs', ctdprs, ...
                     'CTDsal', ctdsal, ...
                     'CTDtem', ctdtem, ...

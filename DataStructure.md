@@ -1,4 +1,23 @@
 # Data structures
+## Output
+### Clean reported data
+This is the clean data with no horizontal interpolation. We support Matlab format
+and [WHP Exchange format](https://cchdo.ucsd.edu/formats).
+The structure for the Matlab format is described in the
+next section.
+
+The WHP format can be read by [Ocean Data View](https://odv.awi.de/) using `Import` → `WOCE Formats` → `WHP CTD (exchange format)` menu.
+The WHP format can also be read
+by [Java Ocean Atlas](http://joa.ucsd.edu/joa) using `File` → `Open` menu.
+
+### Clearn gridded data
+We support
+1. Matlab format
+1. ASCII format
+1. Binary format
+1. NetCDF format
+
+## Internal
 ### Station
 ~~~
 stations(23) = struct('EXPO', '320620140320', ...
@@ -16,12 +35,14 @@ stations(23) = struct('EXPO', '320620140320', ...
 + Use decimal degree in Lat and Lon.
 + Time follows *MATLAB* convention with seconds=0.
 
-
 ### CTD and bottle data
 
 #### Clean reported data
 ~~~
 D_r(1) = struct('Station', {stnW(1), stnW(3), ..} ...
+                'lonlist', lon(:), ...
+                'latlist', lat(:), ...
+                'deplist', depth(:), ...
                 'CTDprs', ctdprs(:,:),  ...
                 'CTDsal', ctdsal(:,:),  ...
                 'CTDtem', ctdtem(:,:),  ...
@@ -37,16 +58,18 @@ D_r(1) = struct('Station', {stnW(1), stnW(3), ..} ...
 + Temperature is in IPTS-68 (*not* ITS-90). This is useful to apply [gamma surface calculation](http://www.teos-10.org/preteos10_software/neutral_density.html).
 + Flag information have been incorporated (i.e. *Bad* (however defined) data have been removed or replaced with `NaN`).
 + Number of entries is not fixed.
-+ Lat/Lon, depths,... etc. can be retrieved by, e.g.,
++ Lat/Lon, depths,... etc. are recorded in 'Station' and can be retracted by
 ~~~
 d = D_r(1);
 nstn = length(d.Station);
-[lats, lons] = deal(NaN(nstn,1));
+[latlist, lonlist, deplist] = deal(NaN(nstn,1));
 for i = 1:nstn
-    lats(i) = d.Station{i}.Lat;
-    lons(i) = d.Station{i}.Lon;
+    latlist(i) = d.Station{i}.Lat;
+    lonlist(i) = d.Station{i}.Lon;
+    deplist(i) = d.Station{i}.Depth;
 end
 ~~~
+But for ease of access, `latlist`, `lonlist`, and `deplist` are provided by `reported_data.m`.
 
 #### Clean gridded data on pressure coordinate
 ~~~

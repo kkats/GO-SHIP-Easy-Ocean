@@ -22,6 +22,10 @@ if nargin < 2
 end
 files = dir([directory filesep '*.nc']);
 
+if isempty(files)
+    error(['read_ctd_nc: not found ''' directory '''']);
+end
+
 % initialisation
 N = length(files);
 [pr, te, sa, ox, pr_flg, te_flg, sa_flg, ox_flg] = deal([]);
