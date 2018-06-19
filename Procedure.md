@@ -101,38 +101,45 @@ It is necessary to use the right `configuration.m` file. Here `%` is Shell promp
 ~~~
 >> pr_grid = [0:20:6500];
 >> ll_grid = [153:(1/5):289];
->> D_pr(1) = grid_data_pressure(D_reported(1), pr_grid, ll_grid);
->> D_pr(2) = grid_data_pressure(D_reported(2), pr_grid, ll_grid);
->> D_pr(3) = grid_data_pressure(D_reported(3), pr_grid, ll_grid);
->> D_pr(4) = grid_data_pressure(D_reported(4), pr_grid, ll_grid);
->> save 'output/gridded/P06_gridded.mat' D_pr pr_grid ll_grid
+% cp P06/configuration_1992.m configuration.m
+>> D_pr(1) = grid_data_pressure(D_reported(1), ll_grid, pr_grid);
+% cp P06/configuration_2003.m configuration.m
+>> D_pr(2) = grid_data_pressure(D_reported(2), ll_grid, pr_grid);
+% cp P06/configuration_2010.m configuration.m
+>> D_pr(3) = grid_data_pressure(D_reported(3), ll_grid, pr_grid);
+% cp P06/configuration_2017.m configuration.m
+>> D_pr(4) = grid_data_pressure(D_reported(4), ll_grid, pr_grid);
+>> save 'output/gridded/P06_gridded.mat' D_pr ll_grid pr_grid
 ~~~
 ### ASCII
 The output can be visualized using e.g.
 [The Generic Mapping Tools](http://gmt.soest.hawaii.edu/home).
 ~~~
->> gridded_XYZ(D_pr(1), 'output/gridded/P06/P06_1992.xyz');
->> gridded_XYZ(D_pr(2), 'output/gridded/P06/P06_2003.xyz');
->> gridded_XYZ(D_pr(3), 'output/gridded/P06/P06_2010.xyz');
->> gridded_XYZ(D_pr(4), 'output/gridded/P06/P06_2017.xyz');
+>> gridded_xyz(D_pr(1), 'output/gridded/P06/P06_1992.xyz', ll_grid, pr_grid);
+>> gridded_xyz(D_pr(2), 'output/gridded/P06/P06_2003.xyz', ll_grid, pr_grid);
+>> gridded_xyz(D_pr(3), 'output/gridded/P06/P06_2010.xyz', ll_grid, pr_grid);
+>> gridded_xyz(D_pr(4), 'output/gridded/P06/P06_2017.xyz', ll_grid, pr_grid);
 ~~~
 
 ### Binary
 The data are in 4-byte, big-endian, IEEE754 floats.
 The data can be visualized using e.g.
 [Grid Analysis and Display System (GrADS)](http://cola.gmu.edu/grads/)
-A tentative control file for GrADS is also output, but please note
-that *GrADS is designed for three dimensinal data set (XYZ) and not for
-sectional data (XZ or YZ). The control file output from *`gridded_bin.m` *overwrites
-`y` as `depth` to avoid unnecesary re-ordering of the binary data set.*
+A tentative control file for GrADS is also output, but note
+that GrADS is designed for three dimensinal data set (XYZ) and not for
+sectional data (XZ or YZ). The control file output from `gridded_bin.m` *overwrites
+`y` as `depth`* to avoid unnecesary re-ordering of the binary data set.
 ~~~
 >> gridded_bin(D_pr, 'output/gridded/P06/p06.bin', ll_grid, pr_grid);
 ~~~
 
 ### NetCDF
+~~~
+>> gridded_nc(D_pr, 'output/gridded/P06/p06.nc', ll_grid, pr_grid);
+~~~
 
 
-## 4. Patches
+## 4. Notes
 ### 4-1. When bottom depth data are missing in the CTD file
 This often happens. If depth data are available in the SUM file, follow these steps.
 First, extract the depth data with `awk`.
@@ -146,62 +153,8 @@ or
 # for I05, 2009
 cat i05_33rr20090320su.txt | awk '/ROS/ && /BO/ {print $3, $4, $16}' > i05_2009.depth
 ~~~
+This depth file can be fed as the fourth argument of `grid_data_pressure.m`.
 
-Then apply the following patch to `grid_data_pressure.m`.
-~~~
---- grid_data_pressure.m        2018-05-31 15:38:50.547560300 -0700
-+++ grid_data_pressure_DEPTHFILE.m      2018-06-06 17:35:36.712872300 -0700
-@@ -10,6 +10,9 @@
- configuration;
- %%%
-
-+load 'I05/i05_2002.depth';
-+dtable = i05_2002;
-+
- % lat/lon and depth
- stations = D_reported.Station;
- nstn = length(stations);
-@@ -17,7 +20,20 @@
- for i = 1:nstn
-     lats(i) = stations{i}.Lat;
-     lons(i) = stations{i}.Lon;
--    d = (-1) * double(stations{i}.Depth);
-+    d = NaN;
-+    for j = 1:size(dtable, 1)
-+        if strcmp(stations{i}.Stnnbr, num2str(dtable(j,1))) && stations{i}.Cast == dtable(j,2)
-+            d = (-1) * dtable(j,3);
-+            break;
-+        end
-+    end
-+    if isnan(d) || d == 999 % missing data
-+        good = find(~isnan(D_reported.CTDprs(:,i)) ...
-+                  & ~isnan(D_reported.CTDtem(:,i)) ...
-+                  & ~isnan(D_reported.CTDsal(:,i)));
-+        % assume deepest data 10 m above the botttom
-+        d = -(D_reported.CTDprs(max(good), i) + 10.0);
-+    end
-     deps(i) = gsw_p_from_z(d, lats(i)); % depth in pressure, not in meters
- end
-~~~
 
 ### 4-2. When bottom depth data are missing and the SUM file is unavailable.
-Assume all CTD casts were terminated at exactly 10 dbar above the bottom. Apply the following patch to `grid_data_pressure.m`.
-~~~
---- grid_data_pressure.m        2018-05-31 15:38:50.547560300 -0700
-+++ grid_data_pressure_NODEPTH.m        2018-05-31 15:39:16.118117000 -0700
-@@ -18,6 +18,14 @@
-     lats(i) = stations{i}.Lat;
-     lons(i) = stations{i}.Lon;
-     d = (-1) * double(stations{i}.Depth);
-+    % missing depth
-+    if d == 999
-+        good = find(~isnan(D_reported.CTDprs(:,i)) ...
-+                  & ~isnan(D_reported.CTDtem(:,i)) ...
-+                  & ~isnan(D_reported.CTDsal(:,i)));
-+        % assume deepest data 10 m above the botttom
-+        d = -(D_reported.CTDprs(max(good), i) + 10.0);
-+    end
-     deps(i) = gsw_p_from_z(d, lats(i)); % depth in pressure, not in meters
- end
-~~~
-
+The function `grid_data_pressure.m` assumes all CTD casts were terminated at exactly 10 dbar above the bottom.
