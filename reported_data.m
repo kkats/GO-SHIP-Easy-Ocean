@@ -88,8 +88,8 @@ for i = 1:nstn
     if strfind(s.CTDoxyUnit, 'mol/kg')
         ctdoxy(:,i) = ox(:,k);
     elseif strfind(s.CTDoxyUnit, 'ml/l')
-        ctdoxy(:,i) = NaN; %%% XXX TODO
-    else
+        ctdoxy(:,i) = convertDO(ox(:,k), ctdprs(:,i), ctdtem(:,i), ctdsal(:,i), lonlist(i), latlist(i));
+    elseif ~isempty(s.CTDoxyUnit)
         error('reported_data.m: Unknown oxygen unit');
     end
     %
