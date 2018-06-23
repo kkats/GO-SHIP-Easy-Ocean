@@ -16,6 +16,10 @@ n = 0;
 for i = 1:length(D_ctd_s.lat)
     lat = D_ctd_s.lat(i);
     lon = D_ctd_s.lon(i);
+    % for Atlantic
+    if lon > 360
+        lon = lon - 360;
+    end
     ig = []; % is good
     for j = 1:N
         % any stations within 0.1 deree Lat/Lon

@@ -43,7 +43,8 @@ for i = 1:nstn
     deps(i) = gsw_p_from_z(d, lats(i)); % depth in pressure, not in meters
 end
 
-[~, ll] = sort_stations(lons, lats);
+[idx, ll] = sort_stations(lons, lats);
+ls = ll(idx); % sort
 
 ctdprs = D_reported.CTDprs;
 ctdtem = D_reported.CTDtem;
@@ -67,29 +68,29 @@ end
 chunk = {};
 ichunk = {};
 len = 0;
-llhere = [ll(1)];
+lshere = [ls(1)];
 idxhere = [1];
-for i = 2:length(ll)
-    if abs(ll(i) - ll(i-1))  < 1.0;
-        llhere = [llhere, ll(i)];
+for i = 2:length(ls)
+    if abs(ls(i) - ls(i-1))  < 1.0;
+        lshere = [lshere, ls(i)];
         idxhere = [idxhere, i];
         continue;
     end
     len = len + 1;
-    chunk(1, len) = {llhere};
+    chunk(1, len) = {lshere};
     ichunk(1, len) = {idxhere};
-    llhere = [ll(i)];
+    lshere = [ls(i)];
     idxhere = [i];
 end
-chunk(1,len+1) = {llhere};
+chunk(1,len+1) = {lshere};
 ichunk(1, len+1) = {idxhere};
 
 [ctdtem_hv, ctdsal_hv, ctdoxy_hv] = deal(NaN(length(pr_grid), length(ll_grid)));
 [ctdCT_hv, ctdSA_hv] = deal(NaN(length(pr_grid), length(ll_grid)));
 for i = 1:length(chunk)
-    llhere = chunk{i};
+    lshere = chunk{i};
     idxhere = ichunk{i};
-    ig = find(min(llhere) < ll_grid & ll_grid < max(llhere));
+    ig = find(min(lshere) < ll_grid & ll_grid < max(lshere));
     if length(idxhere) < 2
         continue;
     end

@@ -48,7 +48,7 @@ for i = 1:nstn
     deps(i) = stations(good(i)).Depth;
 end
 
-idx = sort_stations(lons, lats);
+[idx, nlons, isAtlanticZonal] = sort_stations(lons, lats);
 
 %%%
 %%% unit conversion & sorting
@@ -62,7 +62,11 @@ for i = 1:nstn
     k = good(idx(i));
     s = stations(k); stationlist{i} = s;
     latlist(i) = lats(idx(i));
-    lonlist(i) = lons(idx(i));
+    if isAtlanticZonal % special treatment
+        lonlist(i) = nlons(idx(i));
+    else
+        lonlist(i) = lons(idx(i));
+    end
     deplist(i) = deps(idx(i));
     ctdprs(:,i) = pr(:,k);
     if ~isempty(strfind(s.CTDtemUnit, 'its-90')) ...

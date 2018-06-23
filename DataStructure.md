@@ -70,6 +70,7 @@ for i = 1:nstn
 end
 ~~~
 But for ease of access, `latlist`, `lonlist`, and `deplist` are provided by `reported_data.m`.
+For zonal sections in the Atlantic Ocean, `lonlist` uses negative longitudes.
 
 #### Clean gridded data on pressure coordinate
 ~~~

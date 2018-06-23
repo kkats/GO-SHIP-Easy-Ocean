@@ -1,18 +1,27 @@
-function [idx, ll] = sort_stations(longitudes, latitudes)
+function [idx, ll, bool] = sort_stations(longitudes, latitudes)
+%
+% ll = lon/late (NOT SORTED: use ll(idx) for sorted lon/lat).
+% bool = true for Atlantic zonal section
+%
+%
 
-% Atlantic?
+nlon = longitudes;
+bool = false;
+% If in Atlantic, use negative longitudes for the Western Hemisphere
 if any(longitudes <= 180.0) && any(longitudes > 180.0)
     west = find(longitudes > 180.0);
-    longitudes(west) = longitudes(west) - 360.0;
+    nlon(west) = longitudes(west) - 360.0;
+    bool = true;
 end
 
 % meridional
-if max(latitudes) - min(latitudes) > max(longitudes) - min(longitudes)
+if max(latitudes) - min(latitudes) > max(nlon) - min(nlon)
     [~, idx] = sort(latitudes);
     ll = latitudes;
+    bool = false;
 % zonal
 else
-    [~, idx] = sort(longitudes);
-    ll = longitudes;
+    [~, idx] = sort(nlon);
+    ll = nlon;
 end
 end
