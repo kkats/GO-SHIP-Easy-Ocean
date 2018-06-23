@@ -48,13 +48,7 @@ for i = 1:nstn
     deps(i) = stations(good(i)).Depth;
 end
 
-% meridional section. sort by latitude
-if max(lats) - min(lats) > max(lons) - min(lons)
-    [dummy, idx] = sort(lats);
-% zonal section. sort by longitude
-else
-    [dummy, idx] = sort(lons);
-end
+idx = sort_stations(lons, lats);
 
 %%%
 %%% unit conversion & sorting

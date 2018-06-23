@@ -34,13 +34,8 @@ while 1
     label(n) = m;
 end
 
-% meridional section. sort by lat
-if max(lats) - min(lats) > max(lons) - min(lons)
-    [dummy, idx] = sort(lats);
-% zonal section. sort by lon
-else
-    [dummy, idx] = sort(lons);
-end
+idx = sort_station(lons, lats);
+
 %
 % station distance
 %

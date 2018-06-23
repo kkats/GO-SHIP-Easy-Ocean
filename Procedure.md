@@ -63,6 +63,8 @@ and
                                                        pressure_grid(:), ...
                                                        latlon_grid(:))
 ~~~
+Horizontal interpolation is not performed if stations are more than 1 degree (longitude for zonal sections, latitude for meridional) apart. This is done in `grid_data_pressure.m` and can be changed if needed.
+
 As default options, `vinterp.m` and `hinterp.m` are provided. The former uses Hanning smoothing and the latter shape-preserving piecewise cubic interpolation following [Purkey and Johnson (2010)](https://doi.org/10.1175/2010JCLI3682.1). In `configuration.m`, the functions are listed as;
 ~~~
 vinterp_handle = @vinterp;

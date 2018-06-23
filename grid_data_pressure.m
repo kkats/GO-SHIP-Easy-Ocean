@@ -43,13 +43,7 @@ for i = 1:nstn
     deps(i) = gsw_p_from_z(d, lats(i)); % depth in pressure, not in meters
 end
 
-% meridional section
-if max(lats) - min(lats) > max(lons) - min(lons)
-    ll = lats;
-% zonal section
-else
-    ll = lons;
-end
+[~, ll] = sort_stations(lons, lats);
 
 ctdprs = D_reported.CTDprs;
 ctdtem = D_reported.CTDtem;
@@ -69,14 +63,47 @@ for i = 1:nstn
     ctdSA_v(:,i) = vinterp_handle(ctdprs(:,i), ctdSA(:,i), pr_grid);
 end
 
-% horizontal interpolation
+% Interpolate chunk by chunk -- do not interpolate if more than 1 deg apart
+chunk = {};
+ichunk = {};
+len = 0;
+llhere = [ll(1)];
+idxhere = [1];
+for i = 2:length(ll)
+    if abs(ll(i) - ll(i-1))  < 1.0;
+        llhere = [llhere, ll(i)];
+        idxhere = [idxhere, i];
+        continue;
+    end
+    len = len + 1;
+    chunk(1, len) = {llhere};
+    ichunk(1, len) = {idxhere};
+    llhere = [ll(i)];
+    idxhere = [i];
+end
+chunk(1,len+1) = {llhere};
+ichunk(1, len+1) = {idxhere};
+
 [ctdtem_hv, ctdsal_hv, ctdoxy_hv] = deal(NaN(length(pr_grid), length(ll_grid)));
 [ctdCT_hv, ctdSA_hv] = deal(NaN(length(pr_grid), length(ll_grid)));
-ctdtem_hv = hinterp_handle(ctdtem_v, ll, deps, pr_grid, ll_grid);
-ctdsal_hv = hinterp_handle(ctdsal_v, ll, deps, pr_grid, ll_grid);
-ctdoxy_hv = hinterp_handle(ctdoxy_v, ll, deps, pr_grid, ll_grid);
-ctdCT_hv = hinterp_handle(ctdCT_v, ll, deps, pr_grid, ll_grid);
-ctdSA_hv = hinterp_handle(ctdSA_v, ll, deps, pr_grid, ll_grid);
+for i = 1:length(chunk)
+    llhere = chunk{i};
+    idxhere = ichunk{i};
+    ig = find(min(llhere) < ll_grid & ll_grid < max(llhere));
+    if length(idxhere) < 2
+        continue;
+    end
+    ctdtem_hv(:,ig) = hinterp_handle(ctdtem_v(:,idxhere), ll(idxhere), deps(idxhere), ...
+                                                                    pr_grid, ll_grid(ig));
+    ctdsal_hv(:,ig) = hinterp_handle(ctdsal_v(:,idxhere), ll(idxhere), deps(idxhere), ...
+                                                                    pr_grid, ll_grid(ig));
+    ctdoxy_hv(:,ig) = hinterp_handle(ctdoxy_v(:,idxhere), ll(idxhere), deps(idxhere), ...
+                                                                    pr_grid, ll_grid(ig));
+    ctdCT_hv(:,ig) = hinterp_handle(ctdCT_v(:,idxhere), ll(idxhere), deps(idxhere), ...
+                                                                    pr_grid, ll_grid(ig));
+    ctdSA_hv(:,ig) = hinterp_handle(ctdSA_v(:,idxhere), ll(idxhere), deps(idxhere), ...
+                                                                    pr_grid, ll_grid(ig));
+end
 
 D_pressure = struct('Station', {stations}, ...
                     'CTDtem', ctdtem_hv, ...

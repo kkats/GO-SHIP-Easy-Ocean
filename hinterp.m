@@ -17,6 +17,8 @@ for j = 1:length(pr_grid)
     end
     if length(ig) > 2
         zinterp(j,:) = interp1(latlon(ig), z(j,ig), ll_grid, 'pchip');
+    elseif length(ig) > 1
+        zinterp(j,:) = interp1(latlon(ig), z(j,ig), ll_grid, 'linear');
     end
     % remove 'edge effects'
     zinterp(j,find(ll_grid < min(latlon(ig)))) = NaN;
