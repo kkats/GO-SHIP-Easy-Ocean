@@ -8,7 +8,7 @@ function [idx, ll, bool] = sort_stations(longitudes, latitudes)
 nlon = longitudes;
 bool = false;
 % If in Atlantic, use negative longitudes for the Western Hemisphere
-if any(longitudes <= 180.0) && any(longitudes > 180.0)
+if any(longitudes <= 40.0) && any(longitudes > 280.0)
     west = find(longitudes > 180.0);
     nlon(west) = longitudes(west) - 360.0;
     bool = true;
