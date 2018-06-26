@@ -23,7 +23,7 @@ nstn = length(stations);
 for i = 1:nstn
     lats(i) = stations{i}.Lat;
     lons(i) = stations{i}.Lon;
-    d = NaN;
+    d = (-1) * double(stations{i}.Depth);
     % depth missing in the CTD files and depth_file exists
     if length(dtable) ~= 1 || ~isnan(dtable)
         for j = 1:size(dtable, 1)

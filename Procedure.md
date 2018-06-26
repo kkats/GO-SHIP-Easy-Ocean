@@ -101,8 +101,8 @@ It is necessary to use the right `configuration.m` file. Here `%` is Shell promp
 ## 3. Clean data in uniform grid
 ### Matlab
 ~~~
->> pr_grid = [0:20:6500];
->> ll_grid = [153:(1/5):289];
+>> pr_grid = [0:10:6500];
+>> ll_grid = [153.4:(1/10):288.6];
 % cp P06/configuration_1992.m configuration.m
 >> D_pr(1) = grid_data_pressure(D_reported(1), ll_grid, pr_grid);
 % cp P06/configuration_2003.m configuration.m
