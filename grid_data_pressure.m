@@ -33,7 +33,7 @@ for i = 1:nstn
             end
         end
     end
-    if isnan(d) || d == 999 % missing data
+    if isnan(d) || d == 999 || d == 0 % missing data
         good = find(~isnan(D_reported.CTDprs(:,i)) ...
                   & ~isnan(D_reported.CTDtem(:,i)) ...
                   & ~isnan(D_reported.CTDsal(:,i)));
