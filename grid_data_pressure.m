@@ -24,20 +24,26 @@ for i = 1:nstn
     lats(i) = stations{i}.Lat;
     lons(i) = stations{i}.Lon;
     d = (-1) * double(stations{i}.Depth);
-    % depth missing in the CTD files and depth_file exists
-    if length(dtable) ~= 1 || ~isnan(dtable)
-        for j = 1:size(dtable, 1)
-            if strcmp(stations{i}.Stnnbr, num2str(dtable(j,1))) && stations{i}.Cast == dtable(j,2)
-                d = (-1) * dtable(j,3);
-                break;
+    % missing data
+    % d == -4 was used in I05_2002 (74AB20020301)
+    if isnan(d) || d == 999 || d == 0 || d == -4
+        % if depth_file exists, use it
+        if length(dtable) ~= 1 || ~isnan(dtable)
+            for j = 1:size(dtable, 1)
+                if strcmp(stations{i}.Stnnbr, num2str(dtable(j,1))) ...
+                                            && stations{i}.Cast == dtable(j,2)
+                    d = (-1) * dtable(j,3);
+                    break;
+                end
             end
         end
     end
-    if isnan(d) || d == 999 || d == 0 % missing data
+    % no depth_file, then asssume deepest data at 10 m above sea bed
+    % or depth_file has d=-999 or d=0
+    if isnan(d) || d == 999 || d == 0
         good = find(~isnan(D_reported.CTDprs(:,i)) ...
-                  & ~isnan(D_reported.CTDtem(:,i)) ...
-                  & ~isnan(D_reported.CTDsal(:,i)));
-        % assume deepest data 10 m above the botttom
+                 & ~isnan(D_reported.CTDtem(:,i)) ...
+                 & ~isnan(D_reported.CTDsal(:,i)));
         d = -(D_reported.CTDprs(max(good), i) + 10.0);
     end
     deps(i) = gsw_p_from_z(d, lats(i)); % depth in pressure, not in meters
@@ -64,14 +70,15 @@ for i = 1:nstn
     ctdSA_v(:,i) = vinterp_handle(ctdprs(:,i), ctdSA(:,i), pr_grid);
 end
 
-% Interpolate chunk by chunk -- do not interpolate if more than 1 deg apart
+% Interpolate chunk by chunk -- do not interpolate if more than MAX_SEPARATION deg apart
+% (defined in configuration)
 chunk = {};
 ichunk = {};
 len = 0;
 lshere = [ls(1)];
 idxhere = [1];
 for i = 2:length(ls)
-    if abs(ls(i) - ls(i-1))  < 1.0;
+    if abs(ls(i) - ls(i-1))  < MAX_SEPARATION;
         lshere = [lshere, ls(i)];
         idxhere = [idxhere, i];
         continue;

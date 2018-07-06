@@ -34,7 +34,7 @@ while 1
     label(n) = m;
 end
 
-idx = sort_station(lons, lats);
+idx = sort_stations(lons, lats);
 
 %
 % station distance
@@ -49,5 +49,5 @@ for i = 2:n
     fprintf(2, '%3d -- %3d  %8.2f nm\n', label(j1), label(j0), dx);
 end
 
-plot(lons, lats, 'o', 'Color', 'b');
-%plot(lons, lats, 'x', 'Color', 'r');
+%plot(lons, lats, 'o', 'Color', 'r');
+plot(lons, lats, 'x', 'Color', 'b');

@@ -4,7 +4,7 @@ User friendly WOCE/GO-SHIP data
 ## Documents
 + [READEME.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/README.md) This file.
 + [Procedure.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/Procedure.md) What to do.
-+ [DataStructure.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/DataStructure.md) Internal data structure.
++ [DataStructure.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/DataStructure.md) Output formats and internal data structure.
 
 ## Requirements
 #### [Matlab](https://stackoverflow.blog/2017/10/31/disliked-programming-languages/)

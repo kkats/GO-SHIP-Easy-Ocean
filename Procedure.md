@@ -72,6 +72,10 @@ hinterp_handle = @hinterp;
 ~~~
 using Matlab's function handle. Feel free to change.
 
+In order to avoid unrealistic interpolated field, the field between two stations more than
+`MAX_SEPARATION` degrees part is not interpolated. This paramter is also defined in
+`configuration.m`. The default is 2 degrees.
+
 ### 2-2 `reported_data`
 It is necessary to use the right `configuration.m` file. Here `%` is Shell prompt and `>>` is Matlab prompt.
 ~~~

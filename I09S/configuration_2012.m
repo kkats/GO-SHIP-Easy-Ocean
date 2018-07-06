@@ -2,6 +2,7 @@
 soffset_handle = @salt_offset;
 vinterp_handle = @vinterp;
 hinterp_handle = @hinterp;
+MAX_SEPARATION = 2.0;
 
 function so = salt_offset(k)
 %
