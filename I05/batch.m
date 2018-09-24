@@ -13,7 +13,11 @@ for n = 1:length(years)
     com = ['[s, m] = copyfile(''' DIR 'configuration_' years{n} '.m'', ''configuration.m'');'];
     eval(com);
     if s ~= 1, error(['copyfile ' num2str(n) ':', m]); end
-    com = ['D_reported(' num2str(n) ') = reported_data(''' DIR fname '_' years{n} '.list'',''' BDIR fname '_' years{n} '.mat'');'];
+    if isempty(depth_files{n})
+        com = ['D_reported(' num2str(n) ') = reported_data(''' DIR fname '_' years{n} '.list'',''' BDIR fname '_' years{n} '.mat'');'];
+    else
+        com = ['D_reported(' num2str(n) ') = reported_data(''' DIR fname '_' years{n} '.list'',''' BDIR fname '_' years{n} '.mat'', ''' depth_files{n} ''');'];
+    end
     eval(com);
 end
 com = ['save ''output/reported/' DIR fname '.mat'' D_reported'];
@@ -28,11 +32,7 @@ for n = 1:length(years)
     com = ['[s, m] = copyfile(''' DIR 'configuration_' years{n} '.m'', ''configuration.m'');'];
     eval(com);
     if s ~= 1, error(['copyfile ' num2str(n) ':', m]); end
-    if isempty(depth_files{n})
-        com = ['D_pr(' num2str(n) ') = grid_data_pressure(D_reported(' num2str(n) '), ll_grid, pr_grid);'];
-    else
-        com = ['D_pr(' num2str(n) ') = grid_data_pressure(D_reported(' num2str(n) '), ll_grid, pr_grid, ''' depth_files{n} ''');'];
-    end
+    com = ['D_pr(' num2str(n) ') = grid_data_pressure(D_reported(' num2str(n) '), ll_grid, pr_grid);'];
     eval(com);
 end
 com = ['save ''output/gridded/' DIR fname '.mat'' D_pr ll_grid pr_grid'];

@@ -1,4 +1,4 @@
-function D_pressure = grid_data_pressure(D_reported, ll_grid, pr_grid, depth_file)
+function D_pressure = grid_data_pressure(D_reported, ll_grid, pr_grid)
 %
 % Horizontal & vertical interpolation of `reported_data` D_reported.
 % lat/lon grid `ll_grid` and pressure_grid `pr_grid` are optional
@@ -10,11 +10,6 @@ function D_pressure = grid_data_pressure(D_reported, ll_grid, pr_grid, depth_fil
 configuration;
 %%%
 
-if nargin > 3
-    dtable = load(depth_file);
-else
-    dtable = NaN;
-end
     
 % lat/lon and depth
 stations = D_reported.Station;
@@ -23,30 +18,7 @@ nstn = length(stations);
 for i = 1:nstn
     lats(i) = stations{i}.Lat;
     lons(i) = stations{i}.Lon;
-    d = (-1) * double(stations{i}.Depth);
-    % missing data
-    % d == -4 was used in I05_2002 (74AB20020301)
-    if isnan(d) || d == 999 || d == 0 || d == -4
-        % if depth_file exists, use it
-        if length(dtable) ~= 1 || ~isnan(dtable)
-            for j = 1:size(dtable, 1)
-                if strcmp(stations{i}.Stnnbr, num2str(dtable(j,1))) ...
-                                            && stations{i}.Cast == dtable(j,2)
-                    d = (-1) * dtable(j,3);
-                    break;
-                end
-            end
-        end
-    end
-    % no depth_file, then asssume deepest data at 10 m above sea bed
-    % or depth_file has d=-999 or d=0
-    if isnan(d) || d == 999 || d == 0
-        good = find(~isnan(D_reported.CTDprs(:,i)) ...
-                 & ~isnan(D_reported.CTDtem(:,i)) ...
-                 & ~isnan(D_reported.CTDsal(:,i)));
-        d = -(D_reported.CTDprs(max(good), i) + 10.0);
-    end
-    deps(i) = gsw_p_from_z(d, lats(i)); % depth in pressure, not in meters
+    deps(i) = stations{i}.Depth;
 end
 
 [idx, ll] = sort_stations(lons, lats);

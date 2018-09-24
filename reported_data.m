@@ -1,4 +1,4 @@
-function D_reported = reported_data(fname_list, fname_raw)
+function D_reported = reported_data(fname_list, fname_raw, depth_file)
 %
 % Given edited station list `fname_list` (i.e. unnecessary stations commented out)
 % output *clean* reported data structure from `fname_raw` (i.e. output from `read_ctd_nc.m`)
@@ -14,8 +14,12 @@ function D_reported = reported_data(fname_list, fname_raw)
 %%%
 configuration;
 %%%
-%%%
-%%%
+
+if nargin > 2
+    dtable = load(depth_file);
+else
+    dtable = [];
+end
 
 eval(['load ''' fname_raw ''' stations pr te sa ox']);
 
@@ -101,6 +105,37 @@ for i = 1:nstn
     CT = gsw_CT_from_t(SA, t68tot90(ctdtem(:,i)), ctdprs(:,i));
     ctdCT(:,i) = CT;
 end
+%%%
+%%% Depth correction to pressure
+%%%
+for i = 1:nstn
+    ss = stationlist{i};
+    d = (-1) * double(ss.Depth);
+    % missing data
+    % d == -4 was used in I05_2002 (74AB20020301)
+    if isnan(d) || d == 999 || d == 0 || d == -4
+        % if depth_file exists
+        if ~isempty(dtable)
+            for j = 1:size(dtable, 1)
+                if strcmp(ss.Stnnbr, num2str(dtable(j,1))) && ss.Cast == dtable(j,2)
+                    d = (-1) * dtable(j,3);
+                    break;
+                end
+            end
+        end
+    end
+    % no data in depth_file
+    if isnan(d) || d == 999 || d == 0 || d == 4
+        good = find(~isnan(ctdprs(:,i)) & ~isnan(ctdtem(:,i)) & ~isnan(ctdsal(:,i)));
+        dprime = ctdprs(max(good), i) + 10.0; 
+    else
+        dprime = gsw_p_from_z(d, ss.Lat);
+    end
+    ss.Depth = dprime;
+    stationlist{i} = ss;
+    deplist(i) = dprime;
+end
+
 D_reported = struct('Station', {stationlist}, ...
                     'latlist', latlist, ...
                     'lonlist', lonlist, ...
