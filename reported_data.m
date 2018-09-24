@@ -87,11 +87,12 @@ for i = 1:nstn
     else
         error('reported_data.m: Unknown salinity unit');
     end
-    if strfind(s.CTDoxyUnit, 'mol/kg')
+    if ~(isempty(strfind(s.CTDoxyUnit, 'mol/kg')) && isempty(strfind(s.CTDoxyUnit, 'UMOL/KG')))
         ctdoxy(:,i) = ox(:,k);
     elseif strfind(s.CTDoxyUnit, 'ml/l')
         ctdoxy(:,i) = convertDO(ox(:,k), ctdprs(:,i), ctdtem(:,i), ctdsal(:,i), lonlist(i), latlist(i));
     elseif ~isempty(s.CTDoxyUnit)
+keyboard
         error('reported_data.m: Unknown oxygen unit');
     end
     %

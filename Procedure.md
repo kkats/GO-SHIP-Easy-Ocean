@@ -8,8 +8,8 @@ We use `P06` section as an example.
 
 ### 1-1. Raw data in Matlab format and station list
 
-1. Download and unzip *all* CTD files necessary to form one complete section. For example, three zip files `p06e_nc_ctd.zip`, `p06c_nc_ctd.zip`, and `p06w_nc_ctd.zip` are necessary for the P06 1992 section. Unzip the archive *in one directory* (say, `work/P06/1992/`). For this project, **whp_netcdf** is the preferred format.
-1. Start Matlab and run `read_ctd_nc`. In this example, output goe to `P06/1992/p06_1992.mat`.
+1. Download and unzip *all* CTD files necessary to form one complete section. For example, three zip files `p06e_nc_ctd.zip`, `p06c_nc_ctd.zip`, and `p06w_nc_ctd.zip` are necessary for the P06 1992 section. Unzip the archive *in one directory* (say, `work/P06/1992/`). For **whp_netcdf** format, use `read_ctd_nc.m` in the next step. For **exchange** format, use `read_ctd_exchange.m`.
+1. Start Matlab and run `read_ctd_nc` or `read_ctd_exchange` depending on the downloaded format. In this example, output goe to `P06/1992/p06_1992.mat`.
 ~~~
 >> read_ctd_nc('work/P06/1992/', 'work/P06/p06_1992');
 >> load 'work/P06/1992/p06_1992.mat'

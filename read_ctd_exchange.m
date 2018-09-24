@@ -72,7 +72,7 @@ for i = 1:N
 
     % read body assuming leftmost 8 columns are
     % PRS, PRS_FLAG, TMP, TMP_FLAG, SAL, SAL_FLAG, OXY, OXY_FLAG
-    % if not, CTDtemUnit/CTDsalUnit/CTDoxyUnit might tell something
+    % if not, CTDtemUnit/CTDsalUnit/CTDoxyUnit might show something.
     [p, pf, t, tf, s, sf, o, of] = deal(NaN(7500,1));
     m = 0;
     while 1
