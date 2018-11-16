@@ -131,6 +131,17 @@ te(te_flg ~= 2) = NaN;
 sa(sa_flg ~= 2) = NaN;
 ox(ox_flg ~= 2) = NaN;
 
+% sort in time
+for i = 1:length(stations)
+    timeseries(i) = stations(i).Time;
+end
+[dummy, idx] = sort(timeseries, 'ascend');
+stations = stations(idx);
+pr = pr(:,idx);
+te = te(:,idx);
+sa = sa(:,idx);
+ox = ox(:,idx);
+
 % finally save .mat files
 if length(outputfname) > 4 && strcmp(outputfname(end-3:end), '.mat')
     outputfname = outputfname(1:end-4);

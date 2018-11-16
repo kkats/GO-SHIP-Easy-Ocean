@@ -83,16 +83,15 @@ for i = 1:nstn
     end
     if ~isempty(strfind(s.CTDsalUnit, 'PSS-78')) ...
      || ~isempty(strfind(s.CTDsalUnit, 'pss-78'))
-        ctdsal(:,i) = sa(:,k) + ones(m,1) * soffset_handle(k); % offset is correction, i.e. ADD
+        ctdsal(:,i) = sa(:,k) + ones(m,1) * salt_offset(k); % offset is correction, i.e. ADD
     else
         error('reported_data.m: Unknown salinity unit');
     end
     if ~(isempty(strfind(s.CTDoxyUnit, 'mol/kg')) && isempty(strfind(s.CTDoxyUnit, 'UMOL/KG')))
         ctdoxy(:,i) = ox(:,k);
-    elseif strfind(s.CTDoxyUnit, 'ml/l')
+    elseif ~(isempty(strfind(s.CTDoxyUnit, 'ml/l')) && isempty(strfind(s.CTDoxyUnit, 'ML/L')))
         ctdoxy(:,i) = convertDO(ox(:,k), ctdprs(:,i), ctdtem(:,i), ctdsal(:,i), lonlist(i), latlist(i));
     elseif ~isempty(s.CTDoxyUnit)
-keyboard
         error('reported_data.m: Unknown oxygen unit');
     end
     %
@@ -127,8 +126,12 @@ for i = 1:nstn
     end
     % no data in depth_file
     if isnan(d) || d == 999 || d == 0 || d == 4
-        good = find(~isnan(ctdprs(:,i)) & ~isnan(ctdtem(:,i)) & ~isnan(ctdsal(:,i)));
-        dprime = ctdprs(max(good), i) + 10.0; 
+        ctdgood = find(~isnan(ctdprs(:,i)) & ~isnan(ctdtem(:,i)) & ~isnan(ctdsal(:,i)));
+        if isempty(ctdgood) % happens when all CTD data are flagged not-good
+            dprime = nan;
+        else
+            dprime = ctdprs(max(ctdgood), i) + 10.0; 
+        end
     else
         dprime = gsw_p_from_z(d, ss.Lat);
     end

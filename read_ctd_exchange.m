@@ -55,7 +55,15 @@ for i = 1:N
         header = {header{1:end}, tline};
     end
     % check first unit --- strtok will skip blank entries (',,')
-    [punit, r1] = strtok(tline, ',');
+    % get rid of extra spaces
+    m = 1;
+    for n = 1:length(tline)
+        if ~isspace(tline(n))
+            uline(m) = tline(n);
+            m = m + 1;
+        end
+    end
+    [punit, r1] = strtok(uline, ',');
     [tunit, r2] = strtok(r1, ',');
     [sunit, r3] = strtok(r2, ',');
     ounit = strtok(r3, ',');
@@ -65,10 +73,15 @@ for i = 1:N
     cast = str2num(itemEq(header, 'CASTNO'));
     lat = str2num(itemEq(header, 'LATITUDE'));
     lon = str2num(itemEq(header, 'LONGITUDE'));
-    dep = str2num(itemEq(header, 'DEPTH'));
     woce_date = str2num(itemEq(header, 'DATE'));
     woce_time = str2num(itemEq(header, 'TIME'));
     time = convert_woce_time(woce_date, woce_time);
+    % depth sometime missing
+    if isempty(itemEq(header, 'DEPTH'))
+        dep = NaN;
+    else
+        dep = str2num(itemEq(header, 'DEPTH'));
+    end
 
     % read body assuming leftmost 8 columns are
     % PRS, PRS_FLAG, TMP, TMP_FLAG, SAL, SAL_FLAG, OXY, OXY_FLAG
@@ -89,8 +102,13 @@ for i = 1:N
         tf(m) = a(4);
         s(m) = a(5);
         sf(m) = a(6);
-        o(m) = a(7);
-        of(m) = a(8);
+        if length(a) > 7
+            o(m) = a(7);
+            of(m) = a(8);
+        else
+            o(m) = nan;
+            of(m) = nan;
+        end
         clear a;
     end
     if m > mmax
@@ -147,6 +165,17 @@ te(te_flg ~= 2) = NaN;
 sa(sa_flg ~= 2) = NaN;
 ox(ox_flg ~= 2) = NaN;
 
+% sort in time
+for i = 1:length(stations)
+    timeseries(i) = stations(i).Time;
+end
+[dummy, idx] = sort(timeseries, 'ascend');
+stations = stations(idx);
+pr = pr(:,idx);
+te = te(:,idx);
+sa = sa(:,idx);
+ox = ox(:,idx);
+
 % finally save .mat files
 if length(outputfname) > 4 && strcmp(outputfname(end-3:end), '.mat')
     outputfname = outputfname(1:end-4);
@@ -158,6 +187,7 @@ end % function read_ctd_nc
 % utility funtion
 %
 function out = itemEq(header, label)
+    out = '';
     len = length(label);
     for n = 1:length(header)
         line = header{n};

@@ -69,7 +69,8 @@ while 1
     %             after the CCHDO time (CTD BO (sometimes BE) time)
     s0 = stations(ig1).Stnnbr;
     timediff = datenum(joa(n).date) - stations(ig1).Time;
-    if strncmp(joa(n).stnnum, s0, 3) ~= true ...
+    len = max([length(joa(n).stnnum), length(s0)]);
+    if strncmp(joa(n).stnnum, s0, len) ~= true ...
        || joa(n).cast ~= stations(ig1).Cast ...
        || timediff < -1 || timediff > 1
         % closest station found but fails comparison (1)(2)(3)
@@ -81,7 +82,6 @@ while 1
     isInJOA(ig1) = true;
 end
 fclose(fid);
-
 % show diagnostics
 fprintf(2, 'Found %d CCHDO stations out of %d JOA bottles.\n', ...
                     length(find(isInJOA)), n);

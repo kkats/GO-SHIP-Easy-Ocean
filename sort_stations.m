@@ -16,12 +16,12 @@ end
 
 % meridional
 if max(latitudes) - min(latitudes) > max(nlon) - min(nlon)
-    [~, idx] = sort(latitudes);
+    [dummy, idx] = sort(latitudes);
     ll = latitudes;
     bool = false;
 % zonal
 else
-    [~, idx] = sort(nlon);
+    [dummy, idx] = sort(nlon);
     ll = nlon;
 end
 end

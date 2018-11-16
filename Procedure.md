@@ -8,10 +8,10 @@ We use `P06` section as an example.
 
 ### 1-1. Raw data in Matlab format and station list
 
-1. Download and unzip *all* CTD files necessary to form one complete section. For example, three zip files `p06e_nc_ctd.zip`, `p06c_nc_ctd.zip`, and `p06w_nc_ctd.zip` are necessary for the P06 1992 section. Unzip the archive *in one directory* (say, `work/P06/1992/`). For **whp_netcdf** format, use `read_ctd_nc.m` in the next step. For **exchange** format, use `read_ctd_exchange.m`.
-1. Start Matlab and run `read_ctd_nc` or `read_ctd_exchange` depending on the downloaded format. In this example, output goe to `P06/1992/p06_1992.mat`.
+1. Download and unzip *all* CTD files necessary to form one complete section. Both **whp_netcdf** and **exchange** are acceptable. For example, three zip files `p06e_nc_ctd.zip`, `p06c_nc_ctd.zip`, and `p06w_nc_ctd.zip` are necessary for the P06 1992 section. Unzip the archive *in one directory* (say, `work/P06/1992/`). For **whp_netcdf** format, use `read_ctd_nc.m` in the next step. For **exchange** format, use `read_ctd_exchange.m`.
+1. Start Matlab and run `read_ctd_nc` or `read_ctd_exchange` depending on the downloaded format. In this example, output goes to `P06/1992/p06_1992.mat`.
 ~~~
->> read_ctd_nc('work/P06/1992/', 'work/P06/p06_1992');
+>> read_ctd_exchange('work/P06/1992/', 'work/P06/p06_1992');
 >> load 'work/P06/1992/p06_1992.mat'
 ~~~
 
@@ -159,8 +159,9 @@ or
 # for I05, 2009
 cat i05_33rr20090320su.txt | awk '/ROS/ && /BO/ {print $3, $4, $16}' > i05_2009.depth
 ~~~
-This depth file can be fed as the fourth argument of `grid_data_pressure.m`.
+This depth file can be fed as the 3rd argument of `reported_data.m`.
 
 
 ### 4-2. When bottom depth data are missing and the SUM file is unavailable.
-The function `grid_data_pressure.m` assumes all CTD casts were terminated at exactly 10 dbar above the bottom.
+If depth is one  of `-999`, `0`, `4` (used in `74AB20020301`), `NaN`, and no SUM is available,
+`reported_data.m` assumes the CTD casts were terminated at exactly 10 dbar above the bottom.
