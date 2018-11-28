@@ -1,13 +1,12 @@
 % variables
-DIR = 'I08S-I09N/';
-BDIR = '../CTD/I08S-I09N/';
-fname = 'i08s-i09n';
-years = {'1995', '2007', '2016'};
-ll_grid = [-65.9:0.1:19.8];
+DIR = 'I06S/';
+BDIR = '../CTD/I06S/';
+fname = 'i06s';
+years = {'1993', '1996', '2008'};
+ll_grid = [-69.1:0.1:-33.1];
 pr_grid = [0:10:6500];
-depth_files = {'I08S-I09N/i08s-i09n_1995.depth', '', ''};
+depth_files = {'', '', ''};
 %
-
 tic;
 for n = 1:length(years)
     com = ['[s, m] = copyfile(''' DIR 'configuration_' years{n} '.m'', ''configuration.m'');'];

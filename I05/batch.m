@@ -1,13 +1,12 @@
 % variables
 DIR = 'I05/';
-BDIR = 'C:\Users\ka\Downloads\CTD\I05\';
+BDIR = '../CTD/I05/';
 fname = 'i05';
-years = {'1987', '2002', '2009'};
+years = {'1987', '1995', '2002', '2009'};
 ll_grid = [30.3:0.1:115.4];
 pr_grid = [0:10:6500];
-depth_files = {'', 'I05/i05_2002.depth', 'I05/i05_2009.depth'};
+depth_files = {'', '', 'I05/i05_2002.depth', 'I05/i05_2009.depth'};
 %
-
 tic;
 for n = 1:length(years)
     com = ['[s, m] = copyfile(''' DIR 'configuration_' years{n} '.m'', ''configuration.m'');'];
@@ -45,7 +44,8 @@ end
 %
 com = ['gridded_bin(D_pr, ''output/gridded/' DIR fname '.bin'', ll_grid, pr_grid);'];
 eval(com);
-%
-com = ['gridded_nc(D_pr, ''output/gridded/' DIR fname '.nc'', ll_grid, pr_grid);'];
-eval(com);
 toc
+
+% NetCDF
+%com = ['gridded_nc(D_pr, ''output/gridded/' DIR fname '.nc'', ll_grid, pr_grid);'];
+%eval(com);

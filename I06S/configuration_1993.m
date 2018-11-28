@@ -1,6 +1,6 @@
-% I05, 1987
+% I06S, 1993
 vinterp_handle = @vinterp;
 hinterp_handle = @hinterp;
 MAX_SEPARATION = 2.0;
 
-salt_offset([1:108]) = 1.0e-3 * 2.1; % P97 (74AB29_1)
+salt_offset([1:131]) = 1.0e-3 * 0.4; %  P121 (I06S, 35MFCIVA_1)
