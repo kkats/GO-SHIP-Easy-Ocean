@@ -1,4 +1,4 @@
-function isInJOA = findJOAstations(stations, csvJOAfname)
+function isInJOA = findJstations(stations, csvJOAfname)
 %
 % Find stations in JOA's CSV output from our stations(:)
 %

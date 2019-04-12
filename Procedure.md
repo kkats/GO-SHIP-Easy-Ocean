@@ -25,7 +25,7 @@ We use `P06` section as an example.
 >> load 'work/P06/ctd_all_gridded_P06.mat' % Purkey's product
 >> flagP = findPstations(stations, D_ctd(1));
 ~~~
-1. (optional. When WOCE Atlas header is available for this occupation;) Find stations in [WOCE Atlas](http://woceatlas.ucsd.edu). For example, the station file for the WOCE occupation of P06 is available [here](http://whp-atlas.ucsd.edu/pacific/p06/info/bathy.html).
+1. (optional. When WOCE Atlas header is available for this occupation;) Find stations in [WOCE Atlas](http://woceatlas.ucsd.edu). For example, the station file for the WOCE occupation of P06 is available [here](http://whp-atlas.ucsd.edu/pacific/p06/info/P06_sta_bdep.txt).
 ~~~
 >> flagA = findAstations(stations, 'work/P06/Atlas/P06_sta_bdep.txt');
 ~~~

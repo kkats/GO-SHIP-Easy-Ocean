@@ -18,6 +18,7 @@ for i = 1:length(s)
     if isInJOA(i),   flag = ['J', flag]; end
     if isInP(i),     flag = ['P', flag]; end
     if isInAtlas(i), flag = ['A', flag]; end
+    if ~isInJOA(i) && ~isInP(i) && ~isInAtlas(i), flag = ['_']; end
     woce_date = datestr(s(i).Time, 'mm/dd/yyyy');
     woce_time = datestr(s(i).Time, 'HH:MM');
     fprintf(fid, '%3d%5s %12.3f %12.3f   %10s %5s     %4d %12s    %3s %3d\n', ...

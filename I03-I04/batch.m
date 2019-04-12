@@ -1,14 +1,25 @@
 % variables
 DIR = 'I03-I04/';
-BDIR = 'C:\Users\ka\Downloads\CTD\I03-I04\';
+BDIR = '../CTD/I03-I04/';
 fname = 'i03-i04';
 years = {'1995', '2003'};
 ll_grid = [35.3:0.1:115.8];
 pr_grid = [0:10:6500];
 depth_files = {'', ''};
 %
-
 tic;
+outdir = ['../output/reported/' DIR];
+if ~exist(outdir)
+    if system(['mkdir ' outdir]);
+        error('mkdir failed');
+    end
+end
+outdir = ['../output/gridded/' DIR];
+if ~exist(outdir)
+    if system(['mkdir ' outdir]);
+        error('mkdir failed');
+    end
+end
 for n = 1:length(years)
     com = ['[s, m] = copyfile(''' DIR 'configuration_' years{n} '.m'', ''configuration.m'');'];
     eval(com);
@@ -20,11 +31,11 @@ for n = 1:length(years)
     end
     eval(com);
 end
-com = ['save ''output/reported/' DIR fname '.mat'' D_reported'];
+com = ['save ''../output/reported/' DIR fname '.mat'' D_reported'];
 eval(com);
 %
 for n = 1:length(years)
-    com = ['reported_WHPX(D_reported(' num2str(n) '), ''output/reported/work/' fname '_' years{n} ''');' ];
+    com = ['reported_WHPX(D_reported(' num2str(n) '), ''../output/reported/work/' fname '_' years{n} ''');' ];
     eval(com);
 end
 %
@@ -35,18 +46,19 @@ for n = 1:length(years)
     com = ['D_pr(' num2str(n) ') = grid_data_pressure(D_reported(' num2str(n) '), ll_grid, pr_grid);'];
     eval(com);
 end
-com = ['save ''output/gridded/' DIR fname '.mat'' D_pr ll_grid pr_grid'];
+com = ['save ''../output/gridded/' DIR fname '.mat'' D_pr ll_grid pr_grid'];
 eval (com);
 
 %
 for n = 1:length(years)
-    com = ['gridded_xyz(D_pr(' num2str(n) '), ''output/gridded/' DIR fname '_' years{n} '.xyz'', ll_grid, pr_grid);'];
+    com = ['gridded_xyz(D_pr(' num2str(n) '), ''../output/gridded/' DIR fname '_' years{n} '.xyz'', ll_grid, pr_grid);'];
     eval(com);
 end
 %
-com = ['gridded_bin(D_pr, ''output/gridded/' DIR fname '.bin'', ll_grid, pr_grid);'];
-eval(com);
-%
-com = ['gridded_nc(D_pr, ''output/gridded/' DIR fname '.nc'', ll_grid, pr_grid);'];
+com = ['gridded_bin(D_pr, ''../output/gridded/' DIR fname '.bin'', ll_grid, pr_grid);'];
 eval(com);
 toc
+
+% NetCDF
+%com = ['gridded_nc(D_pr, ''../output/gridded/' DIR fname '.nc'', ll_grid, pr_grid);'];
+%eval(com);

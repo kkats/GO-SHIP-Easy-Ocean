@@ -9,6 +9,7 @@ function D_reported = reported_data(fname_list, fname_raw, depth_file)
 % and this `i` is the first column of `fname_list`
 %
 
+clear configuration MAX_SEPARATION hinterp_handle_vinterp_handle salt_offset;
 %%%
 %%% User defined functions
 %%%
@@ -45,6 +46,7 @@ end
 
 nstn = length(good)
 [lats, lons, deps] = deal(NaN(1,nstn));
+
 
 for i = 1:nstn
     lats(i) = stations(good(i)).Lat;

@@ -5,8 +5,8 @@
 + [74AB29_1](https://cchdo.ucsd.edu/cruise/74AB29_1)
 
 ### 1995
-+ [316N145_7](https://cchdo.ucsd.edu/cruise/306N145_7)
-+ [316N145_9](https://cchdo.ucsd.edu/cruise/306N145_9)
++ [316N145_7](https://cchdo.ucsd.edu/cruise/316N145_7)
++ [316N145_9](https://cchdo.ucsd.edu/cruise/316N145_9)
 
 ### (2000, not used)
 + [09FA20000926](https://cchdo.ucsd.edu/cruise/09FA20000926)
@@ -15,7 +15,7 @@
 + [74AB20020301](https://cchdo.ucsd.edu/cruise/74AB20020301)
 
 ### 2009
-+ [33RO20090320](https://cchdo.ucsd.edu/cruise/33RO20090320)
++ [33RR20090320](https://cchdo.ucsd.edu/cruise/33RR20090320)
 
 # 2. Glitches
 
@@ -28,7 +28,8 @@ Warning: 1 CCHDO  15-1     -32.5467     33.4117 1987-11-17 d=3485
 The [documentation](https://cchdo.ucsd.edu/data/2179/i05pdo.txt) says 3491 m.
 
 ## 2002
-The CTD data `i05_00024_00001_ctd.nc` has two apparently the same profiles packed into one.
+The CTD data `i05_00024_00001_ctd.nc` and 
+`i05_00024_0001_ct1.csv` have two apparently the same profiles packed into one.
 All CTD stations have `BOTTOM_DEPTH_METERS = 4`.
 
 ## 2009
