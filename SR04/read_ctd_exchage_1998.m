@@ -54,7 +54,7 @@ for i = 1:N
         end
         header = {header{1:end}, tline};
     end
-    % check first unit
+    % check first unit --- strtok will skip blank entries (',,')
     % get rid of extra spaces
     m = 1;
     for n = 1:length(tline)
@@ -63,11 +63,17 @@ for i = 1:N
             m = m + 1;
         end
     end
-    % strtok skips consecutive separator, i.e. [a,b] = strtok(',,ABC',','); gives a='ABC'
+    % strtok can skip consecutive separator, i.e. [a,b] = strtok(',,ABC',','); gives a='ABC'
     [punit, r1] = strtok(uline, ',');
     [tunit, r2] = strtok(r1, ',');
     [sunit, r3] = strtok(r2, ',');
     ounit = strtok(r3, ',');
+
+    if strcmp(sunit, 'C') && strcmp(ounit, 'PSS-78')
+        tunit = 'DEG_C';
+        sunit = 'PSS-78';
+        ounit = '';
+    end
 
     expo = itemEq(header, 'EXPOCODE');
     station = itemEq(header, 'STNNBR');

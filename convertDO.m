@@ -8,7 +8,7 @@
 %  of seawater in equation (9) should be calculated at the potential temperature
 %  of the water sample." (Section 3.3)
 %
-function umolkg = convertDO(mll, pre, tem, sal, lon, lat)
+function [umolkg, umolL] = convertDO(mll, pre, tem, sal, lon, lat)
     [SA, in_ocean] = gsw_SA_from_SP(sal, pre, lon, lat);
     if any(in_ocean == 0)
         error('convertDO: in_ocean');
@@ -16,5 +16,6 @@ function umolkg = convertDO(mll, pre, tem, sal, lon, lat)
     CT = gsw_CT_from_t(SA, t68tot90(tem), pre);
     dens = (1000 + gsw_sigma0(SA, CT)) / 1000;
     %
+    umolL  = 44.660 .* mll;
     umolkg = 44.660 .* mll ./ dens;
 end

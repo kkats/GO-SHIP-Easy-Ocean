@@ -92,7 +92,9 @@ for i = 1:nstn
     if ~(isempty(strfind(s.CTDoxyUnit, 'mol/kg')) && isempty(strfind(s.CTDoxyUnit, 'UMOL/KG')))
         ctdoxy(:,i) = ox(:,k);
     elseif ~(isempty(strfind(s.CTDoxyUnit, 'ml/l')) && isempty(strfind(s.CTDoxyUnit, 'ML/L')))
-        ctdoxy(:,i) = convertDO(ox(:,k), ctdprs(:,i), ctdtem(:,i), ctdsal(:,i), lonlist(i), latlist(i));
+        [ctdoxy(:,i), dummy] = convertDO(ox(:,k), ctdprs(:,i), ctdtem(:,i), ctdsal(:,i), lonlist(i), latlist(i));
+    elseif ~(isempty(strfind(s.CTDoxyUnit, 'mol/l')) && isempty(strfind(s.CTDoxyUnit, 'UMOL/L')))
+        [dummy, ctdoxy(:,i)] = convertDO(ox(:,k), ctdprs(:,i), ctdtem(:,i), ctdsal(:,i), lonlist(i), latlist(i));
     elseif ~isempty(s.CTDoxyUnit)
         error('reported_data.m: Unknown oxygen unit');
     end

@@ -41,7 +41,7 @@ for i = 1:N
         error(['read_ctd_exchange.m:', msg]);
     end
 
-    % Whatever before 'DBAR,' is header
+    % Whatever before 'DEG C' is header
     header = {};
     while 1
         tline = fgetl(fid);
@@ -49,12 +49,12 @@ for i = 1:N
             fclose(fid);
             error('read_ctd_exchange.m: premature header termination');
         end
-        if length(tline) > 5 && strcmp(tline(1:5), 'DBAR,')
+        if length(tline) > 5 && strcmp(tline(1:5), 'DEG C')
             break;
         end
         header = {header{1:end}, tline};
     end
-    % check first unit
+    % check first unit --- strtok will skip blank entries (',,')
     % get rid of extra spaces
     m = 1;
     for n = 1:length(tline)
@@ -63,11 +63,11 @@ for i = 1:N
             m = m + 1;
         end
     end
-    % strtok skips consecutive separator, i.e. [a,b] = strtok(',,ABC',','); gives a='ABC'
-    [punit, r1] = strtok(uline, ',');
-    [tunit, r2] = strtok(r1, ',');
-    [sunit, r3] = strtok(r2, ',');
-    ounit = strtok(r3, ',');
+    [dunit, r1] = strtok(uline, ',');
+    [punit, r2] = strtok(r1, ',');
+    [tunit, r3] = strtok(r2, ',');
+    sunit = strtok(r3, ',');
+    ounit = '';
 
     expo = itemEq(header, 'EXPOCODE');
     station = itemEq(header, 'STNNBR');
@@ -95,15 +95,15 @@ for i = 1:N
             fclose(fid);
             break;
         end
-        a = sscanf(tline, '%f,%d,%f,%d,%f,%d,%f,%d');
+        a = sscanf(tline, '%f,%f,%f,%f,%f');
         m = m + 1;
-        p(m) = a(1);
-        pf(m) = a(2);
+        p(m) = a(2);
+        pf(m) = 2; % dummy
         t(m)= a(3);
-        tf(m) = a(4);
-        s(m) = a(5);
-        sf(m) = a(6);
-        if length(a) > 7
+        tf(m) = 2; % dummy
+        s(m) = a(4);
+        sf(m) = 2; % dummy
+        if 0
             o(m) = a(7);
             of(m) = a(8);
         else
