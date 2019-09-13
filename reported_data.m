@@ -84,6 +84,7 @@ for i = 1:nstn
         ctdtem(:,i) = te(:,k);
     end
     if ~isempty(strfind(s.CTDsalUnit, 'PSS-78')) ...
+     || ~isempty(strfind(s.CTDsalUnit, 'PSS78')) ...
      || ~isempty(strfind(s.CTDsalUnit, 'pss-78'))
         ctdsal(:,i) = sa(:,k) + ones(m,1) * salt_offset(k); % offset is correction, i.e. ADD
     else
