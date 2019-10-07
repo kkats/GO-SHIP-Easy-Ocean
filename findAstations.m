@@ -7,6 +7,7 @@ N = length(stations);
 isInA = false(1,N);
 
 fid = fopen(headerfname, 'r');
+if (fid < 0) error('no such file'); end
 % skip header
 fgetl(fid);
 fgetl(fid);
@@ -25,6 +26,7 @@ while 1
                          'lat', a{3}, ...
                          'lon', l0);
 end
+fclose(fid);
 for i = 1:length(astations)
     a = astations(i);
     for j = 1:N

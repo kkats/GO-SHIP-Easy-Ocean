@@ -17,7 +17,19 @@ configuration;
 %%%
 
 if nargin > 2
-    dtable = load(depth_file);
+    did = fopen(depth_file, 'r'); 
+    if (did < 0) error (['cannot open ', depth_file]); end
+    d = 1;
+    while 1
+        tline = fgetl(did);
+        if ~ischar(tline), break; end
+        [stn, rest] = strtok(tline);
+        a = sscanf(rest, '%f');
+        dtable(d) = struct('station', stn, ...
+                           'cast', a(1), ...
+                           'depth', a(2));
+        d = d + 1;
+    end
 else
     dtable = [];
 end
@@ -121,9 +133,9 @@ for i = 1:nstn
     if isnan(d) || d == 999 || d == 0 || d == -4
         % if depth_file exists
         if ~isempty(dtable)
-            for j = 1:size(dtable, 1)
-                if strcmp(ss.Stnnbr, num2str(dtable(j,1))) && ss.Cast == dtable(j,2)
-                    d = (-1) * dtable(j,3);
+            for j = 1:length(dtable)
+                if strcmp(ss.Stnnbr, dtable(j).station) && ss.Cast == dtable(j).cast
+                    d = (-1) * dtable(j).depth;
                     break;
                 end
             end
