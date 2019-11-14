@@ -16,6 +16,12 @@
 ### 1998
 + [06AQANTXV_4](https://cchdo.ucsd.edu/cruise/06AQANTXV_4)
 
+### 2005
++ [06AQ20050122](https://cchdo.ucsd.edu/cruise/06AQ20050122)
+
+### 2008
++ [06AQ20080210](https://cchdo.ucsd.edu/cruise/06AQ20080210)
+
 ### 2010
 + [06AQ20101128](https://cchdo.ucsd.edu/cruise/06AQ20101128)
 
@@ -24,8 +30,6 @@
 
 [06AQANTX_4](https://cchdo.ucsd.edu/cruise/06AQANTX_4) was not used as only less than
 10 stations overlap with other occupations.
-
-`D_ctd(6)` in the Purkey's Matlab output is unrecognised.
 
 ### 1992
 This is `D_ctd(5)` in the Purkey's Matlab output.
@@ -124,6 +128,69 @@ Use the former.
      cast = str2num(itemEq(header, 'CASTNO'));
 ```
 
+### 2005
+This is `D_ctd(6)` in the Purkey's Matlab output.
+
+The data do not have flags. We assume all data are good and apply the following patch
+to `read_ctd_exchange.m`. We also their salinity unit 'PSU' is 'PSS_78'.
+
+```
+--- read_ctd_exchange.m	2019-10-24 17:28:08.243345989 +0900
++++ read_ctd_exchange_2005.m	2019-11-13 17:16:06.619119742 +0900
+@@ -96,21 +96,23 @@
+             fclose(fid);
+             break;
+         end
+-        a = sscanf(tline, '%f,%d,%f,%d,%f,%d,%f,%d');
++        %a = sscanf(tline, '%f,%d,%f,%d,%f,%d,%f,%d');
++        % no flag
++        a = sscanf(tline, '%f,%f,%f,%f,%f,%d');
+         m = m + 1;
+         p(m) = a(1);
+         pf(m) = a(2);
+-        t(m)= a(3);
+-        tf(m) = a(4);
+-        s(m) = a(5);
+-        sf(m) = a(6);
+-        if length(a) > 7
+-            o(m) = a(7);
+-            of(m) = a(8);
+-        else
+-            o(m) = nan;
+-            of(m) = nan;
++        %t(m)= a(3);
++        t(m)= a(2);
++        %tf(m) = a(4);
++        s(m) = a(3);
++        %sf(m) = a(6);
++        if (~isempty(strfind(ounit, 'ML/L')))
++            o(m) = a(4);
++            of(m) = 2; % XXX
+         end
++        % dummy
++        pf(m) = 2; tf(m) = 2; sf(m) = 2;
+         clear a;
+     end
+     if m > mmax
+@@ -141,8 +143,10 @@
+     stations(i).Time   = time;
+     stations(i).Depth  = dep;
+     stations(i).CTDtemUnit = tunit;
+-    stations(i).CTDsalUnit = sunit;
+-    stations(i).CTDoxyUnit = ounit;
++    stations(i).CTDsalUnit = 'PSS-78'; %sunit='PSU', assuming it is PSU078
++    if (~isempty(strfind(ounit, 'ML/L')))
++        stations(i).CTDoxyUnit = ounit;
++    end
+ end
+ 
+ pr(mmax+1:end,:) = [];
+```
+
+### 2008
+
+Exactly the same problem with year 2005. Use the same patch.
+
 ### 2010
 Beware of the unit of oxygen (umol/L).
 
@@ -131,9 +198,33 @@ The files in the exchange format lack flags, i.e., the columns are
 `CTDPRS,CTDTMP,CTDSAL,CTDOXY,FLOURM,XMISS,CTDNOBS`. Use this patch;
 
 ```
---- read_ctd_exchange.m      2019-04-24 17:44:22.050684191 +0900
-+++ read_ctd_exchage_2010.m     2019-04-24 12:01:58.173336976 +0900
-@@ -95,20 +94,20 @@
+--- read_ctd_exchange.m	2019-10-24 17:28:08.243345989 +0900
++++ read_ctd_exchange_2010.m	2019-11-13 17:18:47.858206891 +0900
+@@ -49,13 +49,12 @@
+             fclose(fid);
+             error('read_ctd_exchange.m: premature header termination');
+         end
+-        % 06MT030_2 uses "DBARS" instead of "DBAR"
+-        if length(tline) > 5 && (strcmp(tline(1:5), 'DBAR,') || strcmp(tline(1:6), 'DBARS,'))
++        if length(tline) > 5 && strcmp(tline(1:5), 'DBAR,')
+             break;
+         end
+         header = {header{1:end}, tline};
+     end
+-    % check first unit
++    % check first unit --- strtok will skip blank entries (',,')
+     % get rid of extra spaces
+     m = 1;
+     for n = 1:length(tline)
+@@ -64,7 +63,6 @@
+             m = m + 1;
+         end
+     end
+-    % strtok skips consecutive separator, i.e. [a,b] = strtok(',,ABC',','); gives a='ABC'
+     [punit, r1] = strtok(uline, ',');
+     [tunit, r2] = strtok(r1, ',');
+     [sunit, r3] = strtok(r2, ',');
+@@ -96,21 +94,21 @@
              fclose(fid);
              break;
          end
@@ -146,24 +237,26 @@ The files in the exchange format lack flags, i.e., the columns are
 -        tf(m) = a(4);
 -        s(m) = a(5);
 -        sf(m) = a(6);
+-        if length(a) > 7
+-            o(m) = a(7);
+-            of(m) = a(8);
+-        else
+-            o(m) = nan;
+-            of(m) = nan;
+-        end
 +        pf(m) = 2; % dummy
 +        t(m)= a(2);
 +        tf(m) = 2; % dummy
 +        s(m) = a(3);
 +        sf(m) = 2; % dummy
-         if length(a) > 7
--            o(m) = a(7);
--            of(m) = a(8);
++        %if length(a) > 7
 +            o(m) = a(4);
 +            of(m) = 2; % dummy
-         else
-             o(m) = nan;
--            of(m) = nan;
-+            of(m) = 2; % dummy
-         end
++        %else
++        %    o(m) = nan;
++        %    of(m) = 2; % dummy
++        %end
          clear a;
      end
+     if m > mmax
 ```
-
-
-

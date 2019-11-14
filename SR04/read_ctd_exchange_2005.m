@@ -49,12 +49,13 @@ for i = 1:N
             fclose(fid);
             error('read_ctd_exchange.m: premature header termination');
         end
-        if length(tline) > 5 && strcmp(tline(1:5), 'DBAR,')
+        % 06MT030_2 uses "DBARS" instead of "DBAR"
+        if length(tline) > 5 && (strcmp(tline(1:5), 'DBAR,') || strcmp(tline(1:6), 'DBARS,'))
             break;
         end
         header = {header{1:end}, tline};
     end
-    % check first unit --- strtok will skip blank entries (',,')
+    % check first unit
     % get rid of extra spaces
     m = 1;
     for n = 1:length(tline)
@@ -63,6 +64,7 @@ for i = 1:N
             m = m + 1;
         end
     end
+    % strtok skips consecutive separator, i.e. [a,b] = strtok(',,ABC',','); gives a='ABC'
     [punit, r1] = strtok(uline, ',');
     [tunit, r2] = strtok(r1, ',');
     [sunit, r3] = strtok(r2, ',');
@@ -94,21 +96,23 @@ for i = 1:N
             fclose(fid);
             break;
         end
-        a = sscanf(tline, '%f,%f,%f,%f');
+        %a = sscanf(tline, '%f,%d,%f,%d,%f,%d,%f,%d');
+        % no flag
+        a = sscanf(tline, '%f,%f,%f,%f,%f,%d');
         m = m + 1;
         p(m) = a(1);
-        pf(m) = 2; % dummy
+        pf(m) = a(2);
+        %t(m)= a(3);
         t(m)= a(2);
-        tf(m) = 2; % dummy
+        %tf(m) = a(4);
         s(m) = a(3);
-        sf(m) = 2; % dummy
-        if length(a) > 7
+        %sf(m) = a(6);
+        if (~isempty(strfind(ounit, 'ML/L')))
             o(m) = a(4);
-            of(m) = 2; % dummy
-        else
-            o(m) = nan;
-            of(m) = 2; % dummy
+            of(m) = 2; % XXX
         end
+        % dummy
+        pf(m) = 2; tf(m) = 2; sf(m) = 2;
         clear a;
     end
     if m > mmax
@@ -139,8 +143,10 @@ for i = 1:N
     stations(i).Time   = time;
     stations(i).Depth  = dep;
     stations(i).CTDtemUnit = tunit;
-    stations(i).CTDsalUnit = sunit;
-    stations(i).CTDoxyUnit = ounit;
+    stations(i).CTDsalUnit = 'PSS-78'; %sunit='PSU', assuming it is PSU078
+    if (~isempty(strfind(ounit, 'ML/L')))
+        stations(i).CTDoxyUnit = ounit;
+    end
 end
 
 pr(mmax+1:end,:) = [];
