@@ -96,6 +96,7 @@ for i = 1:nstn
         ctdtem(:,i) = te(:,k);
     end
     if ~isempty(strfind(s.CTDsalUnit, 'PSS-78')) ...
+|| ~isempty(strfind(s.CTDsalUnit, 'PSS-68')) ...
      || ~isempty(strfind(s.CTDsalUnit, 'PSS78')) ...
      || ~isempty(strfind(s.CTDsalUnit, 'pss-78'))
         ctdsal(:,i) = sa(:,k) + ones(m,1) * salt_offset(k); % offset is correction, i.e. ADD
@@ -105,9 +106,9 @@ for i = 1:nstn
     if ~(isempty(strfind(s.CTDoxyUnit, 'mol/kg')) && isempty(strfind(s.CTDoxyUnit, 'UMOL/KG')))
         ctdoxy(:,i) = ox(:,k);
     elseif ~(isempty(strfind(s.CTDoxyUnit, 'ml/l')) && isempty(strfind(s.CTDoxyUnit, 'ML/L')))
-        [ctdoxy(:,i), dummy] = convertDO(ox(:,k), ctdprs(:,i), ctdtem(:,i), ctdsal(:,i), lonlist(i), latlist(i));
+        ctdoxy(:,i) = convertDO(ox(:,k), ctdprs(:,i), ctdtem(:,i), ctdsal(:,i), lonlist(i), latlist(i), 'ML/L');
     elseif ~(isempty(strfind(s.CTDoxyUnit, 'mol/l')) && isempty(strfind(s.CTDoxyUnit, 'UMOL/L')))
-        [dummy, ctdoxy(:,i)] = convertDO(ox(:,k), ctdprs(:,i), ctdtem(:,i), ctdsal(:,i), lonlist(i), latlist(i));
+        ctdoxy(:,i) = convertDO(ox(:,k), ctdprs(:,i), ctdtem(:,i), ctdsal(:,i), lonlist(i), latlist(i), 'MOL/L');
     elseif ~isempty(s.CTDoxyUnit)
         error('reported_data.m: Unknown oxygen unit');
     end
@@ -142,7 +143,7 @@ for i = 1:nstn
         end
     end
     % no data in depth_file
-    if isnan(d) || d == 999 || d == 0 || d == 4
+    if isnan(d) || d == 999 || d == 0 || d == 4 || d == 9
         ctdgood = find(~isnan(ctdprs(:,i)) & ~isnan(ctdtem(:,i)) & ~isnan(ctdsal(:,i)));
         if isempty(ctdgood) % happens when all CTD data are flagged not-good
             dprime = nan;
