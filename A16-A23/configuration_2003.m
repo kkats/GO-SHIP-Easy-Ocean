@@ -3,4 +3,4 @@ vinterp_handle = @vinterp;
 hinterp_handle = @hinterp;
 MAX_SEPARATION = 2.0;
 
-salt_offset([1:275]) = 1.0e-3 * (-0.2); % P143 (33RR200306_01, 33RR200206_02)
+salt_offset([1:275]) = 1.0e-3 * (-0.2); % P143 (33RR200306_01, 33RR200206_02, 33RO200501)

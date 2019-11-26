@@ -10,7 +10,7 @@
 + [3175MB93](https://cchdo.ucsd.edu/cruise/3175MB93)
 
 ### 1995-1998
-+ [74JC10-1](https://cchdo.ucsd.edu/cruise/74JC10_1)
++ [74JC10_1](https://cchdo.ucsd.edu/cruise/74JC10_1)
 + [74DI233_1](https://cchdo.ucsd.edu/cruise/74DI233_1)
 
 ### 2003-2005
