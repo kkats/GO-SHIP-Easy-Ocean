@@ -67,3 +67,4 @@ and by [Java Ocean Atlas](http://joa.ucsd.edu/joa) using `File` menu.
 
 ## History
 + v 0.1.0 First release only for WOCE/GO-SHIP CTD data (no bottle data)
++ v 0.3.2 Major sections done, start preparation for online release

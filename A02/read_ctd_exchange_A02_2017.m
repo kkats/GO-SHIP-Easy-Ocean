@@ -49,12 +49,13 @@ for i = 1:N
             fclose(fid);
             error('read_ctd_exchange.m: premature header termination');
         end
-        if length(tline) > 5 && strcmp(tline(1:5), 'DBAR,')
+        % 06MT030_2 uses "DBARS" instead of "DBAR"
+        if length(tline) > 5 && (strcmp(tline(1:5), 'DBAR,') || strcmp(tline(1:6), 'DBARS,'))
             break;
         end
         header = {header{1:end}, tline};
     end
-    % check first unit --- strtok will skip blank entries (',,')
+    % check first unit
     % get rid of extra spaces
     m = 1;
     for n = 1:length(tline)
@@ -63,6 +64,7 @@ for i = 1:N
             m = m + 1;
         end
     end
+    % strtok skips consecutive separator, i.e. [a,b] = strtok(',,ABC',','); gives a='ABC'
     [punit, r1] = strtok(uline, ',');
     [tunit, r2] = strtok(r1, ',');
     [sunit, r3] = strtok(r2, ',');
@@ -94,20 +96,20 @@ for i = 1:N
             fclose(fid);
             break;
         end
-        a = sscanf(tline, '%f,%f,%f,%f');
+        a = sscanf(tline, '%f,%d,%f,%d,%f,%d,%f,%d');
         m = m + 1;
         p(m) = a(1);
-        pf(m) = 2; % dummy
-        t(m)= a(2);
-        tf(m) = 2; % dummy
-        s(m) = a(3);
-        sf(m) = 2; % dummy
+        pf(m) = a(2);
+        t(m)= a(3);
+        tf(m) = a(4);
+        s(m) = a(5);
+        sf(m) = a(6);
         if length(a) > 7
-            o(m) = a(4);
-            of(m) = 2; % dummy
+            o(m) = a(7);
+            of(m) = a(8);
         else
             o(m) = nan;
-            of(m) = 2; % dummy
+            of(m) = nan;
         end
         clear a;
     end
@@ -160,7 +162,7 @@ ox(ox < -100) = NaN;
 
 % QC flag
 % retain only flag==2
-pr(pr_flg ~= 2) = NaN;
+pr(pr_flg ~= 2 & pr_flg ~= 1) = NaN;
 te(te_flg ~= 2) = NaN;
 sa(sa_flg ~= 2) = NaN;
 ox(ox_flg ~= 2) = NaN;

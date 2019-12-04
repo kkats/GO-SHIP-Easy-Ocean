@@ -49,7 +49,8 @@ for i = 1:N
             fclose(fid);
             error('read_ctd_exchange.m: premature header termination');
         end
-        if length(tline) > 5 && strcmp(tline(1:5), 'DBAR,')
+        % 06MT030_2 uses "DBARS" instead of "DBAR"
+        if length(tline) > 5 && (strcmp(tline(1:5), 'DBAR,') || strcmp(tline(1:6), 'DBARS,'))
             break;
         end
         header = {header{1:end}, tline};
