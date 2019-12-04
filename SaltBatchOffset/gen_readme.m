@@ -14,7 +14,7 @@ fprintf(fid, '%% To generate README.md\n');
 fprintf(fid, '>> gen_readme\n');
 fprintf(fid, '~~~\n');
 fprintf(fid, 'The tables are update of Table 6 in [Kawano *et al.* (2006)](https://doi.org/10.1007/s10872-006-0097-8) and Table A1 in [Purkey and Johnson (2013)](https://doi.org/10.1175/JCLI-D-12-00834.1).\n');
-fprintf(fid, 'Latest table is available from JAMTEC''s [Post-WOCE Hydrograph](http://www.jamstec.go.jp/iorgc/ocorp/data/post-woce.html) page, e.g. Table A1 of [Uchida *et al.* (2018)](http://www.jamstec.go.jp/iorgc/ocorp/data/i10rev_2015/book/i10rev_2015_databook.pdf)\n');
+fprintf(fid, 'Latest table is available from JAMTEC''s [Post-WOCE Hydrograph](http://www.jamstec.go.jp/iorgc/ocorp/data/post-woce.html) page, e.g. Table A1 of [Uchida *et al.* (2018)](http://www.jamstec.go.jp/iorgc/ocorp/data/i10rev_2015/book/i10rev_2015_databook.pdf). The table now has a DOI [10.17596/0001983](https://dx.doi.org/10.17596/0001983)\n');
 %
 fprintf(fid, '## Batch and offset\n');
 csv2md('BatchOffset.csv', fid, '|:--|--:|\n');
