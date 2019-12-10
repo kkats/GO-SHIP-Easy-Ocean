@@ -22,6 +22,13 @@ Use the depth file;
 % awk '/S04/ && /BO/ && ($3 <= 10) {print $3, $4, $16}' s03su.txt >> i09s_1995.depth
 ~~~
 
+Salinity batch information for 316N145_5: salinity was analysed by two groups (WHOI and Scripps). Batches used by SIO include P124, p126 and p128.
+WHOI used only p128 and was responsible for the I08S/I09S legs.
+SIO was responsible for other sections covered in this big voyage.
+
 ### 2004
 
 Some bottom depths are zero. The "0" depths in the station list 'i09s_2004.list' are manually rewritten to '-999'.
+
+
+Data files were made and uploaded by Bec Cowley, scripts made by Kats.
