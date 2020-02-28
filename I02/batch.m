@@ -1,11 +1,11 @@
 % variables
-DIR = 'I09S/';
-BDIR = '../CTD/I09S/';
-fname = 'i09s';
-years = {'1995', '2004', '2012'};
-ll_grid = [-65.4:0.1:-34.4];
+DIR = 'I02/';
+BDIR = '../CTD/I02/';
+fname = 'i02';
+years = {'1995', '2000'};
+ll_grid = [39.8:0.1:105.7];
 pr_grid = [0:10:6500];
-depth_files = {'I09S/i09s_1995.depth', '', ''};
+depth_files = {'I02/i02_1995.depth', ''};
 %
 tic;
 outdir = ['../output/reported/' DIR];
