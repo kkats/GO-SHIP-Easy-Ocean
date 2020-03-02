@@ -17,6 +17,6 @@ Note: `318M200406_tm_ct1.zip` and `318M200406_tm_nc_ctd.zip` are for "trace meta
 
 + [318M20130321](https://cchdo.ucsd.edu/cruise/318M20130321)
 
-# 2. Glitches
+## 2. Glitches
 
 None.

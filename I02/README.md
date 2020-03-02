@@ -8,9 +8,9 @@
 ### 2000
 + [09FA20000926](https://cchdo.ucsd.edu/cruise/09FA20000926)
 
-# 2. Glitches
+## 2. Glitches
 
-## 1995
+### 1995
 
 Depth is missing. Use SUM files to produce depth file.
 ```

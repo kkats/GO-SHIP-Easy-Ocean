@@ -32,7 +32,6 @@
 
 ## 2. Glitches
 
-
 For a quick look at the station locations, one who finds our convention of (longitude > 0)
 not useful might like `longitude_filter.sh`.
 

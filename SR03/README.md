@@ -28,7 +28,7 @@
 ###  2011
 + [09AR20080104](https://cchdo.ucsd.edu/cruise/20110104)
 
-# 2. Glitches
+## 2. Glitches
 
 ### 1994a and 1995
 

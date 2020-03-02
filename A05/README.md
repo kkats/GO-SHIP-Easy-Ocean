@@ -18,7 +18,7 @@
 ### 2015
 + [74EQ20151206](https://cchdo.ucsd.edu/cruise/74EQ20151206)
 
-# 2. Glitches
+## 2. Glitches
 
 No Atlas station data available.
 
@@ -30,7 +30,7 @@ have depth and need to hand edit `a05_1998.depth` to remove these 2 lines.
 
 No SUM file for 2011.
 
-## 2011
+### 2011
 The columns are in the order of "pressure, oxygen, temperaure, salinity", instead of
 regular "pressure, temperature, salinity, oxygen". Apply this patch to `read_ctd_exchange.m`.
 ```

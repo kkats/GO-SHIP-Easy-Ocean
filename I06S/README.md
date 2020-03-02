@@ -10,7 +10,7 @@
 ### 2008
 + [33RR20080204](https://cchdo.ucsd.edu/cruise/33RR20080204)
 
-# 2. Glitches
+## 2. Glitches
 
 ### 1993
 

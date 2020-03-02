@@ -12,11 +12,11 @@ In accordance with the [GO-SHIP recommendation](https://docs.google.com/document
 ### 2011
 + [33RO20110926](https://cchdo.ucsd.edu/cruise/33RO20110926)
 
-# 2. Glitches
+## 2. Glitches
 
-## 1987
+### 1987
 
-### `findJOAstations`
+#### `findJOAstations`
 ~~~
 Warning: 2 JOA stations had no CCHDO stations near by
 Warning: not found( 1)  90-99     -29.7500     11.4083 1993-01-26 d=4006
@@ -39,9 +39,9 @@ The cast number for CTD and Bottle are often different.
 The SUM files shows there are many multiple cast stations and ship drift
 explains the difference.
 
-## 2003
+### 2003
 
-### `findJOAstations`
+#### `findJOAstations`
 ~~~
 Warning: 2 JOA stations had no CCHDO stations near by
 Warning: not found( 1) 992-1     -28.3000     15.7500 2003-12-02 d=  19

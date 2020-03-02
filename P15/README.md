@@ -16,7 +16,7 @@
 ### 2016
 + [096U20160426](https://cchdo.ucsd.edu/cruise/096U20160426)
 
-# 2. Glitches
+## 2. Glitches
 
 - For 1990 occupation,
 the Atlas file `P15_sta_bdep.txt` has stations with the same labels

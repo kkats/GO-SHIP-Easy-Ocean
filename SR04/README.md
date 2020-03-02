@@ -26,7 +26,7 @@
 + [06AQ20101128](https://cchdo.ucsd.edu/cruise/06AQ20101128)
 
 
-# 2. Glitches
+## 2. Glitches
 
 [06AQANTX_4](https://cchdo.ucsd.edu/cruise/06AQANTX_4) was not used as only less than
 10 stations overlap with other occupations.

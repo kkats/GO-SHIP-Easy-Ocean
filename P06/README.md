@@ -19,9 +19,9 @@
 + [320620170703](https://cchdo.ucsd.edu/cruise/320620170703)
 + [320620170820](https://cchdo.ucsd.edu/cruise/320620170820)
 
-# 2. Glitches
-## 1992
-### `findJOAstations.m`
+## 2. Glitches
+### 1992
+#### `findJOAstations.m`
 ~~~
 Warning: not found( 1)  32-1     -32.5010    273.4500 1992-05-13 d=3917
 ~~~
@@ -45,8 +45,8 @@ Warning: 3 CCHDO 233-1     -30.0810    156.4958 1992-07-23 d=4815
 ~~~
 JOA's location corresponds to that at BO in the SUM. CTD files for station 234 has lat=-30.0828 & lon=156.5297 which is BE in the SUM.
 
-## 2010
-### `findJOAstations.m`
+### 2010
+#### `findJOAstations.m`
 ~~~
 Warning: not found( 1) 997-1     -30.0000    152.9500 2003-08-03 d=  19
 ~~~
@@ -63,12 +63,12 @@ Warning: 2 CCHDO 166-1     -32.5085    186.3292 2003-08-20 d=5699
 ~~~
 JOA has a cast number of 99.
 
-## 2010
-### `configuration.m`
+### 2010
+#### `configuration.m`
 According to the cruise report, Standard Sea Water batches P149/P150/P151 were used.
 It was not clear at what station, P150 and P151 were changed. We assumed P151 were *not*
 used and extended the use of P150 for all stations after Station 175.
 
-## 2017
-### `reported_data.m`
+### 2017
+#### `reported_data.m`
 As of May 2018, no depth data are found.

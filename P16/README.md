@@ -26,9 +26,9 @@
 + [33RO20150410](https://cchdo.ucsd.edu/cruise/33RO20150410)
 + [33RO20150525](https://cchdo.ucsd.edu/cruise/33RO20150525)
 
-# 2. Glitches
-## 2006
-### `findJOAstations.m` used with `P16S_2005_2006_CTD.csv`
+## 2. Glitches
+### 2006
+#### `findJOAstations.m` used with `P16S_2005_2006_CTD.csv`
 
 ~~~
 Warning: 1 station pairs did not match

@@ -10,7 +10,7 @@ I will construct the N/S part (at 125W) and if needed, can go back and do the si
 + [49NZ20170208](https://cchdo.ucsd.edu/cruise/49NZ20170208)
 + [320620161224](https://cchdo.ucsd.edu/cruise/320620161224) %this one might have one station at the bottom of P17E. Not used as yet.
 
-# 2. Other
+## 2. Other
 Java Ocean atlas section for 1992/3 bottle data available. P17_1991_92_93_bottle.csv
 
 Purkey's product available for both 1992/3 and 2017.
@@ -21,7 +21,7 @@ D_ctd(1).stn is empty. D_ctd(2).stn has station numbers 1 to 26.
 WOCE Atlas bottle/station file is labelled as P17 (bottom section relates to P17E definition on GO-Ship). p17_sta_bdep.txt. 
 The WOCE Atlas p17e file relates to the Swift station locations from 1992/3 and includes the bottom of P16 and the E/W section in between P16 and P17E.
 
-# 3. Glitches
+## 3. Glitches
 
 ### 1992/3
 
