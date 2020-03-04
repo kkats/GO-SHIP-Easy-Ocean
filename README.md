@@ -64,6 +64,7 @@ and by [Java Ocean Atlas](http://joa.ucsd.edu/joa) using `File` menu.
 + Use two digit section number (i.e. `P06` not `P6`).
 + Use `-999` for missing data as per [WHP Exchange](https://exchange-format.readthedocs.io/en/latest/common.html#parameter-and-unit-lines)
 + Do not use negative logitude (i.e. longitude always in [0,360]) -- except for zonal section in the Atlantic where negative longitudes were used only in `lonlist` in the `reported_data` (see [DataStructure.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/DataStructure.md).
++ Vertical coordinate is in pressure. Assuming 'Depth' and/or 'Corrected depth' in the Exchange CTD or SUM is in meters, we convert them to pressure (`reported_data.m`). If depth is missing, we assume the bottom of measurement is 10 dbar above seabed.
 
 ## History
 + v 0.1.0 First release only for WOCE/GO-SHIP CTD data (no bottle data)
