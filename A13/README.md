@@ -1,6 +1,8 @@
 # A13
-## 1. Source
 
+South of 50S overlaps with section A12.
+
+## 1. Source
 ### 1983
 + [316N19831007](https://cchdo.ucsd.edu/cruise/316N19831007)
 + [316N19840111](https://cchdo.ucsd.edu/cruise/316N19840111)
@@ -10,7 +12,7 @@
 
 ## 2. Glitches
 
-#### 1983
+### 1983
 
 The CTD file is a text file with own format. Use `read_ctd_ajax.m` to produce
 the raw matlab files, which requires EXPO input as the 2nd argument.

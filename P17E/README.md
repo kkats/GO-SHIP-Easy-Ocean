@@ -1,14 +1,14 @@
 # P17E
-Some confusion over what is P17E - on CCHDO it might be both the E/W and N/S parts, but on Go-Ship website, it is just the N/S part as this has had a repeat in 1992/3 and 2017. 
-I will construct the N/S part (at 125W) and if needed, can go back and do the single E/W transect.
+
+Some confusion over what is P17E; on [CCHDO](https://cchdo.ucsd.edu/search?q=P17E) it might be both the E/W and N/S parts, but on [GO-SHIP website](http://www.go-ship.org/RefSecs/goship_ref_secs.html), it is just the N/S part as this has had a repeat in 1992/3 and 2017. In the [WOCE Atlas](http://whp-atlas.ucsd.edu/pacific/p17e/track/track.htm), P17E refers to the zonal section, which is what the original cruise proposal meant (Talley, personal communication).
 
 ## 1. Source
+
 ### 1992
 + [316N138_10](https://cchdo.ucsd.edu/cruise/316N138_10)
 
 ### 2017
 + [49NZ20170208](https://cchdo.ucsd.edu/cruise/49NZ20170208)
-+ [320620161224](https://cchdo.ucsd.edu/cruise/320620161224) %this one might have one station at the bottom of P17E. Not used as yet.
 
 ## 2. Other
 Java Ocean atlas section for 1992/3 bottle data available. P17_1991_92_93_bottle.csv

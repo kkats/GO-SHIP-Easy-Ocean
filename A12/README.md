@@ -1,4 +1,5 @@
 # A12
+South of 50S overlaps with Setion A13.
 ## 1. Source
 ### 1992
 + [06AQANTX_4](https://cchdo.ucsd.edu/cruise/06AQANTX_4)
