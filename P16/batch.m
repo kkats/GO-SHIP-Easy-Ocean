@@ -5,7 +5,7 @@ fname = 'p16';
 years = {'1992', '2006', '2015'};
 ll_grid = [-70.1:0.1:56.3];
 pr_grid = [0:10:6500];
-depth_files = {'', '', ''};
+depth_files = {'', '', 'P16/p16_2015.depth'};
 %
 tic;
 outdir = ['../output/reported/' DIR];

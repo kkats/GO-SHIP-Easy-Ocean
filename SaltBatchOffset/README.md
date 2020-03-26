@@ -9,7 +9,7 @@ The tables are update of Table 6 in [Kawano *et al.* (2006)](https://doi.org/10.
 Latest table is available with DOI:[10.17596/0001983](https://dx.doi.org/10.17596/0001983)
 ## Cruise and batch
 Undocumented batch numbers are from Purkey through personal communication.
-|  WOCE ID | year | also known as  | EXPO code | batch number (if found in cruise document) |
+|  section  | year | also known as  | EXPO code | batch number (if found in cruise document) |
 |:--|--:|:--|:--|:--|
 |  A01 | 1990 | A01E/AR07/AR07E | 64TR90_3 | P112 |
 |  A01 | 1990 | A01W/AR07/AR07W | 18DA90012_1 | P104 (undocumented) |
@@ -50,7 +50,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  A12 | 2008 |  | 35MF20080207 | unknown |
 |  A12 | 2008 | ANTXXXIV_3 | 06AQ20080210 | P149 |
 |  A12 | 2010 | SR04 | 06AQ20101128 | P152 |
-|  A12 | 2014 | 06AQ20141202 | P152 |
+|  A12 | 2014 |  | 06AQ20141202 | P152 |
 |  A13 | 1983 | A13.5 | 316N19831007/316N19840111 | P92(stn.60-116)/P90(otherwise) |
 |  A13 | 2010 | A13.5 | 33RO20100308 | P147 |
 |  A16 | 1988 | A16N | 32OC202_1/32OC202_2 | P108 |
