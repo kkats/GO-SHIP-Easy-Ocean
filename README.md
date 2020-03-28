@@ -12,8 +12,9 @@ Uninterpolated data (station data) are called _reported_ data. Horizontally inte
 + Unless otherwise noted (e.g. [I01](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/tree/master/I01/)), only _good_ (as defined by `flag=2`) data are used. This behaviour
 can be changed by modifying the QC section in `read_ctd_exchange.m`.
 + Missing value is `-999` for ASCII and binary outputs and `NaN` otherwise.
-+ Vertical coordinate is in pressure. Assuming `Depth` and/or `Corrected depth` in the Exchange CTD or SUM is in meters, we convert them to pressure (in `reported_data.m`). If depth is missing, we assume the bottom of measurement is 10 dbar above seabed.
++ Vertical coordinate is in pressure. Assuming `Depth` and/or `Corrected depth` in the Exchange CTD or SUM is in meters, we convert them to pressure (in `reported_data.m`). If depth is missing, we assume the bottom of measurement is 10 dbar above seabed. If `Uncorrected depth` is available but `Corrected depth` is missing, we use the former.
 + Used v3.06 of [TEOS-10](http://www.teos-10.org/software.htm) to calculate Conservative Temperature and Absolute Salinity.
++ Dissolved oxygen concentration is converted to umol/kg (micro mol per kilogram).
 
 ## 0. Quick start
 To visualize`P16` section occupied in 2015, use;
@@ -28,6 +29,7 @@ To visualize`P16` section occupied in 2015, use;
 |[binary](https://en.wikipedia.org/wiki/IEEE_754)|-|`gridded/P16.bin`|
 |ASCII|`reported/P16/p16_2015_ct1.zip`|`gridded/p16_2015.xyz.gz`|
 |NetCDF|(work in progress)|(work in progress)|
+
 \* see [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh) as example.
 
 
