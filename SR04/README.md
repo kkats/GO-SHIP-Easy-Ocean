@@ -105,9 +105,14 @@ The files in the exchange format have columns in an unusual order, i.e.,
 JOA file 'S04A_1996_decimated_CTD.joa' gives more flags than 'S04A_1996_clean_bottle.joa'.
 Use the former.
 
+Missing depths. Use topo file
+```
+awk '$8=="BE" {print $1, $3, $4, $16}' s04asu.txt > sr04_1996.depth
+```
+
 
 ### 1998
-`sr04_3_00002_ct1.csv` says its year is in 1999 -- probaly a type of 1998
+`sr04_3_00002_ct1.csv` says its year is in 1999 -- probaly a typo of 1998
 (or April Fool's Day?). The unit line has excessive commas and confuses
 `read_ctd_exchange.m`. Use this patch;
 ```

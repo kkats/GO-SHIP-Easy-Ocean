@@ -40,6 +40,15 @@ a prefix 'C'. Use this patch
 The original station numbers for 1991 occupations overlap between `49HH915_1/2`
 and `49HH932_1`. Hand editing of `A` flag was necessary on `p13_1991.list`.
 
+Missign depths. Use topo file;
+```
+% awk '$2=="P13C" && $8=="BO" {print $1, $3, $4, $16}' p13casu.txt > p13_1991.depth
+% awk '$2=="P13C" && $8=="BO" {print $1, $3, $4, $16}' p13cbsu.txt >> p13_1991.depth
+% awk '$2=="P13J" && $8=="BO" {print $1, $3, $4, $17}' p13jsu.txt >> p13_1991.depth
+```
+It is necessary to hand-edit `p13_1991.depth` to change `49HH915/1` to `49HH915_1`.
+Station 13C of `49HH932_1` and Station C33 of `49HH915/2` needs hand editing to use `BE` depth.
+
 ### 1992
  Use [P13J_sta_bdep.txt](http://whp-atlas.ucsd.edu/pacific/p13j/info/P13J_sta_bdep.txt)
 for 1991 occupation, and [p13_sta_bdep.txt](http://whp-atlas.ucsd.edu/pacific/p13/info/p13_sta_bdep.txt) for 1992 occupation.

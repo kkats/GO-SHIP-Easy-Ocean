@@ -19,8 +19,8 @@
 
 All depths are missing. Use the SUM files and extract data;
 ~~~
-tail -452 i08ssu.txt | awk '/I08S/ && /ROS/ && /BE/ {print $3, $4, $16}' > i08s-i09n_1995.depth
-tail -423 i09nsu.txt | awk '/I09N/ && /ROS/ && /BE/ {print $3, $4, $16}' >> i08s-i09n_1995.depth
+awk '$2=="I08S" && $8=="BE" {print $1, $3, $4, $16}' i08ssu.txt >i08s-i09n_1995.depth
+awk '$2=="I09N" && $8=="BO" {print $1, $3, $4, $16}' i09nsu.txt >>i08s-i09n_1995.depth
 ~~~
 ### 2007
 

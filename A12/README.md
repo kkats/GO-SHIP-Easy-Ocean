@@ -40,6 +40,12 @@ not useful might like `longitude_filter.sh`.
 For JOA for 1992, `A12_1992_clean_bottle.joa` has less stations than
 `A12_1992_clean_CTD.joa`. Use the latter.
 
+### 1996
+Missing depth.
+```
+% awk '$5=="CTD" {print $1, $3, $4, $16}' s04asu.txt >a12_1996.depth
+```
+
 ### 2002a
 The CTD file `a12_2002a_00060_00001_ct1.csv` has a pressure reverse at the very deepest
 line. Deleted the last line.

@@ -14,3 +14,6 @@
 ### 1994
 Use of `S04IE_1995_clean_bottle.joa` and `S04IE_1995_decimated_CTD.joa` gives the same `flagJ`.
 The former is quicker. Same for `S04IW_1996_clean_bottle.joa` and `S04IW_1996_decimated_CTD.joa`.
+
+ awk '$8=="BO" {print $1, $3, $4, substr($0,85,5)}' s03su.txt > s04i_1993.depth
+

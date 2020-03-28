@@ -30,6 +30,21 @@
 
 ## 2. Glitches
 
+### 1991
+Missing depths. Use topo file;
+```
+% awk '$8=="BO" {print $1, $3, $4, substr($0,85,6)}' sr03_asu.txt > sr03_1991.depth
+```
+which requires a few manual edits (mostly to use BE depth).
+
+### 1993
+Missing depths. Use topo file;
+```
+% awk '$8=="BO" {print $1, $3, $4, substr($0,85,6)}' sr03_bsu.txt > sr03_1993.depth
+```
+which still requires lots of manual edits.
+
+
 ### 1994a and 1995
 
 JOA files `SR03_1995_clean_bottle.jos` and `SR03_1995_decimated_CTD.jos` correspond
@@ -43,12 +58,12 @@ Standard seawater used on stations 10--13 was documted as "P133 and P137". We tr
 
 Salinity and oxygen have wrong units ('C' and 'PSS-78', respectively). Use this patch;
 ```
---- ../reported_data.m.dist	2019-04-12 14:13:22.000276932 +0900
-+++ ../reported_data.m	2019-04-12 14:39:40.237722938 +0900
-@@ -47,6 +47,13 @@
+--- reported_data.m     2020-03-26 14:58:36.527367235 +0900
++++ reported_data_2001SR03.m    2020-03-27 09:31:52.232501873 +0900
+@@ -60,6 +60,14 @@
  nstn = length(good)
  [lats, lons, deps] = deal(NaN(1,nstn));
- 
+
 +% 09AR20011029
 +for i = 1:length(stations)
 +    if strcmp(stations(i).CTDsalUnit, 'C') && strcmp(stations(i).CTDoxyUnit, 'PSS-78')
@@ -56,16 +71,8 @@ Salinity and oxygen have wrong units ('C' and 'PSS-78', respectively). Use this 
 +        stations(i).CTDoxyUnit = 'mol/kg';
 +    end
 +end
- 
++
  for i = 1:nstn
      lats(i) = stations(good(i)).Lat;
-@@ -54,6 +61,8 @@
-     deps(i) = stations(good(i)).Depth;
- end
- 
-+
-+
- [idx, nlons, isAtlanticZonal] = sort_stations(lons, lats);
- 
- %%%
+     lons(i) = stations(good(i)).Lon;
 ```

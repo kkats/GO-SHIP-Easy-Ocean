@@ -25,9 +25,9 @@ for n = 1:length(years)
     eval(com);
     if s ~= 1, error(['copyfile ' num2str(n) ':', m]); end
     if isempty(depth_files{n})
-        com = ['D_reported(' num2str(n) ') = reported_data(''' DIR fname '_' years{n} '.list'',''' BDIR fname '_' years{n} '.mat'');'];
+        com = ['D_reported(' num2str(n) ') = reported_data_SR03(''' DIR fname '_' years{n} '.list'',''' BDIR fname '_' years{n} '.mat'');'];
     else
-        com = ['D_reported(' num2str(n) ') = reported_data(''' DIR fname '_' years{n} '.list'',''' BDIR fname '_' years{n} '.mat'', ''' depth_files{n} ''');'];
+        com = ['D_reported(' num2str(n) ') = reported_data_SR03(''' DIR fname '_' years{n} '.list'',''' BDIR fname '_' years{n} '.mat'', ''' depth_files{n} ''');'];
     end
     eval(com);
 end

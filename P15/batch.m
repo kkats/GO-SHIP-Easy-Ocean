@@ -3,7 +3,7 @@ DIR = 'P15/';
 BDIR = '../CTD/P15/';
 fname = 'p15';
 years = {'1990', '2001', '2009', '2016'};
-ll_grid = [-74.51:0.1:53.93];
+ll_grid = [-74.6:0.1:54];
 pr_grid = [0:10:6500];
 depth_files = {'P15/p15_1990.depth', '', '', ''};
 %
@@ -27,7 +27,7 @@ for n = 1:length(years)
     if isempty(depth_files{n})
         com = ['D_reported(' num2str(n) ') = reported_data(''' DIR fname '_' years{n} '.list'',''' BDIR fname '_' years{n} '.mat'');'];
     else
-        com = ['D_reported(' num2str(n) ') = reported_data_p15(''' DIR fname '_' years{n} '.list'',''' BDIR fname '_' years{n} '.mat'', ''' depth_files{n} ''');'];
+        com = ['D_reported(' num2str(n) ') = reported_data(''' DIR fname '_' years{n} '.list'',''' BDIR fname '_' years{n} '.mat'', ''' depth_files{n} ''');'];
     end
     eval(com);
 end
