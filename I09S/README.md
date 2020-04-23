@@ -11,15 +11,14 @@
 ### 2012
 + [09AR20120105](https://cchdo.ucsd.edu/cruise/09AR20120105)
 
-# 2. Glitches
+## 2. Glitches
 
 ### 1995
 
-Bottom depths are missing. Two cruises were used for this one section, but fortunately their station numbers do not clash.
-Use the depth file;
+Bottom depths are missing. Use the depth file;
 ~~~
-% awk '/BE/ && ($3 > 10) {print $3, $4, $16}' i08ssu.txt > i09s_1995.depth
-% awk '/S04/ && /BO/ && ($3 <= 10) {print $3, $4, $16}' s03su.txt >> i09s_1995.depth
+% awk '$8=="BE" {print $1, $3, $4, $16}' s03su.txt > i09s_1995.depth
+% awk '$8=="BE" {print $1, $3, $4, $16}' i08ssu.txt >> i09s_1995.depth
 ~~~
 
 Salinity batch information for 316N145_5: salinity was analysed by two groups (WHOI and Scripps). Batches used by SIO include P124, p126 and p128.

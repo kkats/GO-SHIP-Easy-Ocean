@@ -17,6 +17,6 @@
 ### 2014
 + [49NZ20140717](https://cchdo.ucsd.edu/cruise/49NZ20140717)
 
-# 2. Glitches
+## 2. Glitches
 
 None.

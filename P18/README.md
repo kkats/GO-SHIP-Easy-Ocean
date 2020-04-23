@@ -9,7 +9,7 @@
 ### 2016
 + [33RO20161119](https://cchdo.ucsd.edu/cruise/33RO20161119)
 
-# 2. Glitches
+## 2. Glitches
 
 For JOA data, `P18_2007_clean_bottle.joa` yields one less flag than
 `P18_2007_clean_CTD.joa`. 

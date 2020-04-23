@@ -1,70 +1,121 @@
 # WOCE-GO-SHIP-clean-sections
-User friendly WOCE/GO-SHIP data
+User friendly WOCE/CLIVAR/GO-SHIP data from [CCHDO](https://cchdo.ucsd.edu).
 
-## Documents
-+ [READEME.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/README.md) This file.
-+ [Procedure.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/Procedure.md) What to do.
-+ [DataStructure.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/DataStructure.md) Output formats and internal data structure.
-
-## Requirements
-#### [Matlab](https://stackoverflow.blog/2017/10/31/disliked-programming-languages/)
-
-#### [TEOS-10](http://www.teos-10.org/software.htm)
-We use v3.06 for Matlab	 at the time of writing.
-
-## Resources
-
-#### [Clean Ocean Section](https://agu.confex.com/agu/os18/meetingapp.cgi/Paper/319661) by J.Swift (product available as [Java OceanAtlas](http://joa.ucsd.edu/data/best.html))
-For bottle data
-1. Remove bad (WOCE QC 4) and uncertain (WOCE QC 3) and replace with WOCE missing values
-1. Remove bad (usually leaking; WOCE QC 4) botles
-1. Eliminates extra bottles (large volume samples) -- usually bottles with no oxygen, nutrients, etc.
-1. Adjust data columns into standard columns
-1. Repaire oxygen & nutrient units if needed
-1. **Eliminate stations not on the section line, duplicate stations, incomplete stations, mearge multiple casts, and sort the stations geographically**
-1. Plot bottle S, Do, Si to assess whether any additional stations be removed due to large numbers of missing values that distort plots
-1. **Join long sections carried out over multiple cruises into single ocean-spanning transects. Eliminate any overlapping stations & section segments with an eye to data continuity**
-1. Convert depth (m) to pressure (db)
+#### Reference
+K. Katsumata, B. Sloyan, R. Cowley, S. Diggs, T. Moore, S. Purkey, J. Swift, L. Talley, _User friendly ship based hydrographic section data_ (in preparation)
 
 
-#### [WOCE clean sections](http://sam.ucsd.edu/vertical_sections/.index.html) by L.Talley
+# Output Formats
 
-#### [WOCE ATLAS](http://woceatlas.ucsd.edu/) has bathymetry data and station info
-e.g. [I08N](http://whp-atlas.ucsd.edu/whp_atlas/indian/i08n/info/bathy.htm)
+Uninterpolated data (station data) are called _reported_ data. Horizontally interpolated data are called _gridded_ data. These are stored under separate directories. Remarks common to all formats are;
++ Temperature is in IPTS-68 (*not* ITS-90). This is useful for [gamma surface calculation](http://www.teos-10.org/preteos10_software/neutral_density.html).
++ Unless otherwise noted (e.g. [I01](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/tree/master/I01/)), only _good_ (as defined by `flag=2`) data are used. This behaviour
+can be changed by modifying the QC section in `read_ctd_exchange.m`.
++ Missing value is `-999` for ASCII and binary outputs and `NaN` otherwise.
++ Vertical coordinate is in pressure. Assuming `Depth` and/or `Corrected depth` in the Exchange CTD or SUM is in meters, we convert them to pressure (in `reported_data.m`). If depth is missing, we assume the bottom of measurement is 10 dbar above seabed. If `Uncorrected depth` is available but `Corrected depth` is missing, we use the former.
++ Used v3.06 of [TEOS-10](http://www.teos-10.org/software.htm) to calculate Conservative Temperature and Absolute Salinity.
++ Dissolved oxygen concentration is converted to umol/kg (micro mol per kilogram).
 
-#### [GLODAPv2](https://cdiac3.ornl.gov/waves/glodapv2/) for bottle data
+## 0. Quick start
+To visualize`P16` section occupied in 2015, use;
 
-#### Matlab codes on [Google Drive](https://www.google.com/appserve/mkt/p/AFIPhzUx-MnvU6PQKf0JvXqg_YNrVy6TUmRI6rhUWI0wvIrlG1xY2f5TuReGa-fT3NOstufGGkSr-2kBPIVKQ16yyJBxJ7w3vvdMz3ZIDbV_pEwOmTL3ygcAym-ri20) (invitation only) by S.Purkey
+| application | _reported_ | _gridded_ |
+|-|-|-|
+|[Matlab](https://stackoverflow.blog/2017/10/31/disliked-programming-languages/) |`reported/P16/p16.mat`|`gridded/P16/p16.mat`|
+|[Ocean Data View](https://odv.awi.de/)|`reported/P16/p16_2015_ct1.zip`| - |
+| [Java Ocean Atlas](http://joa.ucsd.edu/joa)|`reported/P16/p16_2015_ct1.zip`| - |
+|[GrADS](http://cola.gmu.edu/grads/)|-|`gridded/P16/p16.bin.ctl`|
+|[GMT](http://gmt.soest.hawaii.edu/)*|-|`gridded/P16_2015.xyz.gz`|
+|[binary](https://en.wikipedia.org/wiki/IEEE_754)|-|`gridded/P16.bin`|
+|ASCII|`reported/P16/p16_2015_ct1.zip`|`gridded/p16_2015.xyz.gz`|
+|NetCDF|(work in progress)|(work in progress)|
 
-#### GO-SHIP telecon (15 Dec 2016) [pdf](http://www.go-ship.org/GO-ShipMinutes15dec2016_final.pdf)
-> 6.Clean Section  
-> a cleaned-up 1-m T and S dataset from CTDs across the current GO-SHIP survey, and also former WOCE and CLIVAR surveys will be produced in a standardized format. The project aims to increase the value of existing data by better combining them and facilitating their use; Rik recommended to also  look into efforts already done for bottle data as part of GLODAP for BGC data.
+\* see [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh) as example.
 
 
+## 1. Reported data
 
+This is the clean data with no horizontal interpolation and no vertical interpolation.
+We support Matlab format
+and ASCII CSV in [WHP Exchange format](https://cchdo.ucsd.edu/formats).
 
-## Decisions
-#### Two products (at least)
-One without interpolation. The other with interpolation on a grid.
+### 1.1 Matlab format
 
-#### Use [TEOS-10](http://www.teos-10.org)
-With measured TS retained
+D_r is an array holding one Matlab `structure` for one occupation of the hydrographic section.
+In typical cases, `D_r(1)` is by WOCE cruises in the 1980s and 1990s and `D_r(2)` is by
+CLIVAR/GO-SHIP cruises.
 
-#### Start from [CCHDO](https://cchdo.ucsd.edu)
-<5 new sections per year -- manageable on a volunteer basis
+~~~
+D_r(1) = struct('Station', {stnW(1), stnW(3), ..} ...
+                'lonlist', lon(:), ...
+                'latlist', lat(:), ...
+                'deplist', depth(:), ...
+                'CTDprs', ctdprs(:,:),  ...
+                'CTDsal', ctdsal(:,:),  ...
+                'CTDtem', ctdtem(:,:),  ...
+                'CTDoxy', ctdoxy(:,:)))
+~~~
+Lat/Lon, depths,... etc. can be extracted from `station`s (see below), but for ease of access,
+`latlist`, `lonlist`, and `deplist` are provided by `reported_data.m`.
+For zonal sections in the Atlantic Ocean, `lonlist` uses negative longitudes.
+`CTDsal`, `CTDtem`, and `CTDoxy` are aggregations of station measurements with the pressure given by `CTDprs`.
+The entry `'Station'` holds a cell list of `Station` data structure defined as
+~~~
+stations(23) = struct('EXPO', '320620140320', ...
+                      'Stnnbr',   '45',        ...
+                      'Cast',        1,       ...
+                      'Lat',   -45.0002,      ...
+                      'Lon',  -149.5998,      ...
+                      'Time', datenum(2014,4,17,19,47,0), ...
+                      'Depth',     5350,      ...         % in pressure [dbar]
+                      'CTDtemUnit', 'ITS-90', ...
+                      'CTDsalUnit', 'PSS-78', ...
+                      'CTDoxyUnit', 'umol/kg')
+~~~
++ Some `Stnnbr` has letters (e.g. `X12` for cross points) so that `Stnnbr` is not restricted to numbers but characters are accepted.
++ In `Lat` and `Lon`, use decimal degree, not degree-minute-second.
++ Time follows MATLAB convention with fixed `seconds=0`.
 
-#### IAPSO SSW batch correction applied
-As practicable as possible. Extended table of Kawano et al. [(2006)](https://link.springer.com/article/10.1007/s10872-006-0097-8).
+### 1.2 ASCII format
+One zipped archive corresponds to one occupation of the hydrographic section. In the
+archive, there are CSV files, one file for one CTD station. Each file has a header
+showing `DATE`, `LONGITUDE`, etc. Note [Creation Stamp](https://exchange-format.readthedocs.io/en/latest/common.html#file-requirements) is dummy.
 
-#### Basic format in [WHP Exchange](https://cchdo.ucsd.edu/formats)
-This format can be read by [Ocean Data View](https://odv.awi.de/) using `Import` menu,
-and by [Java Ocean Atlas](http://joa.ucsd.edu/joa) using `File` menu.
+When unzipped, the data are in ASCII and can be easily edited by your favourite
+editors. It is in CSV so that spreadsheet program can handle them. In particular,
+these can be read by [Ocean Data View](https://odv.awi.de/) with`Import` → `WOCE Formats` → `WHP CTD (exchange format)` menu.
+They can also be read
+by [Java Ocean Atlas](http://joa.ucsd.edu/joa) with `File` → `Open` menu.
 
-## Trivia
-+ Use two digit section number (i.e. `P06` not `P6`).
-+ Use `-999` for missing data as per [WHP Exchange](https://exchange-format.readthedocs.io/en/latest/common.html#parameter-and-unit-lines)
-+ Do not use negative logitude (i.e. longitude always in [0,360]) -- except for zonal section in the Atlantic where negative longitudes were used only in `lonlist` in the `reported_data` (see [DataStructure.md](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/DataStructure.md).
+### 1.3 NetCDF format
+(work in progress)
 
-## History
-+ v 0.1.0 First release only for WOCE/GO-SHIP CTD data (no bottle data)
-+ v 0.3.2 Major sections done, start preparation for online release
+## 2. Gridded data
+
+### 2.1. Matlab format
+Data are stored in 2 dimensional matrices as entries to a `structure`, one for each
+occupation. The axes are defined in `ll_grid`
+(longitude or latitude) and `pr_grid` (pressure).
+
+### 2.2. Binary format
+Binary is in [IEEE754](https://en.wikipedia.org/wiki/IEEE_754), 4-byte `float` in
+[Big Endian](https://en.wikipedia.org/wiki/Endianness). The first datum is southmost/westmost
+shallowest temperature datum. The second is the shallowest datum from the next horizontal grid.
+After _XDEF_ data, data from the second shallowest depth follows. Vertical number
+of data is _YDEF_. After temperature, the following data are stored in the order;
+salinity, oxygen, Conservative Temperature, and Absolute Salinity.
+
+This information and grid lat/lon are found in the form of GrADS control file
+placed in the output directory (e.g. `P16.bin.ctl` for `P16`). One could actually
+use GrADS to visualize the data, but there is a caveat;
+GrADS is designed to visualize horizontally collected data (i.e. lat/lon) and not
+sectional data (i.e. lat/depth). For this reason, the horizontal coordinate (lat/lon)
+appears as longitude and depth as latitude. Occupation appears in time coordinate.
+Hopefully this is not a problem for other applications.
+
+### 2.3 ASCII format
+When unzipped, the first line shows the content of the data. The missing value `-999`.
+An example for the use of these ASCII data to plot the difference between occupations with GMT can be found in [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh).
+
+### 3.3 NetCDF format
+(work in progress)

@@ -11,14 +11,12 @@
 ### 2011
 + [49RY20110515](https://cchdo.ucsd.edu/cruise/49RY20110515)
 
-# 2. Glitches
+## 2. Glitches
 
-- For 1991 occupation, IAPSO SSW is documented as P112 and P114 for 49HH915_1/2,
+### 1991
+For 1991 occupation, IAPSO SSW is documented as P112 and P114 for 49HH915_1/2,
 but station-wise usage is not described. Since the former has an offset
 of 1.9, the latter 2.0, we apply the value 1.95 for all stations.
-
-- Use [P13J_sta_bdep.txt](http://whp-atlas.ucsd.edu/pacific/p13j/info/P13J_sta_bdep.txt)
-for 1991 occupation, and [p13_sta_bdep.txt](http://whp-atlas.ucsd.edu/pacific/p13/info/p13_sta_bdep.txt) for 1992 occupation.
 
 - `findAstations.m` does not work with 1991 occupation where the stationname has
 a prefix 'C'. Use this patch
@@ -42,4 +40,18 @@ a prefix 'C'. Use this patch
 The original station numbers for 1991 occupations overlap between `49HH915_1/2`
 and `49HH932_1`. Hand editing of `A` flag was necessary on `p13_1991.list`.
 
-- `p13_1992.list` misses some depths. Use the SUM file to fill some of the missing depths; when `BO` is missing, I substituted `EN` value. Some casts were totally without depths (documented under "A.5 MAJOR PROBLEMS").
+Missign depths. Use topo file;
+```
+% awk '$2=="P13C" && $8=="BO" {print $1, $3, $4, $16}' p13casu.txt > p13_1991.depth
+% awk '$2=="P13C" && $8=="BO" {print $1, $3, $4, $16}' p13cbsu.txt >> p13_1991.depth
+% awk '$2=="P13J" && $8=="BO" {print $1, $3, $4, $17}' p13jsu.txt >> p13_1991.depth
+```
+It is necessary to hand-edit `p13_1991.depth` to change `49HH915/1` to `49HH915_1`.
+Station 13C of `49HH932_1` and Station C33 of `49HH915/2` needs hand editing to use `BE` depth.
+
+### 1992
+ Use [P13J_sta_bdep.txt](http://whp-atlas.ucsd.edu/pacific/p13j/info/P13J_sta_bdep.txt)
+for 1991 occupation, and [p13_sta_bdep.txt](http://whp-atlas.ucsd.edu/pacific/p13/info/p13_sta_bdep.txt) for 1992 occupation.
+
+
+`p13_1992.list` misses some depths. Use the SUM file to fill some of the missing depths; when `BO` is missing, I substituted `EN` value. Some casts were totally without depths (documented under "A.5 MAJOR PROBLEMS").

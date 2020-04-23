@@ -9,7 +9,7 @@
 ### 2017
 + [45CE20170427](https://cchdo.ucsd.edu/cruise/45CE20170427)
 
-# 2. Glitches
+## 2. Glitches
 
 No Atlas station data available.
 No JOA profile available.

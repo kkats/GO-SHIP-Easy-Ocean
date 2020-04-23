@@ -26,13 +26,23 @@
 + [33RO20150410](https://cchdo.ucsd.edu/cruise/33RO20150410)
 + [33RO20150525](https://cchdo.ucsd.edu/cruise/33RO20150525)
 
-# 2. Glitches
-## 2006
-### `findJOAstations.m` used with `P16S_2005_2006_CTD.csv`
-
+## 2. Glitches
+### 2006
+#### `findJOAstations.m` used with `P16S_2005_2006_CTD.csv`
 ~~~
 Warning: 1 station pairs did not match
 Warning: 1 JOA    61-3     -45.9995    210.0015 2005-01-27 d=5198
 Warning: 1 CCHDO  61-2     -45.9994    210.0020 2005-01-27 d=5134
 ~~~
 According to the SUM file, 61-2 is a shallow cast only to 257 dbar.
+
+### 2015
+Some CTD file (e.g. `320620140320_00033_00001_ct1.csv`) shows a wrong DEPTH (e.g. = 3032 while SUM shows 4767 m).
+Use SUM to use a depth file.
+
+```
+% awk '$8=="BO" {print $1, $3, $4, $16}' 320620140320su.txt > p16_2015.depth
+```
+
+Some depths are missing (e.g. Station 58). Edit `p16_2015.depth` manually by comparing the depths measured at `BE` or `EN`.
+Also note that some `BE` or `EN` depths are abnormal (e.g. `EN` of Station 60).

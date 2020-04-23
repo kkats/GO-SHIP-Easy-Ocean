@@ -8,7 +8,6 @@ function D_reported = reported_data(fname_list, fname_raw, depth_file)
 % is necessary, i.e. data for station(i) MUST be in pr(i,:), te(i,:), ...
 % and this `i` is the first column of `fname_list`
 %
-
 clear configuration MAX_SEPARATION hinterp_handle_vinterp_handle salt_offset;
 %%%
 %%% User defined functions
@@ -23,9 +22,11 @@ if nargin > 2
     while 1
         tline = fgetl(did);
         if ~ischar(tline), break; end
-        [stn, rest] = strtok(tline);
+        [expo, qest] = strtok(tline);
+        [stn, rest] = strtok(qest);
         a = sscanf(rest, '%f');
-        dtable(d) = struct('station', stn, ...
+        dtable(d) = struct('expo', expo, ...
+                           'station', stn, ...
                            'cast', a(1), ...
                            'depth', a(2));
         d = d + 1;
@@ -58,7 +59,6 @@ end
 
 nstn = length(good)
 [lats, lons, deps] = deal(NaN(1,nstn));
-
 
 for i = 1:nstn
     lats(i) = stations(good(i)).Lat;
@@ -129,21 +129,20 @@ end
 for i = 1:nstn
     ss = stationlist{i};
     d = (-1) * double(ss.Depth);
-    % missing data
-    % d == -4 was used in I05_2002 (74AB20020301)
-    if isnan(d) || d == 999 || d == 0 || d == -4
-        % if depth_file exists
-        if ~isempty(dtable)
-            for j = 1:length(dtable)
-                if strcmp(ss.Stnnbr, dtable(j).station) && ss.Cast == dtable(j).cast
-                    d = (-1) * dtable(j).depth;
-                    break;
-                end
+    % if depth_file exists, overwrite
+    if ~isempty(dtable)
+        for j = 1:length(dtable)
+            if strcmp(ss.EXPO, dtable(j).expo) && strcmp(ss.Stnnbr, dtable(j).station)...
+                                               && ss.Cast == dtable(j).cast
+                d = (-1) * dtable(j).depth;
+                break;
             end
         end
     end
-    % no data in depth_file
-    if isnan(d) || d == 999 || d == 0 || d == 4 || d == 9
+    % missing data
+    % d == -4 was used in I05_2002 (74AB20020301)
+    % d == 9 for missing value for some SUM files (i.e. 18DD9403_2)
+    if isnan(d) || d == 999 || d == 0 || d == -4 || d == 9
         ctdgood = find(~isnan(ctdprs(:,i)) & ~isnan(ctdtem(:,i)) & ~isnan(ctdsal(:,i)));
         if isempty(ctdgood) % happens when all CTD data are flagged not-good
             dprime = nan;

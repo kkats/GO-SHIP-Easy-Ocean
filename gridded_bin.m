@@ -32,7 +32,7 @@ fprintf(fid, 'TDEF %d linear 9sep9999 9yr\n', length(gds));
 fprintf(fid, 'vars 5\n');
 fprintf(fid, 't 1 0 Temperature [deg C]\n');
 fprintf(fid, 's 1 0 Salinity [PSS-78]\n');
-fprintf(fid, 'o 1 0 Oxygen   [umol/kg?]\n');
+fprintf(fid, 'o 1 0 Oxygen   [umol/kg]\n');
 fprintf(fid, 'ct 1 0 Conservative Temperature [deg C]\n');
 fprintf(fid, 'sa 1 0 Absolute Salinity [g/kg]\n');
 fprintf(fid, 'endvars\n');

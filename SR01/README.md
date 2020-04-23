@@ -47,7 +47,7 @@
 + [74JC20161110](https://cchdo.ucsd.edu/cruise/74JC20161110)
 
 
-# 2. Glitches
+## 2. Glitches
 
 ### 1997
 The CTD data at Station 24 in the exchange format

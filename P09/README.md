@@ -10,6 +10,6 @@
 ### 2016
 + [49UP20160703](https://cchdo.ucsd.edu/cruise/49UP20160703)
 
-# 2. Glitches
+## 2. Glitches
 
 No JOA data availale.

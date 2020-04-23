@@ -32,7 +32,7 @@
 ### 2014
 + [74JC20140606](https://cchdo.ucsd.edu/cruise/74JC20140606)
 
-# 2. Glitches
+## 2. Glitches
 
 Atlas data are not found online.
 

@@ -24,7 +24,7 @@
 + [33RO20130803](https://cchdo.ucsd.edu/cruise/33RO20130803)
 + [33RO20131223](https://cchdo.ucsd.edu/cruise/33RO20131223)
 
-# 2. Glitches
+## 2. Glitches
 
 ### 1988
 

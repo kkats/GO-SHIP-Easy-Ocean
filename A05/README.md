@@ -18,19 +18,20 @@
 ### 2015
 + [74EQ20151206](https://cchdo.ucsd.edu/cruise/74EQ20151206)
 
-# 2. Glitches
+## 2. Glitches
 
 No Atlas station data available.
 
-We need a depth file for 1998, produced from the SUM file. Note station 6, 9 do not
+### 1998
+We need a depth file for 1998, produced from the SUM file. Note station 6, 29 do not
 have depth and need to hand edit `a05_1998.depth` to remove these 2 lines.
 ```
-% cat ar01_asu.txt| grep ROS | grep BE | awk '{print $3, $4, $16}' > a05_1998.depth
+% cat ar01_asu.txt| grep ROS | grep BE | awk '{print $1, $3, $4, $16}' > a05_1998.depth
 ```
 
+### 2011
 No SUM file for 2011.
 
-## 2011
 The columns are in the order of "pressure, oxygen, temperaure, salinity", instead of
 regular "pressure, temperature, salinity, oxygen". Apply this patch to `read_ctd_exchange.m`.
 ```

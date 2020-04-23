@@ -8,7 +8,7 @@
 + [49NZ20090410](https://cchdo.ucsd.edu/cruise/49NZ20090410)
 + [49NZ20090521](https://cchdo.ucsd.edu/cruise/49NZ20090521)
 
-# 2. Glitches
+## 2. Glitches
 
 At the time of writing, only the `whp_netcdf` format is available
 for 49NZ20090521.

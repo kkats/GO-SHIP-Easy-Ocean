@@ -5,7 +5,7 @@ fname = 's04i';
 years = {'1994', '2012'};
 ll_grid = [20.0:0.1:162.3];
 pr_grid = [0:10:6500];
-depth_files = {'S04I/09AR9404_1.depth', ''};
+depth_files = {'S04I/s04i_1994.depth', ''};
 %
 tic;
 outdir = ['../output/reported/' DIR];
