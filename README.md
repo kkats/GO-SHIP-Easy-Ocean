@@ -1,5 +1,5 @@
 # WOCE-GO-SHIP-clean-sections
-User friendly WOCE/CLIVAR/GO-SHIP data from [CCHDO](https://cchdo.ucsd.edu).
+GO-SHIP Gridded Time Series; user friendly WOCE/CLIVAR/GO-SHIP data from [CCHDO](https://cchdo.ucsd.edu).
 
 #### Reference
 K. Katsumata, B. Sloyan, R. Cowley, S. Diggs, T. Moore, S. Purkey, J. Swift, L. Talley, _User friendly ship based hydrographic section data_ (in preparation)
@@ -101,7 +101,7 @@ occupation. The axes are defined in `ll_grid`
 Binary is in [IEEE754](https://en.wikipedia.org/wiki/IEEE_754), 4-byte `float` in
 [Big Endian](https://en.wikipedia.org/wiki/Endianness). The first datum is southmost/westmost
 shallowest temperature datum. The second is the shallowest datum from the next horizontal grid.
-After _XDEF_ data, data from the second shallowest depth follows. Vertical number
+After _XDEF_ data, data from the second shallowest depth follow. Vertical number
 of data is _YDEF_. After temperature, the following data are stored in the order;
 salinity, oxygen, Conservative Temperature, and Absolute Salinity.
 
@@ -114,8 +114,14 @@ appears as longitude and depth as latitude. Occupation appears in time coordinat
 Hopefully this is not a problem for other applications.
 
 ### 2.3 ASCII format
-When unzipped, the first line shows the content of the data. The missing value `-999`.
+When unzipped, the first line shows the content of the data. The missing value is `-999`.
 An example for the use of these ASCII data to plot the difference between occupations with GMT can be found in [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh).
 
-### 3.3 NetCDF format
+### 2.3 NetCDF format
 (work in progress)
+
+## 3 ToDo
+
++ [A25/OVIDE](https://cchdo.ucsd.edu/search?q=OVIDE)
++ [75N](https://cchdo.ucsd.edu/search?q=75N)
++ [AR07](https://cchdo.ucsd.edu/search?q=AR07) or reprocess A01?

@@ -30,7 +30,7 @@ awk '{pos = index($1, "|");
       latlon = substr($1, 0, pos-1);
       depth = substr($1, pos+1, length($1)-1);
       if ($2 == -999 || $3 == -999) {print latlon, depth, -999;}
-      else {print latlon, depth, ($3-$2), $3, $2;}}' $XYZ >$CNT
+      else {print latlon, depth, ($3-$2);}}' $XYZ >$CNT
 mv $CNT $XYZ
 
 # colorbar
