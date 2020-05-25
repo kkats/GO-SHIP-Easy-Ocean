@@ -1,0 +1,9 @@
+S, standard_name             = sea_water_pressure
+S, long_name                 = sea_water_pressure
+S, units                     = dbar
+S, reference_datum           = sea surface
+S. axis			     = Z
+S, positive                  = down
+N, valid_min                 = -5.0
+N, valid_max                 = 12000.0
+S, whp_name		     = CTDPRS

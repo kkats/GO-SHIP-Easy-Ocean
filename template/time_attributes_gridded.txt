@@ -1,0 +1,7 @@
+S, standard_name             = time
+S, long_name                 = first_year_of_data_used_in_product
+S, units                     = year
+S, calendar                  = gregorian
+S, axis                      = T
+N, valid_min                 = 0
+N, valid_max                 = 5000

@@ -1,0 +1,7 @@
+S, standard_name             = longitude
+S, long_name                 = longitude
+S, units                     = degrees_east
+S, axis			     = X
+S, reference_datum           = WGS84 geographic coordinate system
+N, valid_min                 = -180
+N, valid_max                 = 180

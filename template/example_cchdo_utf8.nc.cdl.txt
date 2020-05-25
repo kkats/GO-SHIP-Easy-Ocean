@@ -1,0 +1,590 @@
+netcdf example_cchdo_utf8 {
+dimensions:
+	N_PROF = 3 ;
+	N_LEVEL = 36 ;
+	N_WAVELENGTH0 = 3 ;
+variables:
+	float pressure(N_PROF, N_LEVEL) ;
+		pressure:_FillValue = NaNf ;
+		pressure:standard_name = "sea_water_pressure" ;
+		pressure:units = "dbar" ;
+		pressure:axis = "Z" ;
+		pressure:positive = "down" ;
+		pressure:whp_name = "CTDPRS" ;
+		pressure:whp_unit = "DBAR" ;
+	float latitude(N_PROF) ;
+		latitude:standard_name = "latitude" ;
+		latitude:units = "degrees_north" ;
+		latitude:axis = "Y" ;
+	float longitude(N_PROF) ;
+		longitude:standard_name = "latitude" ;
+		longitude:units = "degrees_east" ;
+		longitude:axis = "X" ;
+	int64 date(N_PROF) ;
+		date:standard_name = "time" ;
+		date:axis = "T" ;
+		date:units = "minutes since 1970-01-01T00:00:00+00:00" ;
+		date:calendar = "proleptic_gregorian" ;
+	int wavelength0(N_WAVELENGTH0) ;
+		wavelength0:standard_name = "radiation_wavelength" ;
+		wavelength0:units = "nm" ;
+	float var0(N_PROF, N_LEVEL) ;
+		var0:_FillValue = NaNf ;
+		var0:ancillary_variables = "var1" ;
+		string var0:contributor_name = "Barna, Andrew", "Becker, Susan" ;
+		string var0:contributor_role = "Shipboard Tech", "Shipboard Tech" ;
+		var0:creator_email = "jswift@ucsd.edu" ;
+		var0:creator_institution = "Scripps Institution of Oceanography" ;
+		var0:creator_name = "Swift, James" ;
+		var0:creator_type = "person" ;
+		var0:date_issued = "2016-04-12" ;
+		var0:geospatial_bounds = "MULTIPOINT ((78.3815 -66.6027), (78.2986 -66.4997), (78.0102 -66.15))" ;
+		var0:geospatial_lat_max = -66.15 ;
+		var0:geospatial_lat_min = -66.6027 ;
+		var0:geospatial_lat_units = "degrees_north" ;
+		var0:geospatial_lon_max = 78.3815 ;
+		var0:geospatial_lon_min = 78.0102 ;
+		var0:geospatial_lon_units = "degrees_east" ;
+		var0:processing_level = "final" ;
+		var0:program = "GO-SHIP" ;
+		var0:standard_name = "moles_of_oxygen_per_unit_mass_in_sea_water" ;
+		var0:units = "umol kg-1" ;
+		var0:whp_name = "OXYGEN" ;
+		var0:whp_unit = "UMOL/KG" ;
+		var0:coordinates = "var9 var6 longitude pressure latitude date var8 var7" ;
+	byte var1(N_PROF, N_LEVEL) ;
+		var1:_FillValue = 9b ;
+		var1:flag_meanings = "sample_for_this_measurement_was_drawn_from_water_bottle_but_analysis_not_received acceptable_measurement questionable_measurement bad_measurement not_reported mean_of_replicate_measurements manual_chromatographic_peak_measurement irregular_digital_chromatographic_peak_integration sample_not_drawn_for_this_measurement_from_this_bottle" ;
+		var1:flag_values = 1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b ;
+		var1:standard_name = "status_flag" ;
+		var1:whp_name = "OXYGEN_FLAG_W" ;
+		var1:coordinates = "var9 var6 longitude pressure latitude date var8 var7" ;
+	float var2(N_PROF, N_LEVEL) ;
+		var2:_FillValue = NaNf ;
+		var2:ancillary_variables = "var3" ;
+		string var2:contributor_name = "Belmonte, Manuel", "Cervantes, David" ;
+		string var2:contributor_role = "Shipboard Tech", "Shipboard Tech" ;
+		var2:creator_email = "adickson@ucsd.edu" ;
+		var2:creator_institution = "Scripps Institution of Oceanography" ;
+		var2:creator_name = "Dickson, Andrew" ;
+		var2:creator_type = "person" ;
+		var2:date_issued = "2016-04-12" ;
+		var2:geospatial_bounds = "MULTIPOINT ((78.2986 -66.4997), (78.0102 -66.15))" ;
+		var2:geospatial_lat_max = -66.15 ;
+		var2:geospatial_lat_min = -66.4997 ;
+		var2:geospatial_lat_units = "degrees_north" ;
+		var2:geospatial_lon_max = 78.2986 ;
+		var2:geospatial_lon_min = 78.0102 ;
+		var2:geospatial_lon_units = "degrees_east" ;
+		var2:processing_level = "final" ;
+		var2:program = "GO-SHIP" ;
+		var2:standard_name = "sea_water_ph_reported_on_total_scale" ;
+		var2:units = "1" ;
+		var2:whp_name = "PH_TOT" ;
+		var2:coordinates = "var9 var6 longitude pressure latitude date var8 var7" ;
+	byte var3(N_PROF, N_LEVEL) ;
+		var3:_FillValue = 9b ;
+		var3:flag_meanings = "sample_for_this_measurement_was_drawn_from_water_bottle_but_analysis_not_received acceptable_measurement questionable_measurement bad_measurement not_reported mean_of_replicate_measurements manual_chromatographic_peak_measurement irregular_digital_chromatographic_peak_integration sample_not_drawn_for_this_measurement_from_this_bottle" ;
+		var3:flag_values = 1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b ;
+		var3:standard_name = "status_flag" ;
+		var3:whp_name = "PH_TOT_FLAG_W" ;
+		var3:coordinates = "var9 var6 longitude pressure latitude date var8 var7" ;
+	float var4(N_PROF, N_LEVEL, N_WAVELENGTH0) ;
+		var4:_FillValue = NaNf ;
+		var4:ancillary_variables = "var5" ;
+		var4:creator_email = "sasaoka@jamstec.go.jp" ;
+		var4:creator_institution = "Japan Agency for Marine-Earth Science and Technology" ;
+		string var4:creator_name = "笹岡 晃征 (Kosei Sasaoka)" ;
+		var4:creator_type = "person" ;
+		var4:date_issued = "2016-04-12" ;
+		var4:geospatial_bounds = "MULTIPOINT ((78.0102 -66.15))" ;
+		var4:geospatial_lat_max = -66.15 ;
+		var4:geospatial_lat_min = -66.15 ;
+		var4:geospatial_lat_units = "degrees_north" ;
+		var4:geospatial_lon_max = 78.0102 ;
+		var4:geospatial_lon_min = 78.0102 ;
+		var4:geospatial_lon_units = "degrees_east" ;
+		var4:processing_level = "preliminary" ;
+		var4:program = "GO-SHIP" ;
+		var4:standard_name = "volume_beam_attenuation_coefficient_of_radiative_flux_in_sea_water_due_to_colored_dissolved_organic_matter" ;
+		var4:units = "m-1" ;
+		var4:whp_name = "CDOM{wavelength0}" ;
+		var4:whp_unit = "1/M" ;
+		var4:coordinates = "var9 var6 longitude pressure latitude date var8 wavelength0 var7" ;
+	byte var5(N_PROF, N_LEVEL, N_WAVELENGTH0) ;
+		var5:_FillValue = 9b ;
+		var5:flag_meanings = "def1 def2 def3 def4 def5 def6 def7 def8 def9" ;
+		var5:flag_values = 1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b ;
+		var5:standard_name = "status_flag" ;
+		var5:whp_name = "CDOM{wavelength0}_FLAG_W" ;
+		var5:coordinates = "var9 var6 longitude pressure latitude date var8 wavelength0 var7" ;
+	float var10(N_PROF, N_LEVEL) ;
+		var10:_FillValue = NaNf ;
+		string var10:contributor_name = "Joseph Gum", "Becker, Susan" ;
+		string var10:contributor_role = "Shipboard Tech", "Shipboard Tech" ;
+		var10:creator_email = "jswift@ucsd.edu" ;
+		var10:creator_institution = "Scripps Institution of Oceanography" ;
+		var10:creator_name = "Swift, James" ;
+		var10:creator_type = "person" ;
+		var10:date_issued = "2016-04-12" ;
+		var10:geospatial_bounds = "MULTIPOINT ((78.3815 -66.6027), (78.2986 -66.4997), (78.0102 -66.15))" ;
+		var10:geospatial_lat_max = -66.15 ;
+		var10:geospatial_lat_min = -66.6027 ;
+		var10:geospatial_lat_units = "degrees_north" ;
+		var10:geospatial_lon_max = 78.3815 ;
+		var10:geospatial_lon_min = 78.0102 ;
+		var10:geospatial_lon_units = "degrees_east" ;
+		var10:processing_level = "final" ;
+		var10:program = "GO-SHIP" ;
+		var10:reference_scale = "ITS-90" ;
+		var10:standard_name = "sea_water_temperature" ;
+		var10:units = "degc" ;
+		var10:whp_name = "CTDTMP" ;
+		var10:whp_unit = "ITS-90" ;
+		var10:coordinates = "var9 var6 longitude pressure latitude date var8 var7" ;
+	float var11(N_PROF, N_LEVEL) ;
+		var11:_FillValue = NaNf ;
+		var11:ancillary_variables = "var12" ;
+		string var11:contributor_name = "Joseph Gum", "Becker, Susan" ;
+		string var11:contributor_role = "Shipboard Tech", "Shipboard Tech" ;
+		var11:creator_email = "jswift@ucsd.edu" ;
+		var11:creator_institution = "Scripps Institution of Oceanography" ;
+		var11:creator_name = "Swift, James" ;
+		var11:creator_type = "person" ;
+		var11:date_issued = "2016-04-12" ;
+		var11:geospatial_bounds = "MULTIPOINT ((78.3815 -66.6027), (78.2986 -66.4997), (78.0102 -66.15))" ;
+		var11:geospatial_lat_max = -66.15 ;
+		var11:geospatial_lat_min = -66.6027 ;
+		var11:geospatial_lat_units = "degrees_north" ;
+		var11:geospatial_lon_max = 78.3815 ;
+		var11:geospatial_lon_min = 78.0102 ;
+		var11:geospatial_lon_units = "degrees_east" ;
+		var11:instrument = "SeaBird SBE 4" ;
+		var11:processing_level = "final" ;
+		var11:program = "GO-SHIP" ;
+		var11:standard_name = "sea_water_practical_salinity" ;
+		var11:units = "1" ;
+		var11:whp_name = "CTDSAL" ;
+		var11:whp_unit = "PSS-78" ;
+		var11:coordinates = "var9 var6 longitude pressure latitude date var8 var7" ;
+	byte var12(N_PROF, N_LEVEL) ;
+		var12:_FillValue = 9b ;
+		var12:flag_meanings = "sample_for_this_measurement_was_drawn_from_water_bottle_but_analysis_not_received acceptable_measurement questionable_measurement bad_measurement not_reported mean_of_replicate_measurements manual_chromatographic_peak_measurement irregular_digital_chromatographic_peak_integration sample_not_drawn_for_this_measurement_from_this_bottle" ;
+		var12:flag_values = 1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b ;
+		var12:standard_name = "status_flag" ;
+		var12:whp_name = "CTDSAL_FLAG_W" ;
+		var12:coordinates = "var9 var6 longitude pressure latitude date var8 var7" ;
+	float var13(N_PROF, N_LEVEL) ;
+		var13:_FillValue = NaNf ;
+		var13:ancillary_variables = "var14" ;
+		string var13:contributor_name = "John Calderwood", "Hembrough, Bret" ;
+		string var13:contributor_role = "Shipboard Tech", "Shipboard Tech" ;
+		var13:creator_email = "jswift@ucsd.edu" ;
+		var13:creator_institution = "Scripps Institution of Oceanography" ;
+		var13:creator_name = "Swift, James" ;
+		var13:creator_type = "person" ;
+		var13:date_issued = "2016-04-12" ;
+		var13:geospatial_bounds = "MULTIPOINT ((78.3815 -66.6027), (78.2986 -66.4997), (78.0102 -66.15))" ;
+		var13:geospatial_lat_max = -66.15 ;
+		var13:geospatial_lat_min = -66.6027 ;
+		var13:geospatial_lat_units = "degrees_north" ;
+		var13:geospatial_lon_max = 78.3815 ;
+		var13:geospatial_lon_min = 78.0102 ;
+		var13:geospatial_lon_units = "degrees_east" ;
+		var13:instrument = "Guildline 8400B" ;
+		var13:processing_level = "final" ;
+		var13:program = "GO-SHIP" ;
+		var13:standard_name = "sea_water_practical_salinity" ;
+		var13:units = "1" ;
+		var13:whp_name = "CTDSAL" ;
+		var13:whp_unit = "PSS-78" ;
+		var13:coordinates = "var9 var6 longitude pressure latitude date var8 var7" ;
+	byte var14(N_PROF, N_LEVEL) ;
+		var14:_FillValue = 9b ;
+		var14:flag_meanings = "sample_for_this_measurement_was_drawn_from_water_bottle_but_analysis_not_received acceptable_measurement questionable_measurement bad_measurement not_reported mean_of_replicate_measurements manual_chromatographic_peak_measurement irregular_digital_chromatographic_peak_integration sample_not_drawn_for_this_measurement_from_this_bottle" ;
+		var14:flag_values = 1b, 2b, 3b, 4b, 5b, 6b, 7b, 8b, 9b ;
+		var14:standard_name = "status_flag" ;
+		var14:whp_name = "SALNTY_FLAG_W" ;
+		var14:coordinates = "var9 var6 longitude pressure latitude date var8 var7" ;
+	string var6(N_PROF) ;
+		var6:whp_name = "EXPOCODE" ;
+	string var7(N_PROF) ;
+		var7:whp_name = "STNNBR" ;
+	short var8(N_PROF) ;
+		var8:whp_name = "CASTNO" ;
+	string var9(N_PROF) ;
+		var9:whp_name = "SECT_ID" ;
+
+// global attributes:
+		:Conventions = "CF-1.7 ACDD-1.3 CCHDO-0.0" ;
+		:contributor_name = "\"Cervantes, David\",\"Hembrough, Bret\",\"Joseph Gum\",\"John Calderwood\",\"Barna, Andrew\",\"Belmonte, Manuel\",\"Becker, Susan\"" ;
+		:contributor_role = "\"Shipboard Tech\",\"Shipboard Tech\",\"Shipboard Tech\",\"Shipboard Tech\",\"Shipboard Tech\",\"Shipboard Tech\",\"Shipboard Tech\"" ;
+		:creator_email = "\"jswift@ucsd.edu\",\"sasaoka@jamstec.go.jp\",\"adickson@ucsd.edu\"" ;
+		:creator_institution = "\"Scripps Institution of Oceanography\",\"Japan Agency for Marine-Earth Science and Technology\",\"Scripps Institution of Oceanography\"" ;
+		string :creator_name = "\"Swift, James\",\"笹岡 晃征 (Kosei Sasaoka)\",\"Dickson, Andrew\"" ;
+		:creator_type = "\"person\",\"person\",\"person\"" ;
+		:date_issued = "2016-04-12" ;
+		:geospatial_bounds = "MULTIPOINT ((78.3815 -66.6027), (78.2986 -66.4997), (78.0102 -66.15))" ;
+		:geospatial_lat_max = -66.15 ;
+		:geospatial_lat_min = -66.6027 ;
+		:geospatial_lat_units = "degrees_north" ;
+		:geospatial_lon_max = 78.3815 ;
+		:geospatial_lon_min = 78.0102 ;
+		:geospatial_lon_units = "degrees_east" ;
+		:program = "GO-SHIP" ;
+		:publisher_email = "cchdo@ucsd.edu" ;
+		:publisher_institution = "Scripps Institution of Oceanography" ;
+		:publisher_name = "CCHDO" ;
+		:publisher_type = "group" ;
+		:title = "CCHDO netCDF example file" ;
+		:warning = "The data are not real, this is only a file to demo features of the work in progress" ;
+data:
+
+ pressure =
+  5.5, 10.9, 19.8, 40.3, 65.8, 89.9, 114.8, 140.2, 166.6, 190.5, 214.7, 
+    240.1, 264.6, 289.5, 315.5, 340.6, 365.5, 390.2, 454.4, 454.6, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _, _, _, _,
+  5.4, 13.7, 24.1, 50.6, 75.3, 99.9, 125.6, 150.5, 175.2, 200.1, 225.9, 
+    256.1, 301.4, 352.3, 399.6, 450.3, 509, 599.3, 699.3, 800.9, 933.9, 
+    934.3, _, _, _, _, _, _, _, _, _, _, _, _, _, _,
+  5.7, 35.7, 59.8, 84.2, 112.6, 135.8, 160.6, 185.5, 210.6, 234.8, 264.2, 
+    314.7, 364.9, 415, 462.3, 532.8, 632, 732.5, 833.6, 932.2, 1034.3, 
+    1134.4, 1233.4, 1335.2, 1431.7, 1533.4, 1630.8, 1732.9, 1835.6, 1935.2, 
+    2057.3, 2260.3, 2461.3, 2664.5, 2819.1, 3025.5 ;
+
+ latitude = -66.6027, -66.4997, -66.15 ;
+
+ longitude = 78.3815, 78.2986, 78.0102 ;
+
+ date = 24264357, 24264579, 24265666 ;
+
+ wavelength0 = 325, 370, 443 ;
+
+ var0 =
+  348.7, 348.2, 349, 313.7, 303.9, 305.8, 302, 300.3, 296.4, 302.8, 300.9, 
+    304.9, 304, 302.7, 294.4, 293, 284.2, 270.4, 262.9, _, _, _, _, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _,
+  350.4, 347.1, 324.5, 311.9, 311.6, 312, 314.4, 313.9, 314.4, 313.4, 306.7, 
+    300.8, 306.5, 301.1, 281.6, 269.3, 258.1, 242.9, 227.9, 226.2, 223.8, 
+    221.9, _, _, _, _, _, _, _, _, _, _, _, _, _, _,
+  350.7, 311.3, 302.8, 303.5, 304.7, 303.2, 302.6, 309.1, 297.3, 300, 302.3, 
+    298.5, 293.1, 278, 266.7, 243.9, 230.2, 223.5, 218.7, 221.7, 220.8, 
+    221.9, 224, 222.6, 225.2, 225.3, 226.3, 228.3, 228.3, 230.3, 231, 230.7, 
+    230.4, 232, 232.6, 231.9 ;
+
+ var1 =
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, _, _, _, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _, _,
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _, _,
+  2, 3, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ;
+
+ var2 =
+  _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _, _,
+  7.7013, 7.6967, _, 7.6199, _, 7.6148, _, 7.6183, _, 7.6176, _, 7.6091, _, 
+    7.6071, _, 7.5962, _, 7.5934, _, 7.5934, 7.5939, _, _, _, _, _, _, _, _, 
+    _, _, _, _, _, _, _,
+  7.7209, _, 7.6127, _, 7.6132, _, 7.6114, 7.6152, _, 7.6092, 7.6089, 7.6059, 
+    _, 7.5975, _, 7.5916, _, 7.5926, _, 7.5935, _, 7.593, _, 7.5924, _, 
+    7.592, 7.5923, 7.5919, 7.5913, 7.5916, _, 7.5925, _, 7.5915, 7.5915, 
+    7.5936 ;
+
+ var3 =
+  _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _, _,
+  6, 2, _, 2, _, 2, _, 6, _, 6, _, 6, _, 2, _, 2, _, 6, _, 2, 6, _, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _, _,
+  2, _, 2, _, 2, _, 2, 6, _, 2, 2, 2, _, 2, _, 2, _, 6, _, 6, _, 6, _, 2, _, 
+    2, 2, 2, 2, 2, _, 6, _, 6, 2, 3 ;
+
+ var4 =
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  0.19, 0.104, 0.05,
+  0.143, 0.07, 0.032,
+  0.101, 0.05, 0.02,
+  _, _, _,
+  0.132, 0.064, 0.024,
+  _, _, _,
+  _, _, _,
+  0.193, 0.106, 0.048,
+  _, _, _,
+  0.166, 0.084, 0.033,
+  _, _, _,
+  0.149, 0.068, 0.026,
+  _, _, _,
+  0.149, 0.074, 0.029,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  0.147, 0.075, 0.035,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _ ;
+
+ var5 =
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  1, 1, 1,
+  1, 1, 1,
+  1, 1, 1,
+  _, _, _,
+  1, 1, 1,
+  _, _, _,
+  _, _, _,
+  1, 1, 1,
+  _, _, _,
+  1, 1, 1,
+  _, _, _,
+  1, 1, 1,
+  _, _, _,
+  1, 1, 1,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  1, 1, 1,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _,
+  _, _, _ ;
+
+ var10 =
+  -1.5255, -1.5221, -1.5443, -1.6873, -1.7408, -1.7678, -1.6674, -1.556, 
+    -1.3749, -1.5264, -1.4563, -1.5563, -1.5387, -1.5152, -1.3224, -1.2453, 
+    -1.0696, -0.6823, -0.5178, -0.5138, _, _, _, _, _, _, _, _, _, _, _, _, 
+    _, _, _, _,
+  -1.3913, -1.4055, -1.65, -1.757, -1.7918, -1.8066, -1.814, -1.8167, 
+    -1.8131, -1.791, -1.6131, -1.5035, -1.6372, -1.4751, -1.0002, -0.7021, 
+    -0.367, -0.0191, 0.3428, 0.3582, 0.3768, 0.3768, _, _, _, _, _, _, _, _, 
+    _, _, _, _, _, _,
+  -0.8418, -1.6528, -1.7488, -1.7438, -1.7669, -1.6453, -1.6113, -1.7299, 
+    -1.4049, -1.4916, -1.4972, -1.3852, -1.2886, -0.8591, -0.577, 0.0064, 
+    0.3663, 0.4967, 0.5646, 0.4402, 0.3936, 0.347, 0.2746, 0.2534, 0.2041, 
+    0.162, 0.1353, 0.0723, 0.0432, 0.0223, 0.0094, -0.0044, -0.0084, -0.0427, 
+    -0.0713, -0.168 ;
+
+ var11 =
+  33.0281, 33.0276, 33.0377, 34.0809, 34.2722, 34.316, 34.3449, 34.3641, 
+    34.3971, 34.4032, 34.419, 34.4198, 34.4263, 34.4357, 34.4585, 34.4698, 
+    34.4899, 34.5224, 34.5498, 34.5501, _, _, _, _, _, _, _, _, _, _, _, _, 
+    _, _, _, _,
+  33.0641, 33.0909, 33.8467, 34.2467, 34.3122, 34.3363, 34.35, 34.3581, 
+    34.365, 34.3746, 34.3921, 34.4051, 34.4114, 34.4327, 34.4774, 34.5129, 
+    34.547, 34.5953, 34.6438, 34.6533, 34.6669, 34.6669, _, _, _, _, _, _, _, 
+    _, _, _, _, _, _, _,
+  33.0111, 34.0324, 34.2326, 34.3129, 34.3301, 34.3528, 34.3654, 34.3697, 
+    34.399, 34.4027, 34.4111, 34.4328, 34.4509, 34.4937, 34.523, 34.5865, 
+    34.6364, 34.6594, 34.6753, 34.6684, 34.6699, 34.6698, 34.667, 34.6692, 
+    34.6665, 34.665, 34.6647, 34.6606, 34.6597, 34.6596, 34.6597, 34.6606, 
+    34.663, 34.6617, 34.6615, 34.6599 ;
+
+ var12 =
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, _, _, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _, _,
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _, _,
+  2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ;
+
+ var13 =
+  33.0303, 33.031, 33.0462, 34.0832, 34.2728, 34.3189, 34.3469, 34.3678, 
+    34.3993, 34.4058, 34.4211, 34.4212, 34.4283, 34.439, 34.4624, 34.4706, 
+    34.4925, 34.5231, 34.5513, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 
+    _, _,
+  33.0638, 33.1261, 33.855, 34.246, 34.3122, 34.3353, 34.3518, 34.36, 
+    34.3667, 34.3755, 34.3937, 34.4078, 34.4141, 34.4322, 34.4771, 34.5143, 
+    34.5479, 34.5983, 34.6436, 34.6523, 34.6683, _, _, _, _, _, _, _, _, _, 
+    _, _, _, _, _, _,
+  33.0109, 34.0338, 34.2306, 34.3142, 34.333, 34.3521, 34.3648, 34.3706, 
+    34.398, 34.4066, 34.4104, 34.433, 34.4506, 34.4893, 34.5213, 34.5829, 
+    34.6345, 34.6584, 34.6733, 34.6659, 34.6661, 34.6679, 34.6652, 34.6666, 
+    34.6643, 34.6633, 34.6628, 34.6593, 34.6582, 34.6582, 34.6596, 34.6606, 
+    34.6626, 34.6614, 34.6632, 34.6599 ;
+
+ var14 =
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, _, _, _, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _, _,
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, _, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _, _,
+  2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ;
+
+ var6 = "33RR20160208", "33RR20160208", "33RR20160208" ;
+
+ var7 = "1", "2", "6" ;
+
+ var8 = 1, 3, 1 ;
+
+ var9 = "I08S", "I08S", "I08S" ;
+}
