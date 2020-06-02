@@ -1,4 +1,4 @@
-# WOCE-GO-SHIP-clean-sections
+# GO-SHIP Easy Ocean
 GO-SHIP Gridded Time Series; user friendly WOCE/CLIVAR/GO-SHIP data from [CCHDO](https://cchdo.ucsd.edu).
 
 #### Reference
@@ -28,7 +28,7 @@ To visualize`P16` section occupied in 2015, use;
 |[GMT](http://gmt.soest.hawaii.edu/)*|-|`gridded/P16_2015.xyz.gz`|
 |[binary](https://en.wikipedia.org/wiki/IEEE_754)|-|`gridded/P16.bin`|
 |ASCII|`reported/P16/p16_2015_ct1.zip`|`gridded/p16_2015.xyz.gz`|
-|NetCDF|(work in progress)|(work in progress)|
+|NetCDF|(work in progress)|`gridded/P16_2015.nc`|
 
 \* see [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh) as example.
 
@@ -87,15 +87,14 @@ these can be read by [Ocean Data View](https://odv.awi.de/) with`Import` → `WO
 They can also be read
 by [Java Ocean Atlas](http://joa.ucsd.edu/joa) with `File` → `Open` menu.
 
-### 1.3 NetCDF format
-(work in progress)
-
 ## 2. Gridded data
 
 ### 2.1. Matlab format
 Data are stored in 2 dimensional matrices as entries to a `structure`, one for each
 occupation. The axes are defined in `ll_grid`
-(longitude or latitude) and `pr_grid` (pressure).
+(longitude or latitude) and `pr_grid` (pressure). The structure has a field `NTime`
+which is the time (in Matlab format) of the measurement at the station nearest
+(in lat/lon) to the grid point.
 
 ### 2.2. Binary format
 Binary is in [IEEE754](https://en.wikipedia.org/wiki/IEEE_754), 4-byte `float` in
@@ -118,7 +117,7 @@ When unzipped, the first line shows the content of the data. The missing value i
 An example for the use of these ASCII data to plot the difference between occupations with GMT can be found in [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh).
 
 ### 2.4 NetCDF format
-(work in progress)
+(to be documented)
 
 ## 3 ToDo
 
