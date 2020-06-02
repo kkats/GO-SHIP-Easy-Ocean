@@ -1,0 +1,7 @@
+S, standard_name             = latitude
+S, long_name                 = latitude
+S, axis			     = Y
+S, units                     = degrees_north
+S, reference_datum           = WGS84 geographic coordinate system
+N, valid_min                 = -90.0
+N, valid_max                 = 90.0

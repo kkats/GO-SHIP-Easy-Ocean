@@ -1,0 +1,7 @@
+S, standard_name             = time
+S, long_name                 = time
+S, units                     = days since 1950-01-01T00:00:00+00:00
+S, calendar                  = gregorian
+S, axis                      = T
+N, valid_min                 = 0.0
+N, valid_max                 = 90000.0

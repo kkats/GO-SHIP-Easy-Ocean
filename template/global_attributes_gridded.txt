@@ -1,0 +1,56 @@
+% what
+S, program                      = WOCE and GO-Ship gridded products.
+S, Conventions                  = CF-1.7 ACDD-1.3 CCHDO-0.0
+S, standard_name_vocabulary     = NetCDF Climate and Forecast (CF) Metadata Convention Standard Name Table 45
+S, title                        = Gridded CTD product from WOCE and GO-Ship transects for line  
+D, date_issued                  = 
+S, abstract                     = To be written
+S, comment                      = 
+S, expocode			=
+S, source_file                  = 
+S, goship_woce_line_id 		=
+S, all_years_used		= 
+S, instrument                   = CTD
+S, keywords                     = CTD, gridded product, WOCE lines, GO-Ship lines
+S, references                   = https://cchdo.ucsd.edu/
+% cruise                       
+% institution    
+% institution_address         
+% institution_postal_address   
+
+% where
+% geospatial_bounds
+N, geospatial_lat_min       = 
+N, geospatial_lat_max       = 
+N, geospatial_lon_min       = 
+N, geospatial_lon_max       = 
+S, geospatial_lat_units     = degrees_north
+S, geospatial_lon_units     = degrees_east
+N, geospatial_vertical_min = 
+N, geospatial_vertical_max = 
+S, geospatial_vertical_positive = down
+
+% when
+%time_deployment_start        = 
+%time_deployment_start_origin = UTC
+%time_deployment_end          = 
+%time_deployment_end_origin   = UTC
+D, time_coverage_start          = 
+D, time_coverage_end            = 
+
+% who
+S, publisher_name               = CLIVAR and Carbon Hydrographic Data Office (CCHDO)
+S, publisher_email              = cchdo@ucsd.edu
+S, publisher_institution        = Scripps Institution of Oceanography
+S, publisher_type		= group
+S, creator                      = Katsuro Katsumata
+S, creator_email                = k.katsumata@jamstec.go.jp
+% principal_investigator       
+% principal_investigator_email 
+
+% how
+S, lineage                 = Data were created as described at: https://github.com/kkats/WOCE-GO-SHIP-clean-sections from the datasets listed in source_file
+S, citation                = The citation in a list of references is: "[Data providers of the parameter(s) used]. [Year of file access]. [CTD/Bottle] data from cruise [expocode], [format version used]. Accessed from CCHDO [url of cruise data page]. Access date [date of download]. [Applicable CCHDO cruise DOI if provided].".
+S, acknowledgement         = Any users of CCHDO data are required to clearly acknowledge the source of the material derived from CCHDO in the format: "XX" Users are also encouraged to acknowledge the funding program that supported the data collection in their publication. For US GO-SHIP data this is the NSF/NOAA funded U.S Repeat Hydrography Program.
+S, disclaimer              = Data, products and services from CCHDO are provided "as is" without any warranty as to fitness for a particular purpose.
+S, license                 = http://creativecommons.org/licenses/by/4.0/

@@ -1,84 +1,233 @@
-function gridded_NC(gds, fname, ll_grid, pr_grid)
+function gridded_nc(line_id,inpath,repopath,outfname)
+% function gridded_nc(line_id,infname,outfname)
+% Inputs:   line_id (eg, P15) as character array
+%           inpath: full path to location of 'gridded' folder under which
+%               will sit individual line folders with the gridded mat files (eg. '/home/work/GoShip/')
+%           repopath: full path to the 'WOCE-GO-SHIP-clean-sections' folder
+%               that contains all the code to build the product under each line
+%               folder (eg. '/home/work/GoShip/')
+%           outfname (optional): full path and file name to output the netcdf gridded
+%           data to. Default is the same as inpath.
 %
-% Output reported_data (`gds`) to GrADS readable binary
+% Loads the gridded mat file containing D_pr structure with gridded data 
+%ll_grid (lat/long grid) and pr_grid (pressure grid)
+% created from grid_data_pressure.m
+% Outputs gridded_data to CF compliant NETCDF format
 %
-%
-ni = length(ll_grid);
-nj = length(pr_grid);
-nk = length(gds);
+% Using a template text file for easy editing of metadata attributes.
+% Bec Cowley, April 2020.
 
-% variables
-nccreate(fname, 'temperature', ...
-                'Dimensions', {'Time', nk, 'st_ocean', nj, 'xt_ocean' ni}, ...
-                'Datatype', 'single');
-nccreate(fname, 'salinity', ...
-                'Dimensions', {'Time', nk, 'st_ocean', nj, 'xt_ocean' ni}, ...
-                'Datatype', 'single');
-nccreate(fname, 'dissolved_oxygen', ...
-                'Dimensions', {'Time', nk, 'st_ocean', nj, 'xt_ocean' ni}, ...
-                'Datatype', 'single');
-nccreate(fname, 'Conservative_Temperature', ...
-                'Dimensions', {'Time', nk, 'st_ocean', nj, 'xt_ocean' ni}, ...
-                'Datatype', 'single');
-nccreate(fname, 'Absolute_Salinity', ...
-                'Dimensions', {'Time', nk, 'st_ocean', nj, 'xt_ocean' ni}, ...
-                'Datatype', 'single');
-% coordinates -- time not defined
-nccreate(fname, 'pressure', ...
-                'Dimensions', {'st_ocean', nj}, ...
-                'Datatype', 'single');
-nccreate(fname, 'lonlat', ...
-                'Dimensions', {'xt_ocean', ni}, ...
-                'Datatype', 'single');
-%
-ncwrite(fname, 'pressure', pr_grid);
-ncwrite(fname, 'lonlat', ll_grid);
-buf = NaN(nk,nj,ni);
-for k = 1:nk
-    buf(k,:,:) = shiftdim(gds(k).CTDtem, -1);
+narginchk(3,4);
+if nargin < 4
+    outfname = inpath;
 end
-ncwrite(fname, 'temperature', buf);
-buf = NaN(nk,nj,ni);
-for k = 1:nk
-    buf(k,:,:) = shiftdim(gds(k).CTDsal, -1);
+outfname = [outfname '/gridded/' line_id '/' line_id '.nc'];
+
+%load the input file:
+try
+    load([inpath '/gridded/' line_id '/' line_id '.mat'])
+catch
+    error(['File ' inpath '/gridded/' line_id '/' line_id '.mat does not exist'])
 end
-ncwrite(fname, 'salinity', buf);
-buf = NaN(nk,nj,ni);
-for k = 1:nk
-    buf(k,:,:) = shiftdim(gds(k).CTDoxy, -1);
+
+%Netcdf file creation
+    % the file is created in the following order
+    %
+    % 1. global attributes
+    % 2. dimensions / coordinate variables
+    % 3. variable definitions
+    % 4. data
+fidnc = netcdf.create(outfname, 'NETCDF4');
+if fidnc == -1, error(['Could not create ' filename]); end
+
+% we don't want the API to automatically pre-fill with FillValue, we're
+% taking care of it ourselves and avoid 2 times writting on disk
+netcdf.setFill(fidnc, 'NOFILL');
+
+%% get the global attributes template:
+globalatts = parseNCTemplate('global_attributes_gridded.txt');
+
+%populate empty fields where we can:
+%list of fields
+flds = fieldnames(globalatts);
+
+%add the line name to the end of the text
+%handle the 'goship_woce_line_id' here also
+globalatts.title = [globalatts.title line_id];
+globalatts.goship_woce_line_id = line_id;
+%'date_issued'
+globalatts.date_issued = datestr(now,'yyyymmdd');
+%'source_file'
+%put the expocode file names here with full web links from
+%README.MD file for the line
+%double quotes(?), separated by commas
+pth = [repopath '/WOCE-GO-SHIP-clean-sections/' line_id '/README.md'];
+fid = fopen(pth,'r');
+if fid < 1
+    error(['Path to repo for ' line_id ', ' pth ' is incorrect'])
 end
-ncwrite(fname, 'dissolved_oxygen', buf);
-buf = NaN(nk,nj,ni);
-for k = 1:nk
-    buf(k,:,:) = shiftdim(gds(k).CTDCT, -1);
+c = textscan(fid,'%s','delimiter','|');
+fclose(fid);
+c = c{:};
+%get the http references:
+ii = find(cellfun(@isempty,strfind(c,'http'))==0);
+expocode = [];weblink = [];
+for b = 1:length(ii)
+    str = c{ii(b)};
+    [tokens,matches] =regexp(str,'+ [(\w*).*((\https:[/\w*/\.]+))','tokens','match');
+    if b == 1
+        expocode = tokens{1}{1};
+        weblink = tokens{1}{2};
+    else
+        expocode = [expocode ',' tokens{1}{1}];
+        weblink = [weblink ',' tokens{1}{2}];
+    end
 end
-ncwrite(fname, 'Conservative_Temperature', buf);
-buf = NaN(nk,nj,ni);
-for k = 1:nk
-    buf(k,:,:) = shiftdim(gds(k).CTDSA, -1);
+globalatts.source_file = weblink;
+globalatts.expocode = expocode;
+%'goship_woce_line_id'
+%input into function
+globalatts.goship_woce_line_id = line_id;
+% 'geospatial_bounds'
+%also handle all the geospatial* etc here
+%get the raw data:
+m = length(D_pr);
+for b = 1:length(D_pr)
+    n(b) = length(D_pr(b).Station);
 end
-ncwrite(fname, 'Absolute_Salinity', buf);
-% attributes
-ncwriteatt(fname, '/', 'creation_time', datestr(now));
-ncwriteatt(fname, 'pressure', 'long_name', 'Depth measured in pressure');
-ncwriteatt(fname, 'pressure', 'missing_value', '-999');
-ncwriteatt(fname, 'pressure', 'units', 'decibar');
-ncwriteatt(fname, 'lonlat', 'long_name', 'Horizontal coordinate in Longitude or Latitude');
-ncwriteatt(fname, 'lonlat', 'missing_value', '-999');
-ncwriteatt(fname, 'lonlat', 'units', 'degrees');
-ncwriteatt(fname, 'temperature', 'long_name', 'Temperature in IPTS-68');
-ncwriteatt(fname, 'temperature', 'missing_value', '-999');
-ncwriteatt(fname, 'temperature', 'units', 'deg C');
-ncwriteatt(fname, 'salinity', 'long_name', 'Salinity in PSS-78');
-ncwriteatt(fname, 'salinity', 'missing_value', '-999');
-ncwriteatt(fname, 'salinity', 'units', 'PSU');
-ncwriteatt(fname, 'dissolved_oxygen', 'long_name', 'Dissolved oxygen-78');
-ncwriteatt(fname, 'dissolved_oxygen', 'missing_value', '-999');
-ncwriteatt(fname, 'dissolved_oxygen', 'units', 'umol/kg');
-ncwriteatt(fname, 'Conservative_Temperature', 'long_name', 'Conservative Temperature in TEOS-10');
-ncwriteatt(fname, 'Conservative_Temperature', 'missing_value', '-999');
-ncwriteatt(fname, 'Conservative_Temperature', 'units', 'deg C');
-ncwriteatt(fname, 'Absolute_Salinity', 'long_name', 'Absolute Salinity in TEOS-10');
-ncwriteatt(fname, 'Absolute_Salinity', 'missing_value', '-999');
-ncwriteatt(fname, 'Absolute_Salinity', 'units', 'g/kg');
+lat = NaN*ones(m,max(n));lon = lat; ti = lat;
+for b = 1:length(D_pr)
+    for c = 1:length(D_pr(b).Station)
+        lat(b,c) = D_pr(b).Station{c}.Lat;
+        lon(b,c) = D_pr(b).Station{c}.Lon;
+        ti(b,c) = D_pr(b).Station{c}.Time;
+    end
+end
+%create the time grid
+ti_grid = str2num(datestr(min(ti,[],2),'yyyy'));
+
+%include the years used in the global attributes:
+tt = ti(~isnan(ti));
+globalatts.all_years_used = ['Data from years ' num2str(unique(str2num(datestr(tt,'yyyy')))') ' was used to create this product'];
+%is the ll_grid latitude or longitude?
+[latm,latn] = range(lat);
+[lm,ln] = range(ll_grid);
+[lonm,lonn] = range(lon);
+dmax = [abs(lm - latm),abs(lm - lonm)];
+dmin = [abs(ln - latn),abs(ln - lonn)];
+
+ilatlon = find(min(dmax));
+if ilatlon == 1 %ll_grid is along latitude
+    %create a longitude grid to match:
+    lat_grid = ll_grid;
+    lon_grid = mean(nanmean(lon));
+else %ll_grid is along longitude
+    %create a latitude grid to match:
+    lon_grid = ll_grid;
+    lat_grid = mean(nanmean(lat));
+end
+
+%assign the global attributes:
+globalatts.geospatial_lat_min = min(lat_grid);
+globalatts.geospatial_lat_max = max(lat_grid);
+globalatts.geospatial_lon_min = min(lon_grid);
+globalatts.geospatial_lon_max = max(lon_grid);
+globalatts.geospatial_vertical_min = min(pr_grid);
+globalatts.geospatial_vertical_max = max(pr_grid);
+%also handle the other time* fields here
+globalatts.time_coverage_start = datestr(min(min(ti)),'dd-mm-yyyy HH:MM:SS');
+globalatts.time_coverage_end = datestr(max(max(ti)),'dd-mm-yyyy HH:MM:SS');
+
+%write out global attributes:
+vid = netcdf.getConstant('NC_GLOBAL'); %get the global attributes reference
+flds = fieldnames(globalatts);
+for a = 1:length(flds)
+    name = flds{a};
+    netcdf.putAtt(fidnc, vid, name, globalatts.(flds{a}));
+end
+%% get the dimension attributes templates, using pressure, longitude,
+%dimensions
+dimnames = {'time','pressure','longitude','latitude'};
+dimdata = {'ti_grid','pr_grid','lon_grid','lat_grid'};
+
+ti_gridatts = parseNCTemplate('time_attributes_gridded.txt');
+pr_gridatts = parseNCTemplate('pressure_attributes_gridded.txt');
+lon_gridatts = parseNCTemplate('longitude_attributes.txt');
+lat_gridatts = parseNCTemplate('latitude_attributes.txt');
+
+for m=1:length(dimnames)
+    eval(['data = ' dimdata{m} ';']);
+    eval(['atts = ' dimdata{m} 'atts;']);
+      % create dimension
+      did(m) = netcdf.defDim(fidnc, dimnames{m}, length(data));
+
+      % create coordinate variable and attributes
+      vid(m) = netcdf.defVar(fidnc, dimnames{m}, 'NC_FLOAT', did(m));
+      fldn = fieldnames(atts);
+      for b = 1:length(fldn)
+          netcdf.putAtt(fidnc,vid(m),fldn{b},atts.(fldn{b}))
+      end
+end
+%% now for each variables attributes, DOXY, TEMP, PSAL, CONSERVATIVE TEMP, ABSOLUTE SALINITY 
+
+%populate for each one:
+varname = {'var0','var1','var2','var3','var4'};
+dataname = {'CTDoxy','CTDtem','CTDsal','CTDCT','CTDSA'};
+stdn = {'moles_of_oxygen_per_unit_mass_in_sea_water','sea_water_temperature',...
+    'sea_water_practical_salinity','seawater_conservative_temperature',...
+    'sea_water_absolute_salinity'};
+whpname = {'CTDOXY','CTDTMP','CTDSAL','CTDCT','CTDSA'}; %are these last two correct?
+units = {'umol kg-1','degC','1','degC','g kg-1'}; %note umol/kg, but std units is mol/kg for oxygen, query K (std) or degC for temp
+refscale = {'','ITS-90','PSS-78','',''};
+
+%NEED TO CHECK SCALE FOR TEMPERATURE - REPORTED SAYS IPTS-68, GRIDDED
+%STRUCTURE SAYS ITS-90
+
+for a = 1:length(stdn)
+    varatts = parseNCTemplate('variable_attributes_gridded.txt');
+    varatts.standard_name = stdn{a};
+    varatts.units = units{a};
+    varatts.reference_scale = refscale{a};
+    varatts.whp_name = whpname{a};
+    
+    %create the variable:
+    vidv(a) = netcdf.defVar(fidnc,varname{a},'NC_FLOAT',did);
+    fldn = fieldnames(varatts);
+    %now write out the variable atts:
+    for b = 1:length(fldn)
+        name = fldn{b};
+        if strcmpi(name, 'FillValue')
+            netcdf.defVarFill(fidnc, vidv(a), false, varatts.(fldn{b})); % false means noFillMode == false
+        else
+            netcdf.putAtt(fidnc, vidv(a), name, varatts.(fldn{b}));
+        end
+    end
+end
+% we're finished defining dimensions/attributes/variables
+netcdf.endDef(fidnc);
+
+%% Now the data
+% dimension data
+for a = 1:length(dimnames)
+    eval(['data = ' dimdata{a} ';']);
+    netcdf.putVar(fidnc, vid(a), data);
+end
+
+%variable data
+for a = 1:length(varname)
+    %construct matrix for each time stamp:
+    data = NaN*ones(length(ti_grid),length(pr_grid),length(lon_grid),length(lat_grid));
+    for b = 1:length(ti_grid)
+        eval(['dat = D_pr(b).' dataname{a} ';']);
+        if ilatlon == 1%longitude is single value
+            data(b,:,1,:) = dat;
+        else %latitude is single value
+            data(b,1,:,:) = dat;
+        end
+    end
+    %put -999 for nans
+    data(isnan(data)) = -999;
+    netcdf.putVar(fidnc, vidv(a), data);
+end
+netcdf.close(fidnc)
 end
