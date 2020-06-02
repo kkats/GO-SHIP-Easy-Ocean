@@ -2,10 +2,10 @@
 DIR = 'I06S/';
 BDIR = '../CTD/I06S/';
 fname = 'i06s';
-years = {'1993', '1996', '2008'};
+years = {'1993', '1996', '2008', '2019'};
 ll_grid = [-69.1:0.1:-33.1];
 pr_grid = [0:10:6500];
-depth_files = {'', '', ''};
+depth_files = {'', '', '', ''};
 %
 tic;
 outdir = ['../output/reported/' DIR];

@@ -8,7 +8,7 @@ K. Katsumata, B. Sloyan, R. Cowley, S. Diggs, T. Moore, S. Purkey, J. Swift, L. 
 # Output Formats
 
 Uninterpolated data (station data) are called _reported_ data. Horizontally interpolated data are called _gridded_ data. These are stored under separate directories. Remarks common to all formats are;
-+ Temperature is in IPTS-68 (*not* ITS-90). This is useful for [gamma surface calculation](http://www.teos-10.org/preteos10_software/neutral_density.html).
++ Temperature is in IPTS-68 (*not* ITS-90). This is useful for [gamma surface calculation](http://www.teos-10.org/preteos10_software/neutral_density.html). The unit recorded in Matlab `Station` header (e.g. `D_pr(1).Station`) is the unit of the original CTD data, not the unit in our product.
 + Unless otherwise noted (e.g. [I01](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/tree/master/I01/)), only _good_ (as defined by `flag=2`) data are used. This behaviour
 can be changed by modifying the QC section in `read_ctd_exchange.m`.
 + Missing value is `-999` for ASCII and binary outputs and `NaN` otherwise.
@@ -117,7 +117,7 @@ Hopefully this is not a problem for other applications.
 When unzipped, the first line shows the content of the data. The missing value is `-999`.
 An example for the use of these ASCII data to plot the difference between occupations with GMT can be found in [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh).
 
-### 2.3 NetCDF format
+### 2.4 NetCDF format
 (work in progress)
 
 ## 3 ToDo

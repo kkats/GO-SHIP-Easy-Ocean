@@ -178,10 +178,7 @@ stdn = {'moles_of_oxygen_per_unit_mass_in_sea_water','sea_water_temperature',...
     'sea_water_absolute_salinity'};
 whpname = {'CTDOXY','CTDTMP','CTDSAL','CTDCT','CTDSA'}; %are these last two correct?
 units = {'umol kg-1','degC','1','degC','g kg-1'}; %note umol/kg, but std units is mol/kg for oxygen, query K (std) or degC for temp
-refscale = {'','ITS-90','PSS-78','',''};
-
-%NEED TO CHECK SCALE FOR TEMPERATURE - REPORTED SAYS IPTS-68, GRIDDED
-%STRUCTURE SAYS ITS-90
+refscale = {'','IPTS-68','PSS-78','',''};
 
 for a = 1:length(stdn)
     varatts = parseNCTemplate('variable_attributes_gridded.txt');
