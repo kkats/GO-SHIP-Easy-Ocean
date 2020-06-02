@@ -87,6 +87,12 @@ these can be read by [Ocean Data View](https://odv.awi.de/) with`Import` → `WO
 They can also be read
 by [Java Ocean Atlas](http://joa.ucsd.edu/joa) with `File` → `Open` menu.
 
+### 1.3 All stations
+It is possible to include all stations in the original CTD file in the `reported` data set.
+When calling `reported_data.m`, use a special file name 'all' in the first argument,
+instead of the list file (e.g. `P16/p16_1992.list`). Note that this output cannot be
+gridded because of possible duplication and branching of the station tracks.
+
 ## 2. Gridded data
 
 ### 2.1. Matlab format
