@@ -60,7 +60,6 @@ for i = 1:(length(x)-1)
         gaus2 = exp(-abs(xn) / efold2); % use exponential (Roemmich, 1983)
         acov2 = gaus2 + diag(n) * evar2;
         w2 = acov2 \ (z1 - zlarge);
-
         % gridding
         xh = ones(length(x_h),1) * x1' - x_h' * ones(1,n);
         zinterp(j,ih) = ones(size(ih')) * mred + exp(-xh.^2 / efold1^2) * w1 + exp(-abs(xh) / efold2) * w2;
