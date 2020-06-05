@@ -30,54 +30,9 @@ Station numbers in the CCHDO data are different from the ATLAS station numbers, 
 ### 2017
 
 The exchange file has an exctra column ("SVLSAL") between salinity and oxygen.
-The following patch is necessary for `read_ctd_exchange.m`;
-```
---- read_ctd_exchange.m 2020-02-19 13:50:38.380460961 +0900
-+++ read_ctd_exchange_P17E2017.m        2020-02-26 16:01:16.226759333 +0900
-@@ -68,7 +68,9 @@
-     [punit, r1] = strtok(uline, ',');
-     [tunit, r2] = strtok(r1, ',');
-     [sunit, r3] = strtok(r2, ',');
--    ounit = strtok(r3, ',');
-+    % for 49NZ20170208
-+    [ounit, r4] = strtok(r3, ',');
-+    ounit = strtok(r4, ',');
-
-     expo = itemEq(header, 'EXPOCODE');
-     station = itemEq(header, 'STNNBR');
-@@ -96,7 +98,7 @@
-             fclose(fid);
-             break;
-         end
--        a = sscanf(tline, '%f,%d,%f,%d,%f,%d,%f,%d');
-+        a = sscanf(tline, '%f,%d,%f,%d,%f,%d,%f,%d,%f,%d');
-         m = m + 1;
-         p(m) = a(1);
-         pf(m) = a(2);
-@@ -104,13 +106,9 @@
-         tf(m) = a(4);
-         s(m) = a(5);
-         sf(m) = a(6);
--        if length(a) > 7
--            o(m) = a(7);
--            of(m) = a(8);
--        else
--            o(m) = nan;
--            of(m) = nan;
--        end
-+        % for 49NZ20170208
-+        o(m) = a(9);
-+        of(m) = a(10);
-         clear a;
-     end
-     if m > mmax
-```
+Use `read_ctd_exchange_2017.m` in this directory.
 
 Stations 14, 17, 19 were not completed during the 2017 occupation.
 
 1992 configuration file uses P120.
 2017 configuration file uses P159.
-
-Gridding:
->> pr_grid = [0:10:6500];
->> ll_grid = [-66.328:(1/10):-52.511]; %grid along latitude.

@@ -19,7 +19,7 @@ x = [0, cumsum(dx)];
 lat_grid = interp1(lon, lat, lon_grid, 'linear');
 dx = gsw_distance(lon_grid, lat_grid);
 x1 = gsw_distance([lon(1), lon_grid(1)], [lat(1), lat_grid(1)]);
-x_grid = [x1, cumsum(x_grid)];
+x_grid = [x1, cumsum(dx)];
 
 [zinterp, maxpiterp] = hinterp_objmap(z, x, maxp, pr_grid, x_grid);
 end

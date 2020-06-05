@@ -17,4 +17,3 @@ The meridional section along 127 degW is found in `../P17E`.
 
 ## 2. Glitches
 
-### 1997

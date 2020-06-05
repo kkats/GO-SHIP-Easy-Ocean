@@ -12,6 +12,10 @@
 
 At the time of writing, only the `whp_netcdf` format is available
 for 49NZ20090521.
+Use `whp_netcdf` for both [49NZ20090410](https://cchdo.ucsd.edu/cruise/49NZ20090410)
+and [49NZ20090521](https://cchdo.ucsd.edu/cruise/49NZ20090521) with
+`read_ctd_nc.m` insted of `read_ctd_exchange`.
+
 
 ### 1992
 
