@@ -30,7 +30,7 @@ To visualize`P16` section occupied in 2015, use;
 |ASCII|`reported/P16/p16_2015_ct1.zip`|`gridded/p16_2015.xyz.gz`|
 |NetCDF|(work in progress)|`gridded/P16_2015.nc`|
 
-\* see [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh) as example.
+\* see [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh) for example.
 
 
 ## 1. Reported data
@@ -125,7 +125,7 @@ An example for the use of these ASCII data to plot the difference between occupa
 ### 2.4 NetCDF format
 (to be documented)
 
-## 3 ToDo
+## ToDo
 
 + [A25/OVIDE](https://cchdo.ucsd.edu/search?q=OVIDE)
 + [75N](https://cchdo.ucsd.edu/search?q=75N)

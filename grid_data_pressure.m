@@ -45,44 +45,38 @@ end
 % Interpolate chunk by chunk -- do not interpolate if more than MAX_SEPARATION deg apart
 % (defined in configuration)
 chunk = {};
-ichunk = {};
 len = 0;
-lshere = [ls(1)];
 idxhere = [1];
 for i = 2:length(ls)
     if abs(ls(i) - ls(i-1))  < MAX_SEPARATION;
-        lshere = [lshere, ls(i)];
         idxhere = [idxhere, i];
         continue;
     end
     len = len + 1;
-    chunk(1, len) = {lshere};
-    ichunk(1, len) = {idxhere};
-    lshere = [ls(i)];
+    chunk(1, len) = {idxhere};
     idxhere = [i];
 end
-chunk(1,len+1) = {lshere};
-ichunk(1, len+1) = {idxhere};
+chunk(1, len+1) = {idxhere};
 
 [ctdtem_hv, ctdsal_hv, ctdoxy_hv] = deal(NaN(length(pr_grid), length(ll_grid)));
 [ctdCT_hv, ctdSA_hv] = deal(NaN(length(pr_grid), length(ll_grid)));
 for i = 1:length(chunk)
-    lshere = chunk{i};
-    idxhere = ichunk{i};
+    idxhere = chunk{i};
+    lshere = ls(idxhere);
     ig = find(min(lshere) < ll_grid & ll_grid < max(lshere));
     if length(idxhere) < 2
         continue;
     end
-    ctdtem_hv(:,ig) = hinterp_handle(ctdtem_v(:,idxhere), ll(idxhere), deps(idxhere), ...
-                                                                    pr_grid, ll_grid(ig));
-    ctdsal_hv(:,ig) = hinterp_handle(ctdsal_v(:,idxhere), ll(idxhere), deps(idxhere), ...
-                                                                    pr_grid, ll_grid(ig));
-    ctdoxy_hv(:,ig) = hinterp_handle(ctdoxy_v(:,idxhere), ll(idxhere), deps(idxhere), ...
-                                                                    pr_grid, ll_grid(ig));
-    ctdCT_hv(:,ig) = hinterp_handle(ctdCT_v(:,idxhere), ll(idxhere), deps(idxhere), ...
-                                                                    pr_grid, ll_grid(ig));
-    ctdSA_hv(:,ig) = hinterp_handle(ctdSA_v(:,idxhere), ll(idxhere), deps(idxhere), ...
-                                                                    pr_grid, ll_grid(ig));
+    ctdtem_hv(:,ig) = hinterp_handle(ctdtem_v(:,idxhere), lons(idxhere), lats(idxhere), ...
+                                     deps(idxhere), pr_grid, ll_grid(ig));
+    ctdsal_hv(:,ig) = hinterp_handle(ctdsal_v(:,idxhere), lons(idxhere), lats(idxhere), ...
+                                     deps(idxhere), pr_grid, ll_grid(ig));
+    ctdoxy_hv(:,ig) = hinterp_handle(ctdoxy_v(:,idxhere), lons(idxhere), lats(idxhere), ...
+                                     deps(idxhere), pr_grid, ll_grid(ig));
+    ctdCT_hv(:,ig) = hinterp_handle(ctdCT_v(:,idxhere), lons(idxhere), lats(idxhere), ...
+                                    deps(idxhere), pr_grid, ll_grid(ig));
+    ctdSA_hv(:,ig) = hinterp_handle(ctdSA_v(:,idxhere), lons(idxhere), lats(idxhere), ...
+                                    deps(idxhere), pr_grid, ll_grid(ig));
 end
 
 % Use nearest time to the grid point

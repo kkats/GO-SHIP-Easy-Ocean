@@ -1,4 +1,4 @@
-function [zinterp, maxpinterp] = hinterp(z, latlon, maxp, pr_grid, ll_grid)
+function [zinterp, maxpinterp] = hinterp(z, lon, lat, maxp, pr_grid, ll_grid)
 %
 % Horizontal interpolation
 % IN: z(:,:) measured (& vertically interpolated) at z(:) and latlon(:)
@@ -7,7 +7,8 @@ function [zinterp, maxpinterp] = hinterp(z, latlon, maxp, pr_grid, ll_grid)
 % OUT: zinterp(:,:) interpolated on pr_grid(:) and ll_grid(:)
 %      maxpinterp(:) bottom pressure at latlon(:)
 %
-
+[idx, l] = sort_stations(lon, lat);
+latlon = l(idx);
 % horizontal interpolation at constant pressure
 zinterp = NaN(length(pr_grid), length(ll_grid));
 for j = 1:length(pr_grid)
