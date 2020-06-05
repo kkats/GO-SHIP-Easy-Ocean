@@ -9,16 +9,16 @@ function D_pressure = grid_data_pressure(D_reported, ll_grid, pr_grid)
 %%%
 configuration;
 %%%
-
     
 % lat/lon and depth
 stations = D_reported.Station;
 nstn = length(stations);
-[lats, lons, deps] = deal(NaN(1, nstn));
+[lats, lons, deps, tims] = deal(NaN(1, nstn));
 for i = 1:nstn
     lats(i) = stations{i}.Lat;
     lons(i) = stations{i}.Lon;
     deps(i) = stations{i}.Depth;
+    tims(i) = stations{i}.Time;
 end
 
 [idx, ll] = sort_stations(lons, lats);
@@ -85,7 +85,11 @@ for i = 1:length(chunk)
                                                                     pr_grid, ll_grid(ig));
 end
 
+% Use nearest time to the grid point
+ntime = interp1(ll, tims(idx), ll_grid, 'nearest');
+
 D_pressure = struct('Station', {stations}, ...
+                    'NTime', ntime, ...
                     'CTDtem', ctdtem_hv, ...
                     'CTDsal', ctdsal_hv, ...
                     'CTDoxy', ctdoxy_hv, ...

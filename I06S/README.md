@@ -10,6 +10,9 @@
 ### 2008
 + [33RR20080204](https://cchdo.ucsd.edu/cruise/33RR20080204)
 
+### 2019
++ [325020190403](https://cchdo.ucsd.edu/cruise/325020190403)
+
 ## 2. Glitches
 
 ### 1993
@@ -37,4 +40,23 @@ Use this _ad-hoc_ patch in `read_ctd_exchange.m`.
       expo = itemEq(header, 'EXPOCODE');
       station = itemEq(header, 'STNNBR');
       cast = str2num(itemEq(header, 'CASTNO'));
+~~~
+
+### 2019
+CTDOXY from stations 5 to 8 show abnormality although flag=2 (as of 3 Jun 2020).
+Manually removed by the following patch.
+~~~
+*** read_ctd_exchange.m 2020-06-02 12:58:59.936428666 +0900
+--- read_ctd_exchange_I06S2019.m        2020-06-03 09:19:13.428061625 +0900
+***************
+*** 178,183 ****
+--- 178,185 ----
+  sa = sa(:,idx);
+  ox = ox(:,idx);
+
++ ox(:,5:7) = NaN;
++
+  % finally save .mat files
+  if length(outputfname) > 4 && strcmp(outputfname(end-3:end), '.mat')
+      outputfname = outputfname(1:end-4);
 ~~~

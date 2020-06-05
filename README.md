@@ -1,5 +1,5 @@
-# WOCE-GO-SHIP-clean-sections
-User friendly WOCE/CLIVAR/GO-SHIP data from [CCHDO](https://cchdo.ucsd.edu).
+# GO-SHIP Easy Ocean
+GO-SHIP Gridded Time Series; user friendly WOCE/CLIVAR/GO-SHIP data from [CCHDO](https://cchdo.ucsd.edu).
 
 #### Reference
 K. Katsumata, B. Sloyan, R. Cowley, S. Diggs, T. Moore, S. Purkey, J. Swift, L. Talley, _User friendly ship based hydrographic section data_ (in preparation)
@@ -8,7 +8,7 @@ K. Katsumata, B. Sloyan, R. Cowley, S. Diggs, T. Moore, S. Purkey, J. Swift, L. 
 # Output Formats
 
 Uninterpolated data (station data) are called _reported_ data. Horizontally interpolated data are called _gridded_ data. These are stored under separate directories. Remarks common to all formats are;
-+ Temperature is in IPTS-68 (*not* ITS-90). This is useful for [gamma surface calculation](http://www.teos-10.org/preteos10_software/neutral_density.html).
++ Temperature is in IPTS-68 (*not* ITS-90). This is useful for [gamma surface calculation](http://www.teos-10.org/preteos10_software/neutral_density.html). The unit recorded in Matlab `Station` header (e.g. `D_pr(1).Station`) is the unit of the original CTD data, not the unit in our product.
 + Unless otherwise noted (e.g. [I01](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/tree/master/I01/)), only _good_ (as defined by `flag=2`) data are used. This behaviour
 can be changed by modifying the QC section in `read_ctd_exchange.m`.
 + Missing value is `-999` for ASCII and binary outputs and `NaN` otherwise.
@@ -28,7 +28,7 @@ To visualize`P16` section occupied in 2015, use;
 |[GMT](http://gmt.soest.hawaii.edu/)*|-|`gridded/P16_2015.xyz.gz`|
 |[binary](https://en.wikipedia.org/wiki/IEEE_754)|-|`gridded/P16.bin`|
 |ASCII|`reported/P16/p16_2015_ct1.zip`|`gridded/p16_2015.xyz.gz`|
-|NetCDF|(work in progress)|(work in progress)|
+|NetCDF|(work in progress)|`gridded/P16_2015.nc`|
 
 \* see [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh) as example.
 
@@ -87,21 +87,26 @@ these can be read by [Ocean Data View](https://odv.awi.de/) with`Import` → `WO
 They can also be read
 by [Java Ocean Atlas](http://joa.ucsd.edu/joa) with `File` → `Open` menu.
 
-### 1.3 NetCDF format
-(work in progress)
+### 1.3 All stations
+It is possible to include all stations in the original CTD file in the `reported` data set.
+When calling `reported_data.m`, use a special file name `'all'` in the first argument,
+instead of the list file (e.g. `P16/p16_1992.list`). Note that this output cannot be
+gridded because of possible duplication and branching of the station tracks.
 
 ## 2. Gridded data
 
 ### 2.1. Matlab format
 Data are stored in 2 dimensional matrices as entries to a `structure`, one for each
 occupation. The axes are defined in `ll_grid`
-(longitude or latitude) and `pr_grid` (pressure).
+(longitude or latitude) and `pr_grid` (pressure). The structure has a field `NTime`
+which is the time (in Matlab format) of the measurement at the station nearest
+(in lat/lon) to the grid point.
 
 ### 2.2. Binary format
 Binary is in [IEEE754](https://en.wikipedia.org/wiki/IEEE_754), 4-byte `float` in
 [Big Endian](https://en.wikipedia.org/wiki/Endianness). The first datum is southmost/westmost
 shallowest temperature datum. The second is the shallowest datum from the next horizontal grid.
-After _XDEF_ data, data from the second shallowest depth follows. Vertical number
+After _XDEF_ data, data from the second shallowest depth follow. Vertical number
 of data is _YDEF_. After temperature, the following data are stored in the order;
 salinity, oxygen, Conservative Temperature, and Absolute Salinity.
 
@@ -114,8 +119,14 @@ appears as longitude and depth as latitude. Occupation appears in time coordinat
 Hopefully this is not a problem for other applications.
 
 ### 2.3 ASCII format
-When unzipped, the first line shows the content of the data. The missing value `-999`.
+When unzipped, the first line shows the content of the data. The missing value is `-999`.
 An example for the use of these ASCII data to plot the difference between occupations with GMT can be found in [GMTplotDiff.sh](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/GMTplotDiff.sh).
 
-### 3.3 NetCDF format
-(work in progress)
+### 2.4 NetCDF format
+(to be documented)
+
+## 3 ToDo
+
++ [A25/OVIDE](https://cchdo.ucsd.edu/search?q=OVIDE)
++ [75N](https://cchdo.ucsd.edu/search?q=75N)
++ [AR07](https://cchdo.ucsd.edu/search?q=AR07) or reprocess A01?

@@ -3,6 +3,8 @@ function D_reported = reported_data(fname_list, fname_raw, depth_file)
 % Given edited station list `fname_list` (i.e. unnecessary stations commented out)
 % output *clean* reported data structure from `fname_raw` (i.e. output from `read_ctd_nc.m`)
 %
+% If `fname_list` is `all`, all stations are included. Note this `D_reported`
+% cannot be gridded because of possible duplication, branching, etc. of cruise tracks.
 %
 % Complete 1-to-1 correspondence between stations(:) and pr(:,:), te(:,:), ...
 % is necessary, i.e. data for station(i) MUST be in pr(i,:), te(i,:), ...
@@ -37,27 +39,31 @@ end
 
 eval(['load ''' fname_raw ''' stations pr te sa ox']);
 
-fid = fopen(fname_list, 'r');
-if fid < 0
-    error(['reported_data: cannot find file (', fname_list, ')']);
-end
-
 % stations to be included
-good = [];
-while 1
-    tline = fgetl(fid);
-    if ~ischar(tline)
-        break;
+if strcmp(fname_list, 'ALL') || strcmp(fname_list, 'all')
+    nstn = length(stations);
+    good = [1:nstn];
+else
+    fid = fopen(fname_list, 'r');
+    if fid < 0
+        error(['reported_data: cannot find file (', fname_list, ')']);
     end
-    % commented out
-    if tline(1) == '%' || tline(1) == '#'
-        continue;
+    good = [];
+    while 1
+        tline = fgetl(fid);
+        if ~ischar(tline)
+            break;
+        end
+        % commented out
+        if tline(1) == '%' || tline(1) == '#'
+            continue;
+        end
+        n = textscan(tline, '%d', 1);
+        good = [cell2mat(n); good];
     end
-    n = textscan(tline, '%d', 1);
-    good = [cell2mat(n); good];
+    nstn = length(good)
 end
 
-nstn = length(good)
 [lats, lons, deps] = deal(NaN(1,nstn));
 
 for i = 1:nstn

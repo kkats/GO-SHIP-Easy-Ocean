@@ -1,10 +1,9 @@
 function [idx, ll, bool] = sort_stations(longitudes, latitudes)
 %
-% ll = lon/late (NOT SORTED: use ll(idx) for sorted lon/lat).
+% ll = lon/lat (NOT SORTED: use ll(idx) for sorted lon/lat).
 % bool = true for Atlantic zonal section
 %
 %
-
 nlon = longitudes;
 bool = false;
 % If in Atlantic, use negative longitudes for the Western Hemisphere
