@@ -7,6 +7,7 @@ P = {'P01', 'P02', 'P03', 'P04', 'P06', 'P09', 'P10', 'P11', 'P13', 'P14', 'P15'
 S = {'S04I', 'S04P', 'SR01', 'SR03', 'SR04'};
 SECTIONS = [A, I, P, S];
 for n = 1:length(SECTIONS)
+    clearvars -except n SECTIONS;
     sec = SECTIONS{n};
     com = ['[s, m] = copyfile(''' sec '/batch.m'', ''batch.m'');'];
     eval(com);
@@ -14,6 +15,11 @@ for n = 1:length(SECTIONS)
     com = ['[s, m] = copyfile(''' sec '/batch.sh'', ''batch.sh'');'];
     eval(com);
     if s ~= 1, error(['copyfile ' num2str(n) ':', m]); end
+    system(['touch /local/Shared/output/reported/work/LOCK']);
     batch
-    system(['./batch.sh']);
+    system('./batch.sh');
+    % wait for subshells
+    while (exist(['/local/Shared/output/reported/work/LOCK'], 'file'))
+        system('sleep 10');
+    end
 end
