@@ -33,55 +33,7 @@ have depth and need to hand edit `a05_1998.depth` to remove these 2 lines.
 No SUM file for 2011.
 
 The columns are in the order of "pressure, oxygen, temperaure, salinity", instead of
-regular "pressure, temperature, salinity, oxygen". Apply this patch to `read_ctd_exchange.m`.
-```
---- read_ctd_exchange.m	2019-10-24 17:28:08.243345989 +0900
-+++ read_ctd_A05_2011.m	2019-11-01 14:04:13.244146496 +0900
-@@ -66,9 +66,9 @@
-     end
-     % strtok skips consecutive separator, i.e. [a,b] = strtok(',,ABC',','); gives a='ABC'
-     [punit, r1] = strtok(uline, ',');
--    [tunit, r2] = strtok(r1, ',');
--    [sunit, r3] = strtok(r2, ',');
--    ounit = strtok(r3, ',');
-+    [ounit, r2] = strtok(r1, ',');
-+    [tunit, r3] = strtok(r2, ',');
-+    sunit = strtok(r3, ',');
- 
-     expo = itemEq(header, 'EXPOCODE');
-     station = itemEq(header, 'STNNBR');
-@@ -86,8 +86,7 @@
-     end
- 
-     % read body assuming leftmost 8 columns are
--    % PRS, PRS_FLAG, TMP, TMP_FLAG, SAL, SAL_FLAG, OXY, OXY_FLAG
--    % if not, CTDtemUnit/CTDsalUnit/CTDoxyUnit might show something.
-+    % PRS, PRS_FLAG, OXY, OXY_FLAG, TMP, TMP_FLAG, SAL, SAL_FLAG
-     [p, pf, t, tf, s, sf, o, of] = deal(NaN(7500,1));
-     m = 0;
-     while 1
-@@ -100,17 +99,12 @@
-         m = m + 1;
-         p(m) = a(1);
-         pf(m) = a(2);
--        t(m)= a(3);
--        tf(m) = a(4);
--        s(m) = a(5);
--        sf(m) = a(6);
--        if length(a) > 7
--            o(m) = a(7);
--            of(m) = a(8);
--        else
--            o(m) = nan;
--            of(m) = nan;
--        end
-+        t(m)= a(5);
-+        tf(m) = a(6);
-+        s(m) = a(7);
-+        sf(m) = a(8);
-+        o(m) = a(3);
-+        of(m) = a(4);
-         clear a;
-     end
-     if m > mmax
-```
+regular "pressure, temperature, salinity, oxygen". Use `read_ctd_exchange_2011.m`.
+
+`29AH20110128_00006_00001_ct1.csv` show an unusual gap in all quantities between 568 and 570 dbar.
+Since FLAG=2, we leave these data as is.

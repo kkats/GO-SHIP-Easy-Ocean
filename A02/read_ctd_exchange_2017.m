@@ -1,9 +1,9 @@
 function read_ctd_exchange(directory, outputfname)
 %
+% For A02-2017
+%
 % Input: Directory where WOCE EXCHANGE format CTD files have been unzipped
 %        and outputfilename (optional)
-%
-% Note: Use only flag == 2 (can be modified though)
 %
 %
 if nargin < 1
@@ -183,8 +183,7 @@ if length(outputfname) > 4 && strcmp(outputfname(end-3:end), '.mat')
     outputfname = outputfname(1:end-4);
 end
 eval(['save ''' outputfname '.mat'' stations pr te sa ox']);
-%}
-end % function read_ctd_nc
+end % function
 %
 % utility funtion
 %

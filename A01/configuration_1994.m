@@ -1,6 +1,6 @@
 % A01, 1994
-vinterp_handle = @vinterp;
-hinterp_handle = @hinterp;
+vinterp_handle = @vinterp_gauss;
+hinterp_handle = @hinterp_bylon;
 MAX_SEPARATION = 2.0;
 
 salt_offset([1:3,8:14,16,18:57,59,61,62]) = 1.0e-3 * 0.7; % P123 (18HU94008_1)

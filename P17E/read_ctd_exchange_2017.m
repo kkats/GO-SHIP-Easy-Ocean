@@ -1,6 +1,6 @@
 function read_ctd_exchange(directory, outputfname)
 %
-% For P17E- 2017
+% For P17E-2017
 %
 % Input: Directory where WOCE EXCHANGE format CTD files have been unzipped
 %        and outputfilename (optional)

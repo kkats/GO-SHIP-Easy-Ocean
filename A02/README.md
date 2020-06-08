@@ -20,17 +20,4 @@ The CTD oxygen data from the 1997 occupation is extremely sparse west of 28W. In
 data exist but need care when interpreting.
 
 The pressure from the 2017 data have all FLAG=1. We consider them as usable by
-applying the following patch;
-```
---- read_ctd_exchange.m 2019-10-24 17:28:08.243345989 +0900
-+++ read_ctd_exchange_A02_2017.m        2019-10-24 17:48:04.913486650 +0900
-@@ -162,7 +162,7 @@
-
- % QC flag
- % retain only flag==2
--pr(pr_flg ~= 2) = NaN;
-+pr(pr_flg ~= 2 & pr_flg ~= 1) = NaN;
- te(te_flg ~= 2) = NaN;
- sa(sa_flg ~= 2) = NaN;
- ox(ox_flg ~= 2) = NaN;
-```
+using `read_ctd_exchange_2017.m`.

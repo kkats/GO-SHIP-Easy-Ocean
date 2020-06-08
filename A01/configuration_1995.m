@@ -1,6 +1,6 @@
 % A01, 1995
-vinterp_handle = @vinterp;
-hinterp_handle = @hinterp;
+vinterp_handle = @vinterp_gauss;
+hinterp_handle = @hinterp_bylon;
 MAX_SEPARATION = 2.0;
 
 salt_offset([1:42,44:48,50,52,56,59,61,63,65,67]) = 1.0e-3 * 0.0; % unknown (06AZ152)
