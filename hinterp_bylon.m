@@ -13,6 +13,10 @@ function [zinterp, maxpinterp] = hinterp_bylon(z, lon, lat, maxp, pr_grid, lon_g
 
 % no size check
 
+% avoid jump from 360 to 0 in the Atlantic
+[idx, l] = sort_stations(lon, lat);
+lon = l(idx);
+
 dx = gsw_distance(lon, lat);
 x = [0, cumsum(dx)];
 

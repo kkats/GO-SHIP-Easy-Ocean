@@ -1,7 +1,6 @@
 # A10
 
 ## 1. Source
-[Jim's table](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/Data%20Project%20Section%20List.xlsx) has 5 occupations, 4 of which are available on [CCHDO](https://cchdo.ucsd.edu/search?q=a10).
 In accordance with the [GO-SHIP recommendation](https://docs.google.com/document/d/1JEdqSOQu4-glFTCmBOpAQUXB-oqSE5I9cjv3gDz2V4o), 2009 occupation is counted as A9.5.
 
 ### 1992

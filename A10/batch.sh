@@ -1,6 +1,9 @@
 #!/bin/sh
-(cd ../output/gridded/A10; gzip *xyz)
-for year in 1992 2003 2011;
+DIR=A10
+name=a10
+PREFIX=/local/Shared
+(cd $PREFIX/output/gridded/$DIR; gzip *xyz)
+for year in 1992 2003 2011
 do
-    (cd ../output/reported/work; zip ../A10/a10_${year}_ct1.zip a10_${year}_????_ct1.csv; rm -fr a10_${year}_????_ct1.csv)
+    (cd $PREFIX/output/reported/work; zip ../$DIR/${name}_${year}_ct1.zip ${name}_${year}_????_ct1.csv; rm -fr ${name}_${year}_????_ct1.csv)
 done
