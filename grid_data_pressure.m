@@ -21,8 +21,11 @@ for i = 1:nstn
     tims(i) = stations{i}.Time;
 end
 
-[idx, ll] = sort_stations(lons, lats);
+[idx, ll, isAtlantic] = sort_stations(lons, lats);
 ls = ll(idx); % sort
+if isAtlantic
+    lons = ll;
+end
 
 ctdprs = D_reported.CTDprs;
 ctdtem = D_reported.CTDtem;
@@ -64,7 +67,7 @@ for i = 1:length(chunk)
     idxhere = chunk{i};
     lshere = ls(idxhere);
     ig = find(min(lshere) < ll_grid & ll_grid < max(lshere));
-    if length(idxhere) < 2
+    if length(idxhere) < 2 || isempty(ig)
         continue;
     end
     ctdtem_hv(:,ig) = hinterp_handle(ctdtem_v(:,idxhere), lons(idxhere), lats(idxhere), ...

@@ -1,6 +1,6 @@
 % A13, 1983
-vinterp_handle = @vinterp;
-hinterp_handle = @hinterp;
+vinterp_handle = @vinterp_gauss;
+hinterp_handle = @hinterp_bylat;
 MAX_SEPARATION = 2.0;
 
 % 316N19831007/316N19840111

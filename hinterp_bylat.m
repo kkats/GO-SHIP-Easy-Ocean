@@ -16,7 +16,13 @@ function [zinterp, maxpinterp] = hinterp_bylat(z, lon, lat, maxp, pr_grid, lat_g
 dx = gsw_distance(lon, lat);
 x = [0, cumsum(dx)];
 
-lon_grid = interp1(lat, lon, lat_grid, 'linear');
+% for Atlantic
+nlon = lon;
+if any(lon <= 40.0) && any(lon > 280.0)
+    west = find(lon > 180.0);
+    nlon(west) = lon(west) - 360.0;
+end
+lon_grid = interp1(lat, nlon, lat_grid, 'linear');
 dx = gsw_distance(lon_grid, lat_grid);
 x1 = gsw_distance([lon(1), lon_grid(1)], [lat(1), lat_grid(1)]);
 x_grid = [x1, cumsum(dx)];

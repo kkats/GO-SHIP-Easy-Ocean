@@ -52,7 +52,7 @@ line. Deleted the last line.
 
 ### 2005
 
-This is the same data as [SR04/](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/SR04/README.md)2005. Use the same patch to `read_ctd_exchange.m`.
+This is the same data as [SR04/](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/SR04/README.md)2005. Use `read_ctd_exchange_2005.m`.
 
 ### 2008b
 

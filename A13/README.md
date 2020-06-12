@@ -15,14 +15,7 @@ South of 50S overlaps with section A12.
 ### 1983
 
 The CTD file is a text file with own format. Use `read_ctd_ajax.m` to produce
-the raw matlab files, which requires EXPO input as the 2nd argument.
-```
->> read_ctd_ajax('../CTD/A13/1983/ajax_316n19831007_ctd.txt', '316N19831007', 'A13/out1');
->> read_ctd_ajax('../CTD/A13/1983/ajax_316n19831007_ctd.txt', '316N19831007', 'A13/out2');
->> addpath 'A13/';
->> mergeA13;
->> rmpath 'A13/';
-```
+the raw matlab files, which requires EXPO input as the 2nd argument. See `batch.m`.
 
 Cast number is zero for all stations, which is different from the cast number in
 [JOA file](http://joa.ucsd.edu/data_files/best/Atlantic_sections/A13.5_AJAX_1983/A13.5_AJAX_1983_bottle.poa). Apply the following patch to `findJstations.m` to ignore the cast number;
