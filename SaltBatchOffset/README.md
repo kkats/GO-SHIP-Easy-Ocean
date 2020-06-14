@@ -222,3 +222,12 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  S04P | 1992 | S04 | 90KDIOFFE6_1 | P108 |
 |  S04P | 2011 |  | 320620110219 | P152 |
 |  S04P | 2018 |  | 320620180309 | P161 |
+|  75N | 1994 | ARK-X/1 | 06AQ19940706 | unknown |
+|  75N | 1995 | ARK-XI/2 | 06AQ19950922 | unknown |
+|  75N | 1997 | ARK-XIII/3 | 06AQ19970813 | unknown |
+|  75N | 1998 | ARK-XIIV/2 | 06AQ19980827 | P131/P133 (no stationwise usage documented) |
+|  75N | 1999 | ARK-XV/1 | 06AQ19990623 | unknown |
+|  75N | 2000 | ARK-XVI/1 | 06AQ20000630 | P136 |
+|  75N | 2001 | ARK-XVII/1 | 06AQ20010619 | unknown |
+|  75N | 2006 |  | 58GS20060721 | unknown |
+|  75N | 2016 |  | 58GS20160802 | unknown |
