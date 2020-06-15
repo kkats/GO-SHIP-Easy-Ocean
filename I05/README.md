@@ -26,7 +26,7 @@ The [documentation](https://cchdo.ucsd.edu/data/2179/i05pdo.txt) says 3491 m.
 
 ### 2002
 The CTD data `i05_00024_00001_ctd.nc` and 
-`i05_00024_0001_ct1.csv` have two apparently same profiles packed into one.
+`i05_00024_0001_ct1.csv` have two apparently the same profiles packed into one.
 Delete the latter half.
 
 All CTD stations have `BOTTOM_DEPTH_METERS = 4`.

@@ -9,5 +9,3 @@
 + [49NZ20031209](https://cchdo.ucsd.edu/cruise/49NZ20031209)
 
 ## 2. Glitches
-
-Nothing.
