@@ -8,5 +8,3 @@
 + [49NZ20151223](https://cchdo.ucsd.edu/cruise/49NZ20151223)
 
 ## 2. Glitches
-
-Nothing.

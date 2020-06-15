@@ -11,5 +11,3 @@
 + [09FA20000926](https://cchdo.ucsd.edu/cruise/09FA20000926)
 
 ## 2. Glitches
-
-None.
