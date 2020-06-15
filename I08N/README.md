@@ -8,6 +8,3 @@
 + [49NZ20191205](https://cchdo.ucsd.edu/cruise/49NZ20191205)
 
 ## 2. Glitches
-
-### 1995
-

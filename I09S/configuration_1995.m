@@ -1,6 +1,6 @@
 % I09S, 1995
-vinterp_handle = @vinterp;
-hinterp_handle = @hinterp;
+vinterp_handle = @vinterp_gauss;
+hinterp_handle = @hinterp_bylat;
 MAX_SEPARATION = 2.0;
 
 salt_offset([1:200]) = 1.0e-3 * 1.4; %  P128 (I09S, 316N145_5)
