@@ -43,7 +43,7 @@ int main(void)
 
 Depth is missing in the CTD file. Use depth file produced by
 ```
-% cat p03bsu.txt p03asu.txt | awk '$5=="ROS" && $8=="BE" {print $3, $4, $17}' > depth.dat
+% cat p03bsu.txt p03asu.txt | awk '$5=="ROS" && $8=="BE" {print $1, $3, $4, $17}' > depth.dat
 ```
 where `p03?su.txt` are SUM files.
 

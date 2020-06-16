@@ -1,6 +1,6 @@
 % P01, 1999
-vinterp_handle = @vinterp;
-hinterp_handle = @hinterp;
+vinterp_handle = @vinterp_gauss;
+hinterp_handle = @hinterp_bylon;
 MAX_SEPARATION = 2.0;
 
 salt_offset([1:78]) = 1.0e-3 * 0.3; % P133 (49KA199905_1), P133/P134 (18DD199905_1)

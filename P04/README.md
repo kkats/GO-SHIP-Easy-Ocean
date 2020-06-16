@@ -6,5 +6,3 @@
 + [32MW893_3](https://cchdo.ucsd.edu/cruise/32MW893_3)
 
 ## 2. Glitches
-
-None.

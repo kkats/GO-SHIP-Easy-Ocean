@@ -19,4 +19,5 @@ Note: `318M200406_tm_ct1.zip` and `318M200406_tm_nc_ctd.zip` are for "trace meta
 
 ## 2. Glitches
 
-None.
+### 1993
+Large station separation east of 190E, leading to gaps in the gridded output.
