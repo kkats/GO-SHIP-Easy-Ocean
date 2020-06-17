@@ -54,7 +54,6 @@ The CTD data at Station 24 in the exchange format
 `sr01_00024_00001_ct1.csv` has apparently wrong pressures between "1113 and 1117 dbar"
 and "1133 and 1137 dbar". Manually corrected.
 
-
 ### 2013
 According to the cruise document, Standard Seawater batches P153, P154, and P155 were
 used but it is not clear on which station. Salinity bias is treated as unknown for this occupation.

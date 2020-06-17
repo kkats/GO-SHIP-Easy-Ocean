@@ -54,25 +54,6 @@ to our 1994a. Both yield the same flagJ.
 
 `SR03_2001_decimated_CTD.jos` gives more near-by stations that `SR03_1995_clean_bottle.jos`.
 
-Standard seawater used on stations 10--13 was documted as "P133 and P137". We treat these stations with "unknown SSW". The same for stations 31--36.
+Standard seawater used on stations 10--13 was documted as "P133 and P137". We treat these stations as "unknown SSW". The same for stations 31--36.
 
-Salinity and oxygen have wrong units ('C' and 'PSS-78', respectively). Use this patch;
-```
---- reported_data.m     2020-03-26 14:58:36.527367235 +0900
-+++ reported_data_2001SR03.m    2020-03-27 09:31:52.232501873 +0900
-@@ -60,6 +60,14 @@
- nstn = length(good)
- [lats, lons, deps] = deal(NaN(1,nstn));
-
-+% 09AR20011029
-+for i = 1:length(stations)
-+    if strcmp(stations(i).CTDsalUnit, 'C') && strcmp(stations(i).CTDoxyUnit, 'PSS-78')
-+        stations(i).CTDsalUnit = 'PSS-78';
-+        stations(i).CTDoxyUnit = 'mol/kg';
-+    end
-+end
-+
- for i = 1:nstn
-     lats(i) = stations(good(i)).Lat;
-     lons(i) = stations(good(i)).Lon;
-```
+Salinity and oxygen have wrong units ('C' and 'PSS-78', respectively). Use this `reported_data_2001.m`.

@@ -1,6 +1,6 @@
 % SR03 2011
-vinterp_handle = @vinterp;
-hinterp_handle = @hinterp;
+vinterp_handle = @vinterp_gauss;
+hinterp_handle = @hinterp_bylat;
 MAX_SEPARATION = 2.0;
 
 salt_offset([1:9])   = 1.0e-3 * (-0.4);  % P151 (09AR20110104)
