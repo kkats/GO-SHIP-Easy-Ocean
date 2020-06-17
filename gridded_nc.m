@@ -17,27 +17,34 @@ function gridded_nc(line_id,inpath,repopath,outfname)
 % Using a template text file for easy editing of metadata attributes.
 % Bec Cowley, April 2020.
 
+% the file is created in the following order
+%
+% 1. global attributes
+% 2. dimensions / coordinate variables
+% 3. variable definitions
+% 4. data
+
+% directory in upper case, filname in lower case (as of ver.1)
+SECTION = upper(line_id);
+fname = lower(line_id);
+
 narginchk(3,4);
 if nargin < 4
     outfname = inpath;
 end
-outfname = [outfname '/gridded/' line_id '/' line_id '.nc'];
+outfname = [outfname '/gridded/' SECTION '/' fname '.nc'];
 
 %load the input file:
 try
-    load([inpath '/gridded/' line_id '/' line_id '.mat'])
+    load([inpath '/gridded/' SECTION '/' fname '.mat'])
 catch
-    error(['File ' inpath '/gridded/' line_id '/' line_id '.mat does not exist'])
+    error(['File ' inpath '/gridded/' SECTION '/' fname '.mat does not exist'])
 end
 
 %Netcdf file creation
-    % the file is created in the following order
-    %
-    % 1. global attributes
-    % 2. dimensions / coordinate variables
-    % 3. variable definitions
-    % 4. data
-fidnc = netcdf.create(outfname, 'NETCDF4');
+cmode = netcdf.getConstant('NETCDF4');
+cmode = bitor(cmode,netcdf.getConstant('CLOBBER'));
+fidnc = netcdf.create(outfname, cmode);
 if fidnc == -1, error(['Could not create ' filename]); end
 
 % we don't want the API to automatically pre-fill with FillValue, we're
@@ -53,7 +60,7 @@ flds = fieldnames(globalatts);
 
 %add the line name to the end of the text
 %handle the 'goship_woce_line_id' here also
-globalatts.title = [globalatts.title line_id];
+globalatts.title = [globalatts.title ' ' line_id];
 globalatts.goship_woce_line_id = line_id;
 %'date_issued'
 globalatts.date_issued = datestr(now,'yyyymmdd');
@@ -61,7 +68,7 @@ globalatts.date_issued = datestr(now,'yyyymmdd');
 %put the expocode file names here with full web links from
 %README.MD file for the line
 %double quotes(?), separated by commas
-pth = [repopath '/WOCE-GO-SHIP-clean-sections/' line_id '/README.md'];
+pth = [repopath '/GO-SHIP-Easy-Ocean/' SECTION '/README.md'];
 fid = fopen(pth,'r');
 if fid < 1
     error(['Path to repo for ' line_id ', ' pth ' is incorrect'])
@@ -103,8 +110,6 @@ for b = 1:length(D_pr)
         ti(b,c) = D_pr(b).Station{c}.Time;
     end
 end
-%create the time grid
-ti_grid = str2num(datestr(min(ti,[],2),'yyyy'));
 
 %include the years used in the global attributes:
 tt = ti(~isnan(ti));
@@ -114,7 +119,6 @@ globalatts.all_years_used = ['Data from years ' num2str(unique(str2num(datestr(t
 [lm,ln] = range(ll_grid);
 [lonm,lonn] = range(lon);
 dmax = [abs(lm - latm),abs(lm - lonm)];
-dmin = [abs(ln - latn),abs(ln - lonn)];
 
 ilatlon = find(min(dmax));
 if ilatlon == 1 %ll_grid is along latitude
@@ -147,54 +151,71 @@ for a = 1:length(flds)
 end
 %% get the dimension attributes templates, using pressure, longitude,
 %dimensions
-dimnames = {'time','pressure','longitude','latitude'};
-dimdata = {'ti_grid','pr_grid','lon_grid','lat_grid'};
+%set up the section data:
+sect = 1:length(D_pr);
 
-ti_gridatts = parseNCTemplate('time_attributes_gridded.txt');
+dimnames = {'gridded_section','longitude','latitude','pressure'};
+dimdata = {'sect','lon_grid','lat_grid','pr_grid'};
+
+sectatts = parseNCTemplate('section_attributes_gridded.txt');
 pr_gridatts = parseNCTemplate('pressure_attributes_gridded.txt');
 lon_gridatts = parseNCTemplate('longitude_attributes.txt');
 lat_gridatts = parseNCTemplate('latitude_attributes.txt');
 
 for m=1:length(dimnames)
     eval(['data = ' dimdata{m} ';']);
+    % create dimension
+    did(m) = netcdf.defDim(fidnc, dimnames{m}, length(data));
+    % create coordinate variable and attributes
     eval(['atts = ' dimdata{m} 'atts;']);
-      % create dimension
-      did(m) = netcdf.defDim(fidnc, dimnames{m}, length(data));
-
-      % create coordinate variable and attributes
-      vid(m) = netcdf.defVar(fidnc, dimnames{m}, 'NC_FLOAT', did(m));
-      fldn = fieldnames(atts);
-      for b = 1:length(fldn)
-          netcdf.putAtt(fidnc,vid(m),fldn{b},atts.(fldn{b}))
-      end
+    vid(m) = netcdf.defVar(fidnc, dimnames{m}, 'NC_DOUBLE', did(m));
+    fldn = fieldnames(atts);
+    for b = 1:length(fldn)
+        netcdf.putAtt(fidnc,vid(m),fldn{b},atts.(fldn{b}))
+    end
 end
 %% now for each variables attributes, DOXY, TEMP, PSAL, CONSERVATIVE TEMP, ABSOLUTE SALINITY 
 
 %populate for each one:
-varname = {'var0','var1','var2','var3','var4'};
-dataname = {'CTDoxy','CTDtem','CTDsal','CTDCT','CTDSA'};
-stdn = {'moles_of_oxygen_per_unit_mass_in_sea_water','sea_water_temperature',...
-    'sea_water_practical_salinity','seawater_conservative_temperature',...
+varname = {'time','temperature','practical_salinity','oxygen','conservative_temperature','absolute_salinity'};
+dataname = {'NTime','CTDtem','CTDsal','CTDoxy','CTDCT','CTDSA'};
+stdn = {'time','sea_water_temperature','sea_water_practical_salinity',...
+    'moles_of_oxygen_per_unit_mass_in_sea_water','seawater_conservative_temperature',...
     'sea_water_absolute_salinity'};
-whpname = {'CTDOXY','CTDTMP','CTDSAL','CTDCT','CTDSA'}; %are these last two correct?
-units = {'umol kg-1','degC','1','degC','g kg-1'}; %note umol/kg, but std units is mol/kg for oxygen, query K (std) or degC for temp
-refscale = {'','IPTS-68','PSS-78','',''};
+whpname = {'TIME','CTDTMP','CTDSAL','CTDOXY','CTDCT','CTDSA'}; 
+units = {'days since 1950-01-01 00:00:00 UTC','degC','1','degC','umol kg-1','g kg-1'}; 
+refscale = {'','IPTS-68','PSS-78','','',''};
+vmin = [min(min(ti)),-2.5,2.0,-5.0,-2.5,0];
+vmax = [max(max(ti)),40.0,41.0,600,40.0,42.0];
 
 for a = 1:length(stdn)
-    varatts = parseNCTemplate('variable_attributes_gridded.txt');
+%     varatts = parseNCTemplate('variable_attributes_gridded.txt');
     varatts.standard_name = stdn{a};
     varatts.units = units{a};
+    varatts.valid_min = vmin(a);
+    varatts.valid_max = vmax(a);    
     varatts.reference_scale = refscale{a};
     varatts.whp_name = whpname{a};
+    if ilatlon == 1 & a == 1 %our time variable
+        didv = did([1,3]);
+    elseif ilatlon == 0 & a == 1
+        didv = did([1,1]);
+    else %other variables
+        didv = did;
+    end
     
     %create the variable:
-    vidv(a) = netcdf.defVar(fidnc,varname{a},'NC_FLOAT',did);
+    if a == 1
+        vidv(a) = netcdf.defVar(fidnc,varname{a},'NC_DOUBLE',didv);
+    else
+        vidv(a) = netcdf.defVar(fidnc,varname{a},'NC_DOUBLE',didv);
+    end
     fldn = fieldnames(varatts);
     %now write out the variable atts:
     for b = 1:length(fldn)
         name = fldn{b};
         if strcmpi(name, 'FillValue')
-            netcdf.defVarFill(fidnc, vidv(a), false, varatts.(fldn{b})); % false means noFillMode == false
+            netcdf.defVarFill(fidnc, vidv(a), false, NaN); % false means noFillMode == false
         else
             netcdf.putAtt(fidnc, vidv(a), name, varatts.(fldn{b}));
         end
@@ -212,18 +233,26 @@ end
 
 %variable data
 for a = 1:length(varname)
-    %construct matrix for each time stamp:
-    data = NaN*ones(length(ti_grid),length(pr_grid),length(lon_grid),length(lat_grid));
-    for b = 1:length(ti_grid)
+    %construct matrix for each section:
+    if a == 1
+        data = NaN*ones(length(sect),length(ll_grid));
+    else
+        data = NaN*ones(length(sect),length(lon_grid),length(lat_grid),length(pr_grid));
+    end
+    for b = 1:length(sect)
         eval(['dat = D_pr(b).' dataname{a} ';']);
-        if ilatlon == 1%longitude is single value
-            data(b,:,1,:) = dat;
-        else %latitude is single value
-            data(b,1,:,:) = dat;
+        if a == 1
+            dat = round(dat - datenum('1950-01-01 00:00:00'));
+            data(b,:) = dat;
+        else
+            if ilatlon == 1%longitude is single value
+                data(b,1,:,:) = dat';
+            else %latitude is single value
+                data(b,:,1,:) = dat';
+            end
         end
     end
-    %put -999 for nans
-    data(isnan(data)) = -999;
+
     netcdf.putVar(fidnc, vidv(a), data);
 end
 netcdf.close(fidnc)

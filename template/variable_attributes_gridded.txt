@@ -1,8 +1,7 @@
-N, FillValue  = -999
+N, FillValue  = 
 S, standard_name = 
 S, units = 
 S, reference_scale = 
-%valid_min 
-%valid_max 
+N, valid_min =
+N, valid_max =
 S, whp_name = 
-S, coordinates = time pressure longitude latitude
