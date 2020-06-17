@@ -40,7 +40,7 @@ a prefix 'C'. Use this patch
 The original station numbers for 1991 occupations overlap between `49HH915_1/2`
 and `49HH932_1`. Hand editing of `A` flag was necessary on `p13_1991.list`.
 
-Missign depths. Use topo file;
+Missing depths. Use topo file;
 ```
 % awk '$2=="P13C" && $8=="BO" {print $1, $3, $4, $16}' p13casu.txt > p13_1991.depth
 % awk '$2=="P13C" && $8=="BO" {print $1, $3, $4, $16}' p13cbsu.txt >> p13_1991.depth

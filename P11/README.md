@@ -5,5 +5,3 @@
 + [09AR9391_2](https://cchdo.ucsd.edu/cruise/09AR9391_2)
 
 ## 2. Glitches
-
-None (so far...).
