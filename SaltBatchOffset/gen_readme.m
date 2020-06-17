@@ -13,8 +13,7 @@ fprintf(fid, '~~~\n');
 fprintf(fid, '%% To generate README.md\n');
 fprintf(fid, '>> gen_readme\n');
 fprintf(fid, '~~~\n');
-fprintf(fid, 'The tables are update of Table 6 in [Kawano *et al.* (2006)](https://doi.org/10.1007/s10872-006-0097-8) and Table A1 in [Purkey and Johnson (2013)](https://doi.org/10.1175/JCLI-D-12-00834.1).\n');
-fprintf(fid, 'Latest table is available with DOI:[10.17596/0001983](https://dx.doi.org/10.17596/0001983)\n');
+fprintf(fid, 'The batch-to-batch table is available with DOI:[10.17596/0001983](https://dx.doi.org/10.17596/0001983)\n');
 %
 fprintf(fid, '## Cruise and batch\n');
 fprintf(fid, 'Undocumented batch numbers are from Purkey through personal communication.\n');

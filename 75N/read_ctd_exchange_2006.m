@@ -129,7 +129,7 @@ for i = 1:N
     stations(i).Time   = time;
     stations(i).Depth  = dep;
     stations(i).CTDtemUnit = tunit;
-    stations(i).CTDsalUnit = sunit;
+    stations(i).CTDsalUnit = 'PSS-78'; %sunit='PSU', assuming it is PSS-78
     stations(i).CTDoxyUnit = ounit;
 end
 

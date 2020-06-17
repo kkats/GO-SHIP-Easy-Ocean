@@ -51,7 +51,6 @@ eval(com);
 % reported - WOCE exchange
 for n = 1:length(years)
     com = ['reported_WHPX(D_reported(' num2str(n) '), ''' PREFIX 'output/reported/work/' fname '_' years{n} ''');' ];
-    disp(com);
     eval(com);
 end
 

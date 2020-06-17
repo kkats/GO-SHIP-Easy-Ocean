@@ -17,7 +17,6 @@
 
 ### 2000
 + [06AQ20000630](https://cchdo.ucsd.edu/cruise/06AQ20000630)
-"P136"
 
 ### 2001
 + [06AQ20010619](https://cchdo.ucsd.edu/cruise/06AQ20010619)

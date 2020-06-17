@@ -128,5 +128,4 @@ An example for the use of these ASCII data to plot the difference between occupa
 ## ToDo
 
 + [A25/OVIDE](https://cchdo.ucsd.edu/search?q=OVIDE)
-+ [75N](https://cchdo.ucsd.edu/search?q=75N)
 + [AR07](https://cchdo.ucsd.edu/search?q=AR07) or reprocess A01?

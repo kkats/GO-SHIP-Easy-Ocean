@@ -1,12 +1,13 @@
 % variables
 PREFIX='/local/Shared/';
 MDIR = [PREFIX 'CTD/MATLAB/'];
-DIR = 'P21/';
-fname = 'p21';
-years = {'1994', '2009'};
-ll_grid = [153.6:0.1:284.9];
+DIR = '75N/';
+BDIR = '../CTD/75N/';
+fname = '75n';
+years = {'1994', '1995', '1997', '1998', '1999', '2000', '2001', '2006', '2016'};
+ll_grid = [-16.0:0.1:0.1];
 pr_grid = [0:10:6500];
-depth_files = {'', ''};
+depth_files = {'', '', '', '', '', '', '', '', ''};
 
 tic;
 
@@ -14,8 +15,12 @@ tic;
 for n = 1:length(years)
     mfile = [MDIR fname '_' years{n} '.mat'];
     if ~exist(mfile)
-        if n == 2
-            com = ['read_ctd_nc(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
+        if ismember(n, [1, 2, 4, 5, 6, 7])
+            com = ['addpath 75N; read_ctd_exchange_75N(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath 75N'];
+        elseif n == 3
+            com = ['addpath 75N; read_ctd_exchange_1997(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath 75N'];
+        elseif n == 8
+            com = ['addpath 75N; read_ctd_exchange_2006(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath 75N'];
         else
             com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
         end

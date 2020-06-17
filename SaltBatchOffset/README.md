@@ -5,8 +5,7 @@
 % To generate README.md
 >> gen_readme
 ~~~
-The tables are update of Table 6 in [Kawano *et al.* (2006)](https://doi.org/10.1007/s10872-006-0097-8) and Table A1 in [Purkey and Johnson (2013)](https://doi.org/10.1175/JCLI-D-12-00834.1).
-Latest table is available with DOI:[10.17596/0001983](https://dx.doi.org/10.17596/0001983)
+The batch-to-batch table is available with DOI:[10.17596/0001983](https://dx.doi.org/10.17596/0001983)
 ## Cruise and batch
 Undocumented batch numbers are from Purkey through personal communication.
 |  section  | year | also known as  | EXPO code | batch number (if found in cruise document) |
