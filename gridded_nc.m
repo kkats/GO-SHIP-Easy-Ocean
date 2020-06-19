@@ -184,7 +184,7 @@ stdn = {'time','sea_water_temperature','sea_water_practical_salinity',...
     'sea_water_absolute_salinity'};
 whpname = {'TIME','CTDTMP','CTDSAL','CTDOXY','CTDCT','CTDSA'}; 
 units = {'days since 1950-01-01 00:00:00 UTC','degC','1','degC','umol kg-1','g kg-1'}; 
-refscale = {'','IPTS-68','PSS-78','','',''};
+refscale = {'','ITS-90','PSS-78','','',''};
 vmin = [min(min(ti)),-2.5,2.0,-5.0,-2.5,0];
 vmax = [max(max(ti)),40.0,41.0,600,40.0,42.0];
 

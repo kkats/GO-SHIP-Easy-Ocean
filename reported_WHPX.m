@@ -25,8 +25,8 @@ for n = 1:nstn
     fprintf(fid, 'LATITUDE = %.4f\n', rd.Station{n}.Lat);
     fprintf(fid, 'LONGITUDE = %.4f\n', rd.Station{n}.Lon);
     fprintf(fid, 'CTDPRS, CTDTMP, CTDSAL, CTDOXY, CTDCT, CTDSA\n');
-    fprintf(fid, 'DBAR, IPTS-68, PSS-78, UMOL/KG, ITS-90, G/KG\n');
-    % body
+    fprintf(fid, 'DBAR, ITS-90, PSS-78, UMOL/KG, ITS-90, G/KG\n');
+    %  body
     ig = find(isfinite(rd.CTDprs(:,n)) | isfinite(rd.CTDtem(:,n)) ...
             | isfinite(rd.CTDsal(:,n)) | isfinite(rd.CTDoxy(:,n)) ...
             | isfinite(rd.CTDCT(:,n)) | isfinite(rd.CTDSA(:,n)));

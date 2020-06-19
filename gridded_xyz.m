@@ -8,7 +8,7 @@ if fid < 0
 end
 
 fprintf(fid, '# Lat/Lon   CTDPRS  CTDTMP     CTDSAL     CTDOXY      CTDCT      CTDSA\n');
-fprintf(fid, '# DEG       DBAR    IPTS-68    PSS-78     UMOL/KG     ITS-90     G/KG\n');
+fprintf(fid, '# DEG       DBAR    ITS-90     PSS-78     UMOL/KG     ITS-90     G/KG\n');
 for n = 1:length(ll_grid)
     % number of good data
     ig = find(isfinite(gd.CTDtem(:,n)) ...

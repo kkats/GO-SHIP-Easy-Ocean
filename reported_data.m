@@ -97,15 +97,15 @@ for i = 1:nstn
        || ~isempty(strfind(s.CTDtemUnit, 'ITS-90')) ...
        || ~isempty(strfind(s.CTDtemUnit, 'its90')) ...
        || ~isempty(strfind(s.CTDtemUnit, 'ITS90'))
-        ctdtem(:,i) = t90tot68(te(:,k));
-    else % assume everything else is in IPTS-68
         ctdtem(:,i) = te(:,k);
+    else % assume everything else is in IPTS-68
+        ctdtem(:,i) = t68tot90(te(:,k));
     end
     if ~isempty(strfind(s.CTDsalUnit, 'PSS-78')) ...
-|| ~isempty(strfind(s.CTDsalUnit, 'PSS-68')) ...
+     || ~isempty(strfind(s.CTDsalUnit, 'PSS-68')) ...
      || ~isempty(strfind(s.CTDsalUnit, 'PSS78')) ...
      || ~isempty(strfind(s.CTDsalUnit, 'pss-78'))
-        ctdsal(:,i) = sa(:,k) + ones(m,1) * salt_offset(k); % offset is correction, i.e. ADD
+        ctdsal(:,i) = sa(:,k) + ones(m,1) * salt_offset(k); % offset is correction, i.e. add (not subtract)
     else
         error('reported_data.m: Unknown salinity unit');
     end
@@ -126,7 +126,7 @@ for i = 1:nstn
         error('reported_data.m: gsw_SA_from_SP, in_ocean == 0');
     end
     ctdSA(:,i) = SA;
-    CT = gsw_CT_from_t(SA, t68tot90(ctdtem(:,i)), ctdprs(:,i));
+    CT = gsw_CT_from_t(SA, ctdtem(:,i), ctdprs(:,i)); % T in ITS-90
     ctdCT(:,i) = CT;
 end
 %%%

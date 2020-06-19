@@ -13,7 +13,7 @@ function umolkg = convertDO(oxy, pre, tem, sal, lon, lat, unit)
     if any(in_ocean == 0)
         error('convertDO: in_ocean');
     end
-    CT = gsw_CT_from_t(SA, t68tot90(tem), pre);
+    CT = gsw_CT_from_t(SA, tem, pre); % tem in ITS-90
     dens = (1000 + gsw_sigma0(SA, CT)) / 1000;
     %
     if ~isempty(strfind(unit, 'ML/L'))

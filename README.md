@@ -7,17 +7,18 @@ K. Katsumata, B. Sloyan, R. Cowley, S. Diggs, T. Moore, S. Purkey, J. Swift, L. 
 
 # Output Formats
 
-Uninterpolated data (station data) are called _reported_ data. Horizontally interpolated data are called _gridded_ data. These are stored under separate directories. Remarks common to all formats are;
-+ Temperature is in IPTS-68 (*not* ITS-90). This is useful for [gamma surface calculation](http://www.teos-10.org/preteos10_software/neutral_density.html). The unit recorded in Matlab `Station` header (e.g. `D_pr(1).Station`) is the unit of the original CTD data, not the unit in our product.
+Uninterpolated data (station data) are called _reported_ data. Horizontally interpolated and vertically smoothed data are called _gridded_ data. These are stored under separate directories. Remarks common to all formats are;
++ Temperature is in ITS-90. Use `t90tot68.m` for conversion to IPTS-68 (e.g. input to [gamma surface calculation](http://www.teos-10.org/preteos10_software/neutral_density.html). The unit recorded in Matlab `Station` header (e.g. `D_pr(1).Station`) is the unit of the original CTD data, not the unit in our product.
 + Unless otherwise noted (e.g. [I01](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/tree/master/I01/)), only _good_ (as defined by `flag=2`) data are used. This behaviour
 can be changed by modifying the QC section in `read_ctd_exchange.m`.
 + Missing value is `-999` for ASCII and binary outputs and `NaN` otherwise.
 + Vertical coordinate is in pressure. Assuming `Depth` and/or `Corrected depth` in the Exchange CTD or SUM is in meters, we convert them to pressure (in `reported_data.m`). If depth is missing, we assume the bottom of measurement is 10 dbar above seabed. If `Uncorrected depth` is available but `Corrected depth` is missing, we use the former.
 + Used v3.06 of [TEOS-10](http://www.teos-10.org/software.htm) to calculate Conservative Temperature and Absolute Salinity.
-+ Dissolved oxygen concentration is converted to umol/kg (micro mol per kilogram).
++ Dissolved oxygen concentration is converted to μmol/kg (micro mol per kilogram), often written `umol/kg`.
++ No horizontal interpolation is applied for stations more than 2 degrees apart. This behaviour can be modified by `MAX_SEPARATION` paramter in `configuration_yyyy.m` files.
 
 ## 0. Quick start
-To visualize`P16` section occupied in 2015, use;
+To visualize a section, e.g. `P16` section occupied in 2015, use;
 
 | application | _reported_ | _gridded_ |
 |-|-|-|
@@ -39,8 +40,13 @@ This is the clean data with no horizontal interpolation and no vertical interpol
 We support Matlab format
 and ASCII CSV in [WHP Exchange format](https://cchdo.ucsd.edu/formats).
 
-### 1.1 Matlab format
+### 1.1 All stations
+It is possible to include all stations in the original CTD file in the `reported` data set, e.g., for float calibration purposes.
+When calling `reported_data.m`, use a special file name `'all'` in the first argument
+instead of the list file (e.g. `P16/p16_1992.list`). Note that this output cannot be
+gridded because of possible duplication and branching of the station tracks.
 
+### 1.2 Matlab format
 D_r is an array holding one Matlab `structure` for one occupation of the hydrographic section.
 In typical cases, `D_r(1)` is by WOCE cruises in the 1980s and 1990s and `D_r(2)` is by
 CLIVAR/GO-SHIP cruises.
@@ -76,7 +82,7 @@ stations(23) = struct('EXPO', '320620140320', ...
 + In `Lat` and `Lon`, use decimal degree, not degree-minute-second.
 + Time follows MATLAB convention with fixed `seconds=0`.
 
-### 1.2 ASCII format
+### 1.3 ASCII format
 One zipped archive corresponds to one occupation of the hydrographic section. In the
 archive, there are CSV files, one file for one CTD station. Each file has a header
 showing `DATE`, `LONGITUDE`, etc. Note [Creation Stamp](https://exchange-format.readthedocs.io/en/latest/common.html#file-requirements) is dummy.
@@ -86,12 +92,6 @@ editors. It is in CSV so that spreadsheet program can handle them. In particular
 these can be read by [Ocean Data View](https://odv.awi.de/) with`Import` → `WOCE Formats` → `WHP CTD (exchange format)` menu.
 They can also be read
 by [Java Ocean Atlas](http://joa.ucsd.edu/joa) with `File` → `Open` menu.
-
-### 1.3 All stations
-It is possible to include all stations in the original CTD file in the `reported` data set.
-When calling `reported_data.m`, use a special file name `'all'` in the first argument,
-instead of the list file (e.g. `P16/p16_1992.list`). Note that this output cannot be
-gridded because of possible duplication and branching of the station tracks.
 
 ## 2. Gridded data
 
