@@ -5,7 +5,7 @@
 + [06AQANTVIII_2](https://cchdo.ucsd.edu/cruise/06AQANTVIII_2)
 
 ### 1990
-+ [06AQANTIX_2](https://cchdo.ucsd.edu/cruise/06AQANTVIX_2)
++ [06AQANTIX_2](https://cchdo.ucsd.edu/cruise/06AQANTIX_2)
 
 ### 1992b
 + [06AQANTX_7](https://cchdo.ucsd.edu/cruise/06AQANTX_7)

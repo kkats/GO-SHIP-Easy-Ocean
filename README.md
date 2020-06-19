@@ -128,10 +128,12 @@ An example for the use of these ASCII data to plot the difference between occupa
 ## 3. Reprocessing
 
 All input CTD files can be downloaded from [CCHDO](https://www.cchdo.ucsd.edu).
+List of URLs of the CTD files is `getCTD.list`, which is
+generated from `README.md`s by `getCTDlist.pl`.
+
 It is possible to reprocess all sections with `all_batch.m`. Note that
 `PREFIX` in `batch.m` and `batch.sh` is the output directory. This directory is hard-coded in `all_batch.m`.
 Edit all these files as appropriate before running `all_batch.m`.
-
 
 ## ToDo
 

@@ -35,7 +35,7 @@
 + [74JC20111127](https://cchdo.ucsd.edu/cruise/74JC20111127)
 
 ### 2013
-+ [74JC20130319](https://cchdo.ucsd.edu/cruise/74JC20130391)
++ [74JC20130319](https://cchdo.ucsd.edu/cruise/74JC20130319)
 
 ### 2015a
 + [74JC20150110](https://cchdo.ucsd.edu/cruise/74JC20150110)
