@@ -1,4 +1,4 @@
-N, FillValue  = 
+N, FillValue  = NaN
 S, standard_name = 
 S, units = 
 S, reference_scale = 

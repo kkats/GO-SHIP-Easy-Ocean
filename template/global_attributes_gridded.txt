@@ -1,22 +1,18 @@
 % what
-S, program                      = WOCE and GO-Ship gridded products.
-S, Conventions                  = CF-1.7 ACDD-1.3 CCHDO-0.0
+S, program                      = GO-Ship Easy Ocean. WOCE and GO-Ship gridded products.
+S, Conventions                  = CF-1.7 ACDD-1.3
 S, standard_name_vocabulary     = NetCDF Climate and Forecast (CF) Metadata Convention Standard Name Table 45
 S, title                        = Gridded CTD product from WOCE and GO-Ship transects for line  
 D, date_issued                  = 
-S, abstract                     = To be written
+S, abstract                     = Ship-based hydrographic data are essential for physical, chemical, and biological oceanography and climate science. The data consists of more than 40 sections with multiple repeats, mostly land to land, sea surface to 10 m above the sea bottom. The data are, however, difficult to use in the archived inhomogeneous format. The purpose of this data product is to increase the value of these data by better combining, reformatting and gridding in order to facilitate their use. The product is machine readable and readily accessed by many existing visualisation and analysis software. The data processing can be repeated with modifications to suite various applications such as analysis of decadal variability of deep ocean, validation of numerical simulation output, and calibration of autonomous platforms. This initial release includes only temperature, salinity, and dissolved oxygen data from Conductivity-Temperature-Depth profilers, but will include other properties in the future release.
 S, comment                      = 
 S, expocode			=
 S, source_file                  = 
 S, goship_woce_line_id 		=
 S, all_years_used		= 
 S, instrument                   = CTD
-S, keywords                     = CTD, gridded product, WOCE lines, GO-Ship lines
-S, references                   = https://cchdo.ucsd.edu/
-% cruise                       
-% institution    
-% institution_address         
-% institution_postal_address   
+S, keywords                     = GO-Ship Easy Ocean, CTD, gridded product, WOCE lines, GO-Ship lines
+S, references                   = Katsumata et al., 2020 (in prep), https://www.go-ship.org/,  https://cchdo.ucsd.edu/, IOC, SCOR and IAPSO, 2010: The international thermodynamic equation of seawater - 2010: Calculation and use of thermodynamic properties. Intergovernmental Oceanographic Commission, Manuals and Guides No. 56, UNESCO (English), 196 pp. 
 
 % where
 % geospatial_bounds
@@ -45,12 +41,11 @@ S, publisher_institution        = Scripps Institution of Oceanography
 S, publisher_type		= group
 S, creator                      = Katsuro Katsumata
 S, creator_email                = k.katsumata@jamstec.go.jp
-% principal_investigator       
-% principal_investigator_email 
+
 
 % how
-S, lineage                 = Data were created as described at: https://github.com/kkats/WOCE-GO-SHIP-clean-sections from the datasets listed in source_file
-S, citation                = The citation in a list of references is: "[Data providers of the parameter(s) used]. [Year of file access]. [CTD/Bottle] data from cruise [expocode], [format version used]. Accessed from CCHDO [url of cruise data page]. Access date [date of download]. [Applicable CCHDO cruise DOI if provided].".
-S, acknowledgement         = Any users of CCHDO data are required to clearly acknowledge the source of the material derived from CCHDO in the format: "XX" Users are also encouraged to acknowledge the funding program that supported the data collection in their publication. For US GO-SHIP data this is the NSF/NOAA funded U.S Repeat Hydrography Program.
+S, lineage                 = Data were created as described at: https://github.com/kkats/GO-SHIP-Easy-Ocean from the datasets listed in source_file
+S, citation                = The citation in a list of references is: "Katsuro Katsumata, Rebecca Cowley, Steve Diggs, Sarah Purkey, Bernadette M. Sloyan, Thomas Moore, Lynne D. Talley, Jim Swift 2020. Formatted and gridded ship-based hydrographic section data: GO-SHIP Easy Ocean data product.(in preparation)".
+S, acknowledgement         = Data were collected and made publicly available by the International Global Ship-based Hydrographic Investigations Program (GO-SHIP;http://www.go-ship.org/) and the national programs that contribute to it. Cite Katsumata, et al 2020 (in prep) when using the GO-SHIP Easy Ocean product
 S, disclaimer              = Data, products and services from CCHDO are provided "as is" without any warranty as to fitness for a particular purpose.
 S, license                 = http://creativecommons.org/licenses/by/4.0/
