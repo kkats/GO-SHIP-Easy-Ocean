@@ -77,7 +77,7 @@ c = textscan(fid,'%s','delimiter','|');
 fclose(fid);
 c = c{:};
 %get the http references:
-ii = find(cellfun(@isempty,strfind(c,'http'))==0);
+ii = find(cellfun(@isempty,strfind(c,'+ ['))==0);
 expocode = [];weblink = [];
 for b = 1:length(ii)
     str = c{ii(b)};
@@ -123,12 +123,12 @@ dmax = [abs(lm - latm),abs(lm - lonm)];
 ilatlon = find(min(dmax));
 if ilatlon == 1 %ll_grid is along latitude
     %create a longitude grid to match:
-    lat_grid = ll_grid;
-    lon_grid = mean(nanmean(lon));
+    lat_grid = round(ll_grid,2);
+    lon_grid = round(mean(nanmean(lon)),2);
 else %ll_grid is along longitude
     %create a latitude grid to match:
-    lon_grid = ll_grid;
-    lat_grid = mean(nanmean(lat));
+    lon_grid = round(ll_grid,2);
+    lat_grid = round(mean(nanmean(lat)),2);
 end
 
 %assign the global attributes:
@@ -183,18 +183,21 @@ stdn = {'time','sea_water_temperature','sea_water_practical_salinity',...
     'moles_of_oxygen_per_unit_mass_in_sea_water','seawater_conservative_temperature',...
     'sea_water_absolute_salinity'};
 whpname = {'TIME','CTDTMP','CTDSAL','CTDOXY','CTDCT','CTDSA'}; 
-units = {'days since 1950-01-01 00:00:00 UTC','degC','1','degC','umol kg-1','g kg-1'}; 
-refscale = {'','ITS-90','PSS-78','','',''};
-vmin = [min(min(ti)),-2.5,2.0,-5.0,-2.5,0];
-vmax = [max(max(ti)),40.0,41.0,600,40.0,42.0];
-
+units = {'days since 1950-01-01 00:00:00 UTC','degC','1','umol kg-1','degC','g kg-1'}; 
+refscale = {'','ITS-90','PSS-78','','TEOS-10','TEOS-10'};
+vmin = [round(min(min(ti))- datenum('1950-01-01 00:00:00')),-2.5,2.0,-5.0,-2.5,0];
+vmax = [round(max(max(ti))- datenum('1950-01-01 00:00:00')),40.0,41.0,600,40.0,42.0];
 for a = 1:length(stdn)
 %     varatts = parseNCTemplate('variable_attributes_gridded.txt');
+    clear varatts
     varatts.standard_name = stdn{a};
     varatts.units = units{a};
     varatts.valid_min = vmin(a);
     varatts.valid_max = vmax(a);    
-    varatts.reference_scale = refscale{a};
+    varatts.FillValue = NaN;
+    if ~isempty(refscale{a}) %do for all but time and oxygen
+        varatts.reference_scale = refscale{a};
+    end
     varatts.whp_name = whpname{a};
     if ilatlon == 1 & a == 1 %our time variable
         didv = did([1,3]);
@@ -245,6 +248,8 @@ for a = 1:length(varname)
             dat = round(dat - datenum('1950-01-01 00:00:00'));
             data(b,:) = dat;
         else
+            %data needs to be kept to 3 decimal places
+            dat = round(dat,3);
             if ilatlon == 1%longitude is single value
                 data(b,1,:,:) = dat';
             else %latitude is single value
