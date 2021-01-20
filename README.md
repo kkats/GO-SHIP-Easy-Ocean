@@ -1,9 +1,11 @@
 # GO-SHIP Easy Ocean
 GO-SHIP Gridded Time Series; user friendly WOCE/CLIVAR/GO-SHIP data from [CCHDO](https://cchdo.ucsd.edu).
+Product is available at [doi:10.7942/GOSHIP-EasyOcean](https://dx.doi.org/10.7942/GOSHIP-EasyOcean).
 
 #### Reference
-K. Katsumata, B. Sloyan, R. Cowley, S. Diggs, T. Moore, S. Purkey, J. Swift, L. Talley, _User friendly ship based hydrographic section data_ (in preparation)
-
+K. Katsumata, S. G. Purkey, R. Cowley, B. M. Sloyan, S. C. Diggs, T. S. Moore II, L. D. Talley, J. H. Swift, _GO-SHIP Easy Ocean: Formatted and gridded ship-based hydrographic section data_ (submitted, 2020).
+This publication describes version [1.1](https://github.com/kkats/GO-SHIP-Easy-Ocean/releases/tag/v1.1)
+which has a [doi:10.5281/zenodo.3937962](https://doi.org/10.5281/zenodo.3937962).
 
 # Output Formats
 
@@ -39,6 +41,7 @@ To visualize a section, e.g. `P16` section occupied in 2015, use;
 This is the clean data with no horizontal interpolation and no vertical interpolation.
 We support Matlab format
 and ASCII CSV in [WHP Exchange format](https://cchdo.ucsd.edu/formats).
+Note: we do not perform any additional quality control. Bad data in the original data set remain in the product.
 
 ### 1.1 All stations
 It is possible to include all stations in the original CTD file in the `reported` data set, e.g., for float calibration purposes.
