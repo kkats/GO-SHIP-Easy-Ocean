@@ -1,12 +1,12 @@
 function gridded_nc(line_id,inpath,repopath,outfname)
-% function gridded_nc(line_id,infname,outfname)
+% function gridded_nc(line_id,infname,repopath,outfname)
 % Inputs:   line_id (eg, P15) as character array
 %           inpath: full path to location of 'gridded' folder under which
 %               will sit individual line folders with the gridded mat files (eg. '/home/work/GoShip/')
-%           repopath: full path to the 'WOCE-GO-SHIP-clean-sections' folder
-%               that contains all the code to build the product under each line
-%               folder (eg. '/home/work/GoShip/')
-%           outfname (optional): full path and file name to output the netcdf gridded
+%           repopath: full path to the 'GO-SHIP-Easy-Ocean' repository folder
+%               that contains all the code to build the product for each line
+%               (eg. '/home/work/GoShip/')
+%           outfname (optional): full path and output the netcdf gridded
 %           data to. Default is the same as inpath.
 %
 % Loads the gridded mat file containing D_pr structure with gridded data 

@@ -140,8 +140,14 @@ sectional data (XZ or YZ). The control file output from `gridded_bin.m` *overwri
 ~~~
 
 ### NetCDF
+To output the data to netcdf format, the use gridded_nc with the following arguments:
+gridded_nc(line_id,inpath,repopath,outfname)
+Inputs:   line_id (eg, 'P06') as character array
+           inpath: full path to location of 'gridded' folder under which will sit individual line folders with the gridded mat files 
+           repopath: full path to the 'GO-SHIP-Easy-Ocean' repository folder that contains all the code to build the product for each line 
+           outfname (optional): full path to output the netcdf gridded data to. Default is the same as inpath.
 ~~~
->> gridded_nc(D_pr, 'output/gridded/P06/p06.nc', ll_grid, pr_grid);
+>> gridded_nc('P06','output/','./');
 ~~~
 
 
