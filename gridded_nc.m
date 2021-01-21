@@ -120,7 +120,7 @@ globalatts.all_years_used = ['Data from years ' num2str(unique(str2num(datestr(t
 [lonm,lonn] = range(lon);
 dmax = [abs(lm - latm),abs(lm - lonm)];
 
-ilatlon = find(min(dmax));
+[~,ilatlon] = min(dmax);
 if ilatlon == 1 %ll_grid is along latitude
     %create a longitude grid to match:
     lat_grid = round(ll_grid,2);
@@ -201,8 +201,8 @@ for a = 1:length(stdn)
     varatts.whp_name = whpname{a};
     if ilatlon == 1 & a == 1 %our time variable
         didv = did([1,3]);
-    elseif ilatlon == 0 & a == 1
-        didv = did([1,1]);
+    elseif ilatlon == 2 & a == 1
+        didv = did([1,2]);
     else %other variables
         didv = did;
     end
