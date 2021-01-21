@@ -29,5 +29,5 @@ for n = 1:length(SECTIONS)
     %}
 
     % gridded/sec/sec.mat -> gridded/sec/sec.nc
-    gridded_nc(sec, '/local/Shared/output', '../');
+    gridded_nc(sec, '/Users/cow074/Documents/work_mac/GoSHIP/output/', '/Users/cow074/Documents/work_mac/GoSHIP');
 end
