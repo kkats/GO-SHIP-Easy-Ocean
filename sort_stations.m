@@ -14,7 +14,8 @@ if any(longitudes <= 40.0) && any(longitudes > 280.0)
 end
 
 % meridional
-if max(latitudes) - min(latitudes) > max(nlon) - min(nlon)
+% use distance (for AR07W)
+if max(latitudes) - min(latitudes) > (max(nlon) - min(nlon)) * cos(mean(latitudes) * 3.14159 / 180);
     [dummy, idx] = sort(latitudes);
     ll = latitudes;
     bool = false;
