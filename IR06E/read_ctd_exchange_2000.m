@@ -178,8 +178,8 @@ te = te(:,idx);
 sa = sa(:,idx);
 ox = ox(:,idx);
 
-% bad oxygen for stations 5 to 8
-ox(:,5:8) = NaN;
+% bad oxygen for station 9 and 10
+ox(:,9:10) = NaN;
 
 % finally save .mat files
 if length(outputfname) > 4 && strcmp(outputfname(end-3:end), '.mat')

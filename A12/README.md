@@ -40,6 +40,8 @@ not useful might like `longitude_filter.sh`.
 For JOA for 1992, `A12_1992_clean_bottle.joa` has less stations than
 `A12_1992_clean_CTD.joa`. Use the latter.
 
+Salinity is noisy.
+
 ### 1996
 Missing depth.
 ```

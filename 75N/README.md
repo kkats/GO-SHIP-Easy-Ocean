@@ -29,6 +29,8 @@
 
 ## 2. Glitches
 
+JOA has a 75N file but in different locations in the Arctic Ocean.
+
 ### 1994
 
 '666575_ct1.csv' has duplicate entries at depths 3991, 3992, and 3993 dbar. Hand editted.
@@ -56,9 +58,8 @@ DEPTH recorded as floating number, not integer, such that some `list` files are 
 
 ### 1997
 Now potential temperature raw is gone. Use `read_ctd_exchange_1997.m`.
+Salinity for `098925_ct1.csv` is spiky.
 
 ### 2006
 No flag. Use `read_ctd_exchange_2006.m`. No depth, no SUM.
-
-JOA has a 75N file but in different locations in the Arctic Ocean.
-
+First data of `58GS20060721_00266_00001_ct1.csv` has bad values with good flag. Manually removed.

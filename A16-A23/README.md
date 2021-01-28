@@ -54,7 +54,7 @@ Warning: 4 CCHDO  63-1      34.2133    338.9350 1988-08-05 d=5231
 ~~~
 The cruise report reads (section 3.7)
 ~~~
-There were alsoi 4 stations - 61, 62, 63, 65 - which had two casts (deep and shallow)
+There were also 4 stations - 61, 62, 63, 65 - which had two casts (deep and shallow)
 in order to recover shallower bottle data information missed on the deep casts because of
 rosette malfunctions, ... The first three of the two cast stations were collected during
 re-occupations of the stations (about 22 hours later).

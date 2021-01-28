@@ -14,7 +14,11 @@ tic;
 for n = 1:length(years)
     mfile = [MDIR fname '_' years{n} '.mat'];
     if ~exist(mfile)
-        com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
+        if n == 3
+            com = ['addpath IR06E; read_ctd_exchange_2000(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath IR06E'];
+        else
+            com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
+        end
         eval(com);
     end
 end

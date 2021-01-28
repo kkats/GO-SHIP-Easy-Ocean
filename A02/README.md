@@ -16,8 +16,7 @@ No JOA profile available.
 
 The 1994 data have a salinity unit in "PSS-68". We suspect it is a typographical error of "PSS-78".
 
-The CTD oxygen data from the 1997 occupation is extremely sparse west of 28W. Interpolation
-data exist but need care when interpreting.
+The CTD oxygen data from the 1997 occupation is extremely sparse west of 28W(=332E). Interpolation data exist but requires extra care when interpreting.
 
 The pressure from the 2017 data have all FLAG=1. We consider them as usable by
 using `read_ctd_exchange_2017.m`.

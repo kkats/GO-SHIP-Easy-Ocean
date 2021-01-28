@@ -22,3 +22,5 @@
 ### 1999
 Some pressure data from `49NZ199901_1` (a.k.a. `49NZ199908_1`) have flag=1 (uncalibrated).
 To include these data, edit `read_ctd_exchange.m` (c. line 160) and reprocess.
+
+Many near-surface salinity spikes are found for `49KA199905_2`. Untouched.

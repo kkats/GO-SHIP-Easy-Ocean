@@ -15,3 +15,4 @@
 
 ### 2000
 Despite its flag=2, CTDOXYs are just noise at some stations.
+Station 10 is obviously bad and removed by using `ctd_read_exchange_2000.`.

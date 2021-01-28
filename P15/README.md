@@ -33,3 +33,8 @@ Depths are missing. Use topo file;
 % awk '$2=="P15N" && $5=="ROS" && $8=="BE" {print $1, $3, $4, $16}' p15nbsu.txt >>p15_1990.depth
 ```
 It is necessary to edit station numbers (e.g. `003` to `3`) manually.
+
+### 2009
+Station 116 (source file `09SS20090203116_ct1.csv`) shows an extremely low salinity
+(S=28.5118) at the very bottom (P=5784). Since it is flagged 2 ("acceptable"), we
+leave it as is.
