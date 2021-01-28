@@ -201,7 +201,7 @@ They are recorded in `README.md`'s and tabulated here.
 |A22     |1997|316N151_4   |  7|1  |Spikes in S below 2500 db|
 |A22     |1997|316N151_4   | 35|1  |Spikes in T,S around 2612 db|
 |AR07E   |2000|64PE20000926|   |   |No quality flag|
-|AR07W   |1999--2011       |   |   |Uncalibrated CTD|
+|AR07W   |1999--2011     | |   |   |Uncalibrated CTD|
 |I01     |1995|316N145_11  |   |   |FLAG=3|
 |I02     |1995|            |118|  1|Wrong P at 2223 db|
 |I06S    |2019|325020190403|5-8|   |Bad oxygen|
