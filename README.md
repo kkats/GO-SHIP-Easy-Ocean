@@ -99,7 +99,7 @@ by [Java Ocean Atlas](http://joa.ucsd.edu/joa) with `File` → `Open` menu.
 ## 2. Gridded data
 
 Users interested in data intercomparison should not use gridded data. See
-Secton 3.1 below.
+[Secton 3.1](https://github.com/kkats/GO-SHIP-Easy-Ocean/blob/master/README.md#11-all-stations) below.
 
 ### 2.1. Matlab format
 Data are stored in 2 dimensional matrices as entries to a `structure`, one for each
@@ -149,7 +149,7 @@ When gridded,
 the stations north of 40&deg;N appear on the same meridian of 225&deg;E but actually not.
 The northmost station is more than 1000 km west of the meridian.
 Those users interested in data intercomparison should only use `reported` data,
-where `all` option might be useful (see section 1.1).
+where `all` option might be useful (see [Section 1.1](https://github.com/kkats/GO-SHIP-Easy-Ocean/blob/master/README.md#11-all-stations).
 
 ### 3.2 Choice of 'occupation'
 The definition of occupation or repeat on a section is rather subjective.
@@ -193,27 +193,26 @@ For some obvious cases only, did we manually removed suspect data
 even with `flag = 2`(["acceptable measurement"](https://exchange-format.readthedocs.io/en/v1.0.1/quality.html)).
 They are recorded in `README.md`'s and tabulated here.
 | section | year | EXPO code | station | cast | description |
-|
-|:--|--:|:--|--:|--:|:--|
-|75N|2006|58GS20060721|266|1|Bad at 1 db|
-|A05|2011|29AH20110128|6|1|Bad below 568 db|
-|A12|1992|06AQANTX_4|||Noisy salinity|
-|A13|1983|316N19831007,316N19840111|||Gaps in data, salinity suspect|
-|A22|1997|316N151_4|7|1|Spikes in S below 2500 db|
-|||35|1|Spikes in T,S around 2612 db|
-|AR07E|2000|64PE20000926|||No quality flag|
-|AR07W|1999--2011|||Uncalibrated CTD|
-|I01|1995|316N145_11|||FLAG=3|
-|I02|1995||118|1|Wrong P at 2223 db|
-|I06S|2019|325020190403|5-8||Bad oxygen|
-|I08S|2007|33RR20070204|50|2|FLAG=8|
-|IR06E|2000|35MF200009|||Noisy DO|
-|IR06E|2000|35MF200009|10||Bad DO|
-|IR06-I10|1995|09FA9503_1|||Flag=4 for S|
-|P01|1999|49NZ199901_1|||Flag=1 for P|
-|P01|1999|49KA199905_2|||Noisy S near surface|
-|P15|2009|09SS20090203|116|1|Extremely low S at P=5784 db|
-|SR01|1997|74JC27_1|24|Wrong pressure P=1113, 1137 db|
+|:--     |--: |:--         |--:|--:|:--|
+|75N     |2006|58GS20060721|266|1  |Bad at 1 db|
+|A05     |2011|29AH20110128|6  |1  |Bad below 568 db|
+|A12     |1992|06AQANTX_4  |   |   |Noisy salinity|
+|A13     |1983|316N19831007,316N19840111|||Gaps in data, salinity suspect|
+|A22     |1997|316N151_4   |  7|1  |Spikes in S below 2500 db|
+|A22     |1997|316N151_4   | 35|1  |Spikes in T,S around 2612 db|
+|AR07E   |2000|64PE20000926|   |   |No quality flag|
+|AR07W   |1999--2011       |   |   |Uncalibrated CTD|
+|I01     |1995|316N145_11  |   |   |FLAG=3|
+|I02     |1995|            |118|  1|Wrong P at 2223 db|
+|I06S    |2019|325020190403|5-8|   |Bad oxygen|
+|I08S    |2007|33RR20070204| 50|  2|FLAG=8|
+|IR06E   |2000|35MF200009  |   |   |Noisy DO|
+|IR06E   |2000|35MF200009  | 10|   |Bad DO|
+|IR06-I10|1995|09FA9503_1  |   |   |Flag=4 for S|
+|P01     |1999|49NZ199901_1|   |   |Flag=1 for P|
+|P01     |1999|49KA199905_2|   |   |Noisy S near surface|
+|P15     |2009|09SS20090203|116|  1|Extremely low S at P=5784 db|
+|SR01    |1997|74JC27_1    | 24|   |Wrong pressure P=1113, 1137 db|
 
 
 ## 4. Reprocessing
