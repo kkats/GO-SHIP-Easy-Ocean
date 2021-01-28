@@ -4,8 +4,6 @@ We use `P06` section as an example.
 
 ## 1. Prepare `station.list`
 
-
-
 ### 1-1. Raw data in Matlab format and station list
 
 1. Download and unzip *all* CTD files necessary to form one complete section. Both **whp_netcdf** and **exchange** are acceptable. For example, three zip files `p06e_nc_ctd.zip`, `p06c_nc_ctd.zip`, and `p06w_nc_ctd.zip` are necessary for the P06 1992 section. Unzip the archive *in one directory* (say, `work/P06/1992/`). For **whp_netcdf** format, use `read_ctd_nc.m` in the next step. For **exchange** format, use `read_ctd_exchange.m`.
@@ -63,8 +61,6 @@ and
                                                        pressure_grid(:), ...
                                                        latlon_grid(:))
 ~~~
-Horizontal interpolation is not performed if stations are more than 1 degree (longitude for zonal sections, latitude for meridional) apart. This is done in `grid_data_pressure.m` and can be changed if needed.
-
 As default options, `vinterp.m` and `hinterp.m` are provided. The former uses Hanning smoothing and the latter shape-preserving piecewise cubic interpolation following [Purkey and Johnson (2010)](https://doi.org/10.1175/2010JCLI3682.1). In `configuration.m`, the functions are listed as;
 ~~~
 vinterp_handle = @vinterp;
@@ -140,16 +136,18 @@ sectional data (XZ or YZ). The control file output from `gridded_bin.m` *overwri
 ~~~
 
 ### NetCDF
-To output the data to netcdf format, the use gridded_nc with the following arguments:
+To output the data to [NetCDF](https://www.unidata.ucar.edu/software/netcdf/)
+format, use `gridded_nc` with the following arguments:
+~~~
 gridded_nc(line_id,inpath,repopath,outfname)
-Inputs:   line_id (eg, 'P06') as character array
-           inpath: full path to location of 'gridded' folder under which will sit individual line folders with the gridded mat files 
-           repopath: full path to the 'GO-SHIP-Easy-Ocean' repository folder that contains all the code to build the product for each line 
-           outfname (optional): full path to output the netcdf gridded data to. Default is the same as inpath.
+~~~
+-- `line_id` (eg, 'P06') as character array
+-- `inpath` full path to location of 'gridded' folder under which will sit individual line folders with the gridded mat files 
+-- `repopath` full path to the 'GO-SHIP-Easy-Ocean' repository folder that contains all the code to build the product for each line 
+-- `outfname (optional)` full path to output the netcdf gridded data to. Default is the same as inpath.
 ~~~
 >> gridded_nc('P06','output/','./');
 ~~~
-
 
 ## 4. Notes
 ### 4-1. When bottom depth data are missing in the CTD file
