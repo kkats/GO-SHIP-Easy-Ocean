@@ -4,7 +4,7 @@
 % Culberson, C. H. (1991). "Dissolved Oxygen". WHPO Publication 91-1
 % https://geo.h2o.ucsd.edu/documentation/manuals/pdf/91_1/culber2.pdf
 %
-% "...If the seawater temperature at the time of pickling it not known, the density
+% "...If the seawater temperature at the time of pickling is not known, the density
 %  of seawater in equation (9) should be calculated at the potential temperature
 %  of the water sample." (Section 3.3)
 %
@@ -20,4 +20,5 @@ function umolkg = convertDO(oxy, pre, tem, sal, lon, lat, unit)
         umolkg = 44.660 .* oxy ./ dens; % ml/l to umol/kg
     elseif ~isempty(strfind(unit, 'MOL/L'))
         umolkg = oxy ./ dens; % mol/l to mol/kg
+    end
 end

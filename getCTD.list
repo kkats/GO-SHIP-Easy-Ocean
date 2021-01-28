@@ -1,22 +1,15 @@
 #
 # output from getCTDlist.pl, manually edited.
 #
-A01: https://cchdo.ucsd.edu/data/5365/ar07e_a_ct1.zip
-A01: https://cchdo.ucsd.edu/data/7055/ar07w_a_ct1.zip
-A01: https://cchdo.ucsd.edu/data/7742/ar07e_b_ct1.zip
-A01: https://cchdo.ucsd.edu/data/2764/a01e_ct1.zip
-A01: https://cchdo.ucsd.edu/data/661/ar07e_d_ct1.zip
-A01: https://cchdo.ucsd.edu/data/1470/ar07w_c_ct1.zip
-A01: https://cchdo.ucsd.edu/data/3646/a01ew_ct1.zip
-A01: https://cchdo.ucsd.edu/data/277/ar07e_f_ct1.zip
-A01: https://cchdo.ucsd.edu/data/3403/ar07w_e_ct1.zip
-A01: https://cchdo.ucsd.edu/data/10049/ar07e_g_ct1.zip
-A01: https://cchdo.ucsd.edu/data/8316/a01w_ct1.zip
-A01: https://cchdo.ucsd.edu/data/9354/ar07e_h_ct1.zip
-A01: https://cchdo.ucsd.edu/data/6156/ar07w_f_ct1.zip
-A01: https://cchdo.ucsd.edu/data/3225/ar07e_i_ct1.zip
-A01: https://cchdo.ucsd.edu/data/9151/ar07wh_ct1.zip
-A01: https://cchdo.ucsd.edu/data/11852/ar07_74JC20140606_ct1.zip
+75N: https://cchdo.ucsd.edu/data/10856/06AQ19940706_ct1.zip
+75N: https://cchdo.ucsd.edu/data/2456/06AQ19950922_ct1.zip
+75N: https://cchdo.ucsd.edu/data/2774/06AQ19970813_ct1.zip
+75N: https://cchdo.ucsd.edu/data/967/06AQ19980827_ct1.zip
+75N: https://cchdo.ucsd.edu/data/1283/06AQ19990623_ct1.zip
+75N: https://cchdo.ucsd.edu/data/6297/06AQ20000630_ct1.zip
+75N: https://cchdo.ucsd.edu/data/1225/06AQ20010619_ct1.zip
+75N: https://cchdo.ucsd.edu/data/8354/58GS20060721_ct1.zip
+75N: https://cchdo.ucsd.edu/data/14232/58GS20160802_ct1.zip
 
 A02: https://cchdo.ucsd.edu/data/11484/a02a_ct1.zip
 A02: https://cchdo.ucsd.edu/data/3646/a01ew_ct1.zip
@@ -30,6 +23,7 @@ A05: https://cchdo.ucsd.edu/data/14960/74DI20040404_ct1.zip
 A05: https://cchdo.ucsd.edu/data/11749/a05_74DI20100106_ct1.zip
 A05: https://cchdo.ucsd.edu/data/2147/29AH20110128_ct1.zip
 A05: https://cchdo.ucsd.edu/data/12220/a05_74EQ20151206_ct1.zip
+A05: https://cchdo.ucsd.edu/data/16092/740H20200119_ct1.zip
 
 A10: https://cchdo.ucsd.edu/data/6004/a10_ct1.zip
 A10: https://cchdo.ucsd.edu/data/11266/a10_2003a_ct1.zip
@@ -70,15 +64,36 @@ A22: https://cchdo.ucsd.edu/data/11093/a22_ct1.zip
 A22: https://cchdo.ucsd.edu/data/13558/316N200310_ct1.zip
 A22: https://cchdo.ucsd.edu/data/13546/33AT20120324_ct1.zip
 
-75N: https://cchdo.ucsd.edu/data/10856/06AQ19940706_ct1.zip
-75N: https://cchdo.ucsd.edu/data/2456/06AQ19950922_ct1.zip
-75N: https://cchdo.ucsd.edu/data/2774/06AQ19970813_ct1.zip
-75N: https://cchdo.ucsd.edu/data/967/06AQ19980827_ct1.zip
-75N: https://cchdo.ucsd.edu/data/1283/06AQ19990623_ct1.zip
-75N: https://cchdo.ucsd.edu/data/6297/06AQ20000630_ct1.zip
-75N: https://cchdo.ucsd.edu/data/1225/06AQ20010619_ct1.zip
-75N: https://cchdo.ucsd.edu/data/8354/58GS20060721_ct1.zip
-75N: https://cchdo.ucsd.edu/data/14232/58GS20160802_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/5365/ar07e_a_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/7742/ar07e_b_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/295/ar12_c_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/2764/a01e_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/661/ar07e_d_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/277/ar07e_f_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/3646/a01ew_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/10049/ar07e_g_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/9354/ar07e_h_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/3225/ar07e_i_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/15490/64PE20000926_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/4866/64PE20050907_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/13995/GEOVIDE_ctd_35PK20140515.zip
+AR07E: https://cchdo.ucsd.edu/data/11852/ar07_74JC20140606_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/14153/58GS20150410_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/9868/64PE20070830_ct1.zip
+AR07E: https://cchdo.ucsd.edu/data/3326/45ce20100209_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/7055/ar07w_a_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/1470/ar07w_c_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/4453/ar07w_d_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/3646/a01ew_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/3403/ar07w_e_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/8316/a01w_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/6156/ar07w_f_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/9151/ar07wh_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/10815/ar07w_j_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/14958/06MT20110624_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/15479/18MF20120601_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/12247/18HU20130507_ct1.zip
+AR07W: https://cchdo.ucsd.edu/data/14255/06M220130509_ct1.zip
 
 I01: https://cchdo.ucsd.edu/data/2996/ir01w_c_ct1.zip
 I01: https://cchdo.ucsd.edu/data/6143/i01w_ct1.zip
@@ -273,3 +288,4 @@ SR04: https://cchdo.ucsd.edu/data/5510/sr04_e_ct1.zip
 SR04: https://cchdo.ucsd.edu/data/4236/06AQ20050122_ct1.zip
 SR04: https://cchdo.ucsd.edu/data/12253/06AQ20080210_ct1.zip
 SR04: https://cchdo.ucsd.edu/data/7616/06AQ20101128_ct1.zip
+

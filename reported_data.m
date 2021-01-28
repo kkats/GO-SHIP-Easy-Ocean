@@ -148,7 +148,8 @@ for i = 1:nstn
     % missing data
     % d == -4 was used in I05_2002 (74AB20020301)
     % d == 9 for missing value for some SUM files (i.e. 18DD9403_2)
-    if isnan(d) || d == 999 || d == 0 || d == -4 || d == 9
+    % d == -100 was used in AR07W_1999 (18HU99022_1)
+    if isnan(d) || d == 999 || d == 0 || d == -4 || d == 9 || d == 100
         ctdgood = find(~isnan(ctdprs(:,i)) & ~isnan(ctdtem(:,i)) & ~isnan(ctdsal(:,i)));
         if isempty(ctdgood) % happens when all CTD data are flagged not-good
             dprime = nan;
