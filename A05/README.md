@@ -18,6 +18,9 @@
 ### 2015
 + [74EQ20151206](https://cchdo.ucsd.edu/cruise/74EQ20151206)
 
+### 2020
++ [740H20200119](https://cchdo.ucsd.edu/cruise/740H20200119)
+
 ## 2. Glitches
 
 No Atlas station data available.
@@ -35,5 +38,7 @@ No SUM file for 2011.
 The columns are in the order of "pressure, oxygen, temperaure, salinity", instead of
 regular "pressure, temperature, salinity, oxygen". Use `read_ctd_exchange_2011.m`.
 
-`29AH20110128_00006_00001_ct1.csv` show an unusual gap in all quantities between 568 and 570 dbar.
-Since FLAG=2, we leave these data as is.
+`29AH20110128_00006_00001_ct1.csv` shows an unusual gap in all quantities between 566 and 570 dbar. We removed data below 568 dbar.
+
+### 2020
+No SUM file as of 26 Jan 2021.
