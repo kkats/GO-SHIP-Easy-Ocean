@@ -114,6 +114,14 @@ end
 %include the years used in the global attributes:
 tt = ti(~isnan(ti));
 globalatts.all_years_used = ['Data from years ' num2str(unique(str2num(datestr(tt,'yyyy')))') ' was used to create this product'];
+
+%A10 and 75N are in -180 to 180 longitude
+%All other lines are 0-360
+%first, convert A10 and 75N to 0-360:
+if contains('A10',SECTION) | contains('75N',SECTION)
+    ineg = ll_grid <0;
+    ll_grid(ineg) = ll_grid(ineg) + 360;
+end
 %is the ll_grid latitude or longitude?
 [latm,latn] = range(lat);
 [lm,ln] = range(ll_grid);
@@ -124,12 +132,26 @@ dmax = [abs(lm - latm),abs(lm - lonm)];
 if ilatlon == 1 %ll_grid is along latitude
     %create a longitude grid to match:
     lat_grid = round(ll_grid,2);
-    lon_grid = round(mean(nanmean(lon)),2);
+    %look for longitudes across 0/360:
+    if diff(range(lon)) > 20
+        %assume across the 0 degree longitude and convert to negative
+        %longitudes:
+        ineg = lon > 180;
+        lon(ineg) = lon(ineg)-360;
+        lon_grid = round(mean(nanmedian(lon)),2);
+    else
+        lon_grid = round(mean(nanmedian(lon)),2);
+    end
 else %ll_grid is along longitude
     %create a latitude grid to match:
+    %look for longitudes across 0/360:
     lon_grid = round(ll_grid,2);
-    lat_grid = round(mean(nanmean(lat)),2);
+    lat_grid = round(mean(nanmedian(lat)),2);
 end
+
+%Final output needs to be -180 to 180 longitude, do conversion here
+ineg = lon_grid > 180;
+lon_grid(ineg) = lon_grid(ineg)-360;
 
 %assign the global attributes:
 globalatts.geospatial_lat_min = min(lat_grid);
