@@ -4,6 +4,14 @@ function reported_WHPX(rd, fname)
 %
 nstn = length(rd.Station);
 for n = 1:nstn
+    % good data
+    ig = find(isfinite(rd.CTDprs(:,n)) | isfinite(rd.CTDtem(:,n)) ...
+            | isfinite(rd.CTDsal(:,n)) | isfinite(rd.CTDoxy(:,n)) ...
+            | isfinite(rd.CTDCT(:,n)) | isfinite(rd.CTDSA(:,n)));
+    if isempty(ig) % do not output empty files
+       continue;
+    end
+
     filename = sprintf('%s_%04d_ct1.csv', fname, n)
     fid = fopen(filename, 'w');
     if fid < 0
@@ -27,9 +35,6 @@ for n = 1:nstn
     fprintf(fid, 'CTDPRS, CTDTMP, CTDSAL, CTDOXY, CTDCT, CTDSA\n');
     fprintf(fid, 'DBAR, ITS-90, PSS-78, UMOL/KG, ITS-90, G/KG\n');
     %  body
-    ig = find(isfinite(rd.CTDprs(:,n)) | isfinite(rd.CTDtem(:,n)) ...
-            | isfinite(rd.CTDsal(:,n)) | isfinite(rd.CTDoxy(:,n)) ...
-            | isfinite(rd.CTDCT(:,n)) | isfinite(rd.CTDSA(:,n)));
     m = max(ig);
     for i = 1:m
         prs = rd.CTDprs(i,n); tem = rd.CTDtem(i,n); sal = rd.CTDsal(i,n);
