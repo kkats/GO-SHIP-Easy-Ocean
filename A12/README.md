@@ -56,6 +56,12 @@ line. Deleted the last line.
 
 This is the same data as [SR04/](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/blob/master/SR04/README.md)2005. Use `read_ctd_exchange_2005.m`.
 
+### 2008a
+
+Somehow, all CTD data has pressre '-999' with flag'9' at 9 dbar.
+We judge this is a bug in the original file and treated 'pressure=9 and flag=2'.
+See `read_ctd_exchange_2008a.m`.
+
 ### 2008b
 
 See 2005 above.

@@ -16,6 +16,8 @@ for n = 1:length(years)
     if ~exist(mfile)
         if n == 6 || n == 8
             com = ['addpath A12; read_ctd_exchange_2005(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath A12;'];
+        elseif n == 7
+            com = ['addpath A12; read_ctd_exchange_2008a(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath A12;'];
         elseif n == 9
             com = ['addpath A12; read_ctd_exchange_2010(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath A12;'];
         else

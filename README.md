@@ -187,16 +187,17 @@ or `gridded` product, it is most likely because oxygen was not provided in the s
 If you notice oxygen in the source but not in the product, please notify us.
 
 ### 3.6 Bad data
-We do not perform any quality control on top of the [WOCE flags](https://exchange-format.readthedocs.io/en/v1.0.1/quality.html) provided in the source data.
+We do not perform any quality control on top of the [WOCE flags](https://exchange-format.readthedocs.io/en/v1.2.0/quality.html) provided in the source data.
 
 For some obvious cases only, did we manually removed suspect data
-even with `flag = 2`(["acceptable measurement"](https://exchange-format.readthedocs.io/en/v1.0.1/quality.html)).
+even with `flag = 2`(["acceptable measurement"](https://exchange-format.readthedocs.io/en/v1.2.0/quality.html)).
 They are recorded in `README.md`'s and tabulated here.
 | section | year | EXPO code | station | cast | description |
 |:--     |--: |:--         |--:|--:|:--|
 |75N     |2006|58GS20060721|266|1  |Bad at 1 db|
 |A05     |2011|29AH20110128|6  |1  |Bad below 568 db|
 |A12     |1992|06AQANTX_4  |   |   |Noisy salinity|
+|A12     |2008a|35MF20080207|  |   |Pressure missing at p=9 db|
 |A13     |1983|316N19831007,316N19840111|||Gaps in data, salinity suspect|
 |A22     |1997|316N151_4   |  7|1  |Spikes in S below 2500 db|
 |A22     |1997|316N151_4   | 35|1  |Spikes in T,S around 2612 db|
