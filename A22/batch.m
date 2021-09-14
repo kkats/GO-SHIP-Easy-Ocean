@@ -1,12 +1,13 @@
 % variables
-PREFIX='/local/Shared/';
+%PREFIX='/local/Shared/';
+PREFIX='/local/data/';
 MDIR = [PREFIX 'CTD/MATLAB/'];
 DIR = 'A22/';
 fname = 'a22';
-years = {'1997', '2003', '2012'};
+years = {'1997', '2003', '2012', '2021'};
 ll_grid = [11.0:0.1:40.1];
 pr_grid = [0:10:6500];
-depth_files = {'A22/a22_1997.depth', '', ''};
+depth_files = {'A22/a22_1997.depth', '', '', ''};
 
 tic;
 
@@ -14,7 +15,11 @@ tic;
 for n = 1:length(years)
     mfile = [MDIR fname '_' years{n} '.mat'];
     if ~exist(mfile)
-        com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
+        if n == 4
+            com = ['addpath A22; read_ctd_exchange_2021(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
+        else
+            com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
+        end
         eval(com);
     end
 end
