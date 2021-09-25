@@ -3,9 +3,8 @@ GO-SHIP Gridded Time Series; user friendly WOCE/CLIVAR/GO-SHIP data from [CCHDO]
 Product is available at [doi:10.7942/GOSHIP-EasyOcean](https://dx.doi.org/10.7942/GOSHIP-EasyOcean).
 
 #### Reference
-K. Katsumata, S. G. Purkey, R. Cowley, B. M. Sloyan, S. C. Diggs, T. S. Moore II, L. D. Talley, J. H. Swift, _GO-SHIP Easy Ocean: Formatted and gridded ship-based hydrographic section data_ (submitted, 2020).
-This publication describes version [1.1](https://github.com/kkats/GO-SHIP-Easy-Ocean/releases/tag/v1.1)
-which has a [doi:10.5281/zenodo.3937962](https://doi.org/10.5281/zenodo.3937962).
+K. Katsumata, S. G. Purkey, R. Cowley, B. M. Sloyan, S. C. Diggs, T. S. Moore II, L. D. Talley, J. H. Swift, _GO-SHIP Easy Ocean: Formatted and gridded ship-based hydrographic section data_ (submitted, 2021).
+This publication describes version [1.3](https://github.com/kkats/GO-SHIP-Easy-Ocean/releases/tag/v1.3).
 
 # Output Formats
 
