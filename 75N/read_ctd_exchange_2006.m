@@ -148,6 +148,9 @@ te(te < -100) = NaN;
 sa(sa < -100) = NaN;
 ox(ox < -100) = NaN;
 
+% bad data (57GS20060721_00260)
+ox(ox < 0) = NaN;
+
 % QC flag -> no flag here
 % retain only flag==2
 %pr(pr_flg ~= 2) = NaN;

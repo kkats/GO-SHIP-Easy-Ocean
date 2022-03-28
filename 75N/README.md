@@ -61,5 +61,5 @@ Now potential temperature raw is gone. Use `read_ctd_exchange_1997.m`.
 Salinity for `098925_ct1.csv` is spiky.
 
 ### 2006
-No flag. Use `read_ctd_exchange_2006.m`. No depth, no SUM.
-First data of `58GS20060721_00266_00001_ct1.csv` has bad values with good flag. Manually removed.
+No flag. Negative oxygen in `57GS20060721_00260`. Use `read_ctd_exchange_2006.m`. No depth, no SUM.
+First data of `58GS20060721_00266_00001_ct1.csv` has bad values. Manually removed.
