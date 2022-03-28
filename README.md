@@ -2,9 +2,11 @@
 GO-SHIP Gridded Time Series; user friendly WOCE/CLIVAR/GO-SHIP data from [CCHDO](https://cchdo.ucsd.edu).
 Product is available at [doi:10.7942/GOSHIP-EasyOcean](https://dx.doi.org/10.7942/GOSHIP-EasyOcean).
 
+Information for IAPSO Standard Seawater batch-to-batch offset is found in [SaltBatchOffset](https://github.com/kkats/GO-SHIP-Easy-Ocean/tree/master/SaltBatchOffset#readme) directory.
+
 #### Reference
-K. Katsumata, S. G. Purkey, R. Cowley, B. M. Sloyan, S. C. Diggs, T. S. Moore II, L. D. Talley, J. H. Swift, _GO-SHIP Easy Ocean: Formatted and gridded ship-based hydrographic section data_ (submitted, 2021).
-This publication describes version [1.3](https://github.com/kkats/GO-SHIP-Easy-Ocean/releases/tag/v1.3).
+K. Katsumata, S. G. Purkey, R. Cowley, B. M. Sloyan, S. C. Diggs, T. S. Moore II, L. D. Talley, J. H. Swift, GO-SHIP Easy Ocean: Gridded ship-based hydrographic section of temperature, salinity, and dissolved oxygen (2022), _Scientific Data_, [doi:10.1038/s41597-022-01212-w](https://doi.org/10.1038/s41597-022-01212-w), [PDF](https://www.nature.com/articles/s41597-022-01212-w.pdf).
+This publication describes version [1.4](https://github.com/kkats/GO-SHIP-Easy-Ocean/releases/tag/v1.4).
 
 # Output Formats
 
@@ -49,7 +51,7 @@ instead of the list file (e.g. `P16/p16_1992.list`). Note that this output canno
 gridded because of possible duplication and branching of the station tracks.
 
 ### 1.2 Matlab format
-D_r is an array holding one Matlab `structure` for one occupation of the hydrographic section.
+`D_r` is an array holding one Matlab `structure` for one occupation of the hydrographic section.
 In typical cases, `D_r(1)` is by WOCE cruises in the 1980s and 1990s and `D_r(2)` is by
 CLIVAR/GO-SHIP cruises.
 
@@ -194,6 +196,7 @@ They are recorded in `README.md`'s and tabulated here.
 | section | year | EXPO code | station | cast | description |
 |:--     |--: |:--         |--:|--:|:--|
 |75N     |2006|58GS20060721|266|1  |Bad at 1 db|
+|75N     |2006|58GS20060721|260|1  |Negative oxygen|
 |A05     |2011|29AH20110128|6  |1  |Bad below 568 db|
 |A12     |1992|06AQANTX_4  |   |   |Noisy salinity|
 |A12     |2008a|35MF20080207|  |   |Pressure missing at p=9 db|
