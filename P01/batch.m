@@ -1,12 +1,12 @@
 % variables
-PREFIX='/local/Shared/';
-MDIR = [PREFIX 'CTD/MATLAB/'];
+PREFIX='/local/data/CTD/';
+MDIR = [PREFIX 'MATLAB/'];
 DIR = 'P01/';
 fname = 'p01';
-years = {'1985', '1999', '2007', '2014'};
+years = {'1985', '1999', '2007', '2014', '2021'};
 ll_grid = [145.4:0.1:235.1];
 pr_grid = [0:10:6500];
-depth_files = {'', '', '', ''};
+depth_files = {'', '', '', '', ''};
 
 tic;
 

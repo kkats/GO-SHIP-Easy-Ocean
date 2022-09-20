@@ -5,7 +5,7 @@ Product is available at [doi:10.7942/GOSHIP-EasyOcean](https://dx.doi.org/10.794
 Information for IAPSO Standard Seawater batch-to-batch offset is found in [SaltBatchOffset](https://github.com/kkats/GO-SHIP-Easy-Ocean/tree/master/SaltBatchOffset#readme) directory.
 
 #### Reference
-K. Katsumata, S. G. Purkey, R. Cowley, B. M. Sloyan, S. C. Diggs, T. S. Moore II, L. D. Talley, J. H. Swift, GO-SHIP Easy Ocean: Gridded ship-based hydrographic section of temperature, salinity, and dissolved oxygen (2022), _Scientific Data_, [doi:10.1038/s41597-022-01212-w](https://doi.org/10.1038/s41597-022-01212-w), [PDF](https://www.nature.com/articles/s41597-022-01212-w.pdf).
+K. Katsumata, S. G. Purkey, R. Cowley, B. M. Sloyan, S. C. Diggs, T. S. Moore II, L. D. Talley, J. H. Swift, GO-SHIP Easy Ocean: Gridded ship-based hydrographic section of temperature, salinity, and dissolved oxygen (2022), _Scientific Data_, [doi:10.1038/s41597-022-01212-w](https://doi.org/10.1038/s41597-022-01212-w), also available in [PDF](https://www.nature.com/articles/s41597-022-01212-w.pdf).
 This publication describes version [1.4](https://github.com/kkats/GO-SHIP-Easy-Ocean/releases/tag/v1.4).
 
 # Output Formats
