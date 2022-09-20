@@ -1,17 +1,17 @@
 % variables
-PREFIX='/local/Shared/';
-MDIR = [PREFIX 'CTD/MATLAB/'];
+PREFIX='/local/data/CTD/';
+MDIR = [PREFIX 'MATLAB/'];
 DIR = 'AR07W/';
 fname = 'ar07w';
 years = {'1990', '1992', '1993', '1994', '1995', '1996', '1997', '1998', ...
-         '2011b', '2012', '2013a', '2013b'};
+         '2011b', '2012', '2013a', '2013b', '2015'};
 % The following data are NOT calibrated and not included by default. See README.md
 %         '1999', '2001', '2002a', '2002b', '2003', '2004', ...
 %         '2005', '2006', '2007', '2008', '2009', '2010', '2011a'
 ll_grid = [54.9:0.1:60.6];
 pr_grid = [0:10:6500];
 depth_files = {'', '', '', '', '', '', '', '', '', '', '', '', '', '', ...
-         '', '', '', '', '', '', '', '', '', '', ''};
+         '', '', '', '', '', '', '', '', '', '', '', ''};
 
 
 tic;
