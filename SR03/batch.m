@@ -1,19 +1,19 @@
 % variables
-PREFIX='/local/Shared/';
-MDIR = [PREFIX 'CTD/MATLAB/'];
+PREFIX='/local/data/CTD/';
+MDIR = [PREFIX '/MATLAB/'];
 DIR = 'SR03/';
 fname = 'sr03';
-years = {'1991', '1993', '1994a', '1994b', '1995', '1996', '2001', '2008', '2011'};
+years = {'1991', '1993', '1994a', '1994b', '1995', '1996', '2001', '2008', '2011', '2018'};
 ll_grid = [-65.9:0.1:-43.9];
 pr_grid = [0:10:6500];
-depth_files = {'SR03/sr03_1991.depth', 'SR03/sr03_1993.depth', '', '', '', '', '', '', ''};
+depth_files = {'SR03/sr03_1991.depth', 'SR03/sr03_1993.depth', '', '', '', '', '', '', '', ''};
 
 tic;
 
 % MATLAB intermediate files
 for n = 1:length(years)
     mfile = [MDIR fname '_' years{n} '.mat'];
-    com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
+    com = ['read_ctd_exchange(''' PREFIX DIR years{n} '/'', ''' mfile ''');'];
     eval(com);
 end
 
