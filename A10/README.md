@@ -1,7 +1,7 @@
 # A10
 
 ## 1. Source
-In accordance with the [GO-SHIP recommendation](https://docs.google.com/document/d/1JEdqSOQu4-glFTCmBOpAQUXB-oqSE5I9cjv3gDz2V4o), 2009 occupation is counted as A9.5.
+In accordance with the [GO-SHIP recommendation](https://www.go-ship.org/Docs/A9.5_A10_A10.5__final.pdf), A9.5 is distinct from A10.
 
 ### 1992
 + [06MT22_5](https://cchdo.ucsd.edu/cruise/06MT22_5)
