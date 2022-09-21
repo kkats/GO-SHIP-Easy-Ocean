@@ -46,6 +46,13 @@
 ### 2016
 + [74JC20161110](https://cchdo.ucsd.edu/cruise/74JC20161110)
 
+### 2018
++ [74JC20181103](https://cchdo.ucsd.edu/cruise/74JC20181103)
+
+### 2021
++ [740H20210202](https://cchdo.ucsd.edu/cruise/740H20210202)
+
+
 
 ## 2. Glitches
 
@@ -58,3 +65,5 @@ and "1133 and 1137 dbar". Manually corrected.
 According to the cruise document, Standard Seawater batches P153, P154, and P155 were
 used but it is not clear on which station. Salinity bias is treated as unknown for this occupation.
 
+### 2021
+Pressure field does not have `CTDPRS_FLAG_W`. Use `read_ctd_exchange_2021.m`.
