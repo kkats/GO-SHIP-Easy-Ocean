@@ -1,12 +1,12 @@
 % variables
-PREFIX='/local/Shared/';
-MDIR = [PREFIX 'CTD/MATLAB/'];
+PREFIX='/local/data/CTD/';
+MDIR = [PREFIX 'MATLAB/'];
 DIR = 'P03/';
 fname = 'p03';
-years = {'1985', '2005'};
+years = {'1985', '2005', '2013'};
 ll_grid = [124.9:0.1:242.7];
 pr_grid = [0:10:6500];
-depth_files = {'P03/p03_1985.depth', ''};
+depth_files = {'P03/p03_1985.depth', '', ''};
 
 tic;
 
@@ -14,7 +14,7 @@ tic;
 for n = 1:length(years)
     mfile = [MDIR fname '_' years{n} '.mat'];
     if ~exist(mfile)
-        com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
+        com = ['read_ctd_exchange(''' PREFIX DIR years{n} '/'', ''' mfile ''');'];
         eval(com);
     end
 end
