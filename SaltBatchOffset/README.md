@@ -22,6 +22,8 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  A05 | 2011 |  | 29AH20110128 | no document |
 |  A05 | 2015 |  | 74EQ20151206 | no document |
 |  A05 | 2020 |  | 740H20200119 | P163 |
+|  A9.5 | 2009 | A10 | 740H20090307 | P150 |
+|  A9.5 | 2018 | A10 | 740H20180228 | unknown |
 |  A10 | 1992 |  | 06MT22_5 | P120 (undocumented) |
 |  A10 | 2003 |  | 49NZ0031106 | P142 |
 |  A10 | 2011 |  | 33RO20110926 | P152 |
@@ -99,6 +101,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  AR07W | 2013 | AR07 | 18HU20130507 | unknown |
 |  AR07W | 2013 | A02/AR07 | 06M220130509 | P153/P155 |
 |  AR07W | 2014 | A01/AR07E/AR28 | 74JC20140606 | P156 |
+|  AR07W | 2015 |  | 18HU20150504 | unknown |
 |  I01 | 1995 |  | 3175MB95_04 | unknown |
 |  I01 | 1995 | IR01/IR01W/I01W | 316N145_11 | P124/P126/P128 (no station info) |
 |  I01 | 1995 | IR01/IR01W/I01E | 316N145_12 | P124/P126/P128 (no station info) |
@@ -148,6 +151,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  P01 | 1999 | P01W | 49KA199905_1 | P133 |
 |  P01 | 2007 | P01C/P01H/P01W/P01E | 49NZ20070724/49NZ20071008 | P148 |
 |  P01 | 2014 |  | 49NZ20140717 | P156 |
+|  P01 | 2021 |  | 49NZ20210713 | P164 |
 |  P02 | 1993 | P02E | 492SSY9310_1 | P123 |
 |  P02 | 1994 | P02T | 49K6KY9401_1 | unknown |
 |  P02 | 1994 | P02C | 49EWBO9401_1 | P121 |
@@ -158,6 +162,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  P03 | 2005 | P03E | 49NZ20051031 | P145 |
 |  P03 | 2005 | P03W | 49NZ20051127 | P145 |
 |  P03 | 2006 | P03W/P03H | 49NZ20060120 | P145 |
+|  P03 | 2013 | P03W | 49UP20130619 | P155 |
 |  P04 | 1989 | P04W/P04C/P04E | 32MW893_1/32MW893_2/32MW893_3 | P97 |
 |  P06 | 1992 | P06C | 316N138_4 | P116 |
 |  P06 | 1992 | P06E | 316N138_3 | P116 |
@@ -174,6 +179,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  P10 | 1993 |  | 3250TN026_1 | P114(1-12)/P120(13-) |
 |  P10 | 2005 |  | 49NZ20050525 | P145 |
 |  P10 | 2011 |  | 49NZ20111220/49NZ20120113 | P153 |
+|  P10 | 2014 |  | 49UP20140609 | P156 |
 |  P13 | 1991 |  | 49HH915_1/49HH915_2 | P112/P114 |
 |  P13 | 1993 |  | 49HH932_1 | P114 |
 |  P13 | 1992 |  | 3220CGC92_0/3220CGC92_1/3220CGC92_2 | P114 |
@@ -228,6 +234,8 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  SR01 | 2015a | SR01b/S01 | 74JC20150110 | unknown |
 |  SR01 | 2015b | SR01b/S01 | 74JC20151217 | P156 (1-14)/P158 (15-) |
 |  SR01 | 2016 | SR01b/S01 | 74JC20161110 | P158 |
+|  SR01 | 2018 | SR01b/S01 | 74JC20181103 | P160 |
+|  SR01 | 2021 | A23/SR01/S01 | 740H20210202 | P164 |
 |  SR03 | 1991 | S03 | 09AR9101_1 | P115 (undocumented) |
 |  SR03 | 1993 | S03 | 09AR9309_1 | P121 (Table A6.2 of cruise report for 09AR9407_1) |
 |  SR03 | 1994 | S03 | 09AR9404_1 | P121 (86-107)/P123 (1-85) (Table A6.2 of c.r. for 09AR9407_1 | Table 8.3.10 of c.r. for 320696_3) |
@@ -237,6 +245,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  SR03 | 2001 | S03 | 09AR20011029 | P133 (1-7/30/43-45/89-115/120-125/129-135)/P137 (8-9/14-29)/P140 (37-42/46-88/116-119/126-128)/P133 & P137 (10-13)/P133 & P140(31-36) |
 |  SR03 | 2008 | S03 | 09AR20080322 | P147 (1-8/11-73)/P148 (9-10) |
 |  SR03 | 2011 | S03 | 09AR20110104 | P149 (53/55-61/87-99/109-115/141)/P150 (22-25/28-40/48-50/62-68/84-86/100-102)/P151 (1-9/11/12/41-47/51/52/54/69-83/103-108/142/144/146-149)/P152 (10/13-21/26/27/116-140/143/145) |
+|  SR03 | 2018 |  | 096U20180111 | P158/P161 |
 |  SR04 | 1989 | SCM02/SR02 | 06AQANTVIII_2 | P111 (undocumented) |
 |  SR04 | 1990 | SCM07 | 06AQANTIX_2 | P113 (undocumented) |
 |  SR04 | 1992 |  | 06AQQNTX_7/06AQ19921203 | unknown |
