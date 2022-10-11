@@ -68,7 +68,7 @@ globalatts.date_issued = datestr(now,'yyyymmdd');
 %put the expocode file names here with full web links from
 %README.MD file for the line
 %double quotes(?), separated by commas
-pth = [repopath '/GO-SHIP-Easy-Ocean/' SECTION '/README.md'];
+pth = [repopath '/WOCE-GO-SHIP-clean-sections/' SECTION '/README.md'];
 fid = fopen(pth,'r');
 if fid < 1
     error(['Path to repo for ' line_id ', ' pth ' is incorrect'])
