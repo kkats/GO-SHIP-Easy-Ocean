@@ -63,6 +63,7 @@ else
     end
     nstn = length(good)
 end
+fclose(fid);
 
 [lats, lons, deps] = deal(NaN(1,nstn));
 

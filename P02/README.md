@@ -12,10 +12,14 @@
 
 Note: `318M200406_tm_ct1.zip` and `318M200406_tm_nc_ctd.zip` are for "trace metal casts" down to 1000 dbar (manual P.48) and not used.
 
-
 ### 2004
 
 + [318M20130321](https://cchdo.ucsd.edu/cruise/318M20130321)
+
+### 2022
+
++ [33RR20220430](https://cchdo.ucsd.edu/cruise/33RR20220430)
++ [33RR20220613](https://cchdo.ucsd.edu/cruise/33RR20220613)
 
 ## 2. Glitches
 
