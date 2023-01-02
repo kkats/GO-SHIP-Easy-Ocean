@@ -58,7 +58,7 @@ for i = 1:(length(x)-1)
         zlarge = gaus1 * w1;
         % small scale
         gaus2 = exp(-abs(xn) / efold2); % use exponential (Roemmich, 1983)
-        acov2 = gaus2 + diag(n) * evar2;
+        acov2 = gaus2 + diag(ones(n,1)) * evar2;
         w2 = acov2 \ (z1 - zlarge);
         % gridding
         xh = ones(length(x_h),1) * x1' - x_h' * ones(1,n);
