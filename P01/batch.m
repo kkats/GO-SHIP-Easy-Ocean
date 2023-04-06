@@ -1,6 +1,6 @@
 % variables
-PREFIX='/local/data/CTD/';
-MDIR = [PREFIX 'MATLAB/'];
+PREFIX='/local/Shared/';
+MDIR = [PREFIX 'CTD/MATLAB/'];
 DIR = 'P01/';
 fname = 'p01';
 years = {'1985', '1999', '2007', '2014', '2021'};

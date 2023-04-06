@@ -1,6 +1,6 @@
 % variables
-PREFIX='/local/data/CTD/';
-MDIR = [PREFIX 'MATLAB/'];
+PREFIX='/local/Shared/';
+MDIR = [PREFIX 'CTD/MATLAB/'];
 DIR = 'P10/';
 fname = 'p10';
 years = {'1993', '2005', '2011', '2014'};
@@ -14,7 +14,7 @@ tic;
 for n = 1:length(years)
     mfile = [MDIR fname '_' years{n} '.mat'];
     if ~exist(mfile)
-        com = ['read_ctd_exchange(''' PREFIX DIR years{n} '/'', ''' mfile ''');'];
+        com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
         eval(com);
     end
 end

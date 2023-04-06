@@ -1,7 +1,7 @@
 #!/bin/sh
 DIR=A9.5
 name=a9.5
-PREFIX=/local/data/CTD
+PREFIX=/local/Shared
 (cd $PREFIX/output/gridded/$DIR; gzip *xyz)
 for year in 2009 2018
 do

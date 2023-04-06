@@ -1,7 +1,7 @@
 #!/bin/sh
 DIR=AR07W
 name=ar07w
-PREFIX=/local/data/CTD
+PREFIX=/local/Shared
 (cd $PREFIX/output/gridded/$DIR; gzip *xyz)
 for year in 1990 1992 1993 1994 1995 1996 1997 1998 2011b 2012 2013a 2013b 2015
 do

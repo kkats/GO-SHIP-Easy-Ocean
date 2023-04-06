@@ -1,7 +1,7 @@
 #!/bin/sh
 DIR=SR03
 name=sr03
-PREFIX=/local/data/CTD
+PREFIX=/local/Shared/
 (cd $PREFIX/output/gridded/$DIR; gzip *xyz)
 for year in 1991 1993 1994a 1994b 1995 1996 2001 2008 2011 2018
 do

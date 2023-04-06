@@ -1,6 +1,5 @@
 % variables
-%PREFIX='/local/Shared/';
-PREFIX='/local/data/';
+PREFIX='/local/Shared/';
 MDIR = [PREFIX 'CTD/MATLAB/'];
 DIR = 'A22/';
 fname = 'a22';

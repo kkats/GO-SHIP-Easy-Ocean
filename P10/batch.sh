@@ -1,7 +1,7 @@
 #!/bin/sh
 DIR=P10
 name=p10
-PREFIX=/local/data/CTD
+PREFIX=/local/Shared/
 (cd $PREFIX/output/gridded/$DIR; gzip *xyz)
 for year in 1993 2005 2011 2014
 do

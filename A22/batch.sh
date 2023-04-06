@@ -1,8 +1,7 @@
 #!/bin/sh
 DIR=A22
 name=a22
-#PREFIX=/local/Shared
-PREFIX=/local/data
+PREFIX=/local/Shared
 (cd $PREFIX/output/gridded/$DIR; gzip *xyz)
 for year in 1997 2003 2012 2021
 do
