@@ -8,12 +8,12 @@ function D_reported = fromGLODAP(fname_list, param)
 % aou, c13, c14, ccl4, cfc11, cfc113, cfc11, cfc12, chla, doc, doi, don, ...
 % fco2, fco2temp, gamma, h3, he, he3, neon, nitrate, nitrite, o18, oxygen, ...
 % pccl, pcfc11, pcfc113, pcfc12, phosphate, phts25p0, phtsinsitutp, ...
-% psf6, salinity, sf6, sigma0, sigma1, sigma2, sigma3, sigma4, silicate, ...
-% talk, tco2, tdn, temperature, theta, toc
+% psf6, sf6, sigma0, sigma1, sigma2, sigma3, sigma4, silicate, ...
+% talk, tco2, tdn, theta, toc
 %
 % Note: output includes _pressure_ and `param`
 %
-% Algorithm
+% Algorithm:
 %
 % Read a list file (1st argument of the function) for EasyOcean. For each EXPOCODE on the list,
 % extract from GLODAPv2 those data satisfying the following conditions;
@@ -111,12 +111,13 @@ addpath '../';
 rmpath '../';
 
 [data, pressure] = deal(NaN(nbotmax, length(lons)));
+[SA, CT] = deal(NaN(nbotmax, length(lons)));
 [latlist, lonlist, deplist] = deal(NaN(1, length(lons)));
 stationlist = cell(length(lons),1);
 paramU = upper(param);
 for i = 1:length(idx)
     k = idx(i);
-    jdx = good(k,:);
+    jdx = unique(good(k,:)); % unique() for possible duplicates
     kdx = jdx(find(jdx > 0));
     lat1 = extract(G2latitude, kdx, 0.02);
     lon1 = extract(G2longitude, kdx, 0.02);
@@ -142,10 +143,11 @@ for i = 1:length(idx)
     deplist(i) = dep1;
     stationlist{i} = station1;
     pres1 = G2pressure(kdx);
+    salt1 = G2salinity(kdx); saltf = G2salinityf(kdx);
+    salt1(saltf ~= 2) = NaN;
+    temp1 = G2temperature(kdx);
     if strncmp(paramU, 'AOU', 3)
         data1 = G2aou(kdx); flag1 = G2aouf(kdx);
-    elseif strncmp(paramU, 'SALINITY', 8)
-        data1 = G2salinity(kdx); flag1 = G2salinityf(kdx);
     elseif strncmp(paramU, 'OXYGEN', 6)
         data1 = G2oxygen(kdx); flag1 = G2oxygenf(kdx);
     elseif strncmp(paramU, 'CFC11', 5)
@@ -173,17 +175,28 @@ for i = 1:length(idx)
     data1(flag1 ~= 2) = NaN;
     %
     %
-    %
     ig = find(~isnan(pres1) & ~isnan(data1));
     [ih, ldx] = sort(pres1(ig));
-    pressure(1:length(ih), i) = pres1(ig(ldx));
-    data(1:length(ih), i) = data1(ig(ldx));
+    nb = length(ih);
+    pressure(1:nb, i) = pres1(ig(ldx));
+    data(1:nb, i) = data1(ig(ldx));
+    salt = salt1(ig(ldx));
+    temp = temp1(ig(ldx));
+    % (t, s) to (CT, SA)
+    [SA(1:nb,i), in_ocean] = gsw_SA_from_SP(salt, pressure(1:nb,i), lon1, lat1);
+    if any (in_ocean < 1)
+        error('fromGLODAP.m: gsw_SA_form_SP, in_ocean == 0');
+    end
+    CT(1:nb,i) = gsw_CT_from_t(SA(1:nb,i), temp, pressure(1:nb,i));
 end
+
 D_reported = struct('Station', {stationlist}, ...
                     'latlist', latlist, ...
                     'lonlist', lonlist, ...
                     'deplist', deplist, ...
                     'pressure', pressure, ...
+                    'CT', CT, ...
+                    'SA', SA, ...
                     'data', data);
 end
 % exact equality
