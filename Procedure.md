@@ -18,6 +18,13 @@ We use `P06` section as an example.
 ~~~
 >> flagJ = findJstations(stations, 'work/P06/JOA/P06_1992_bottle.csv');
 ~~~
+
+Recent JOA data are provided in CSV -- no conversion is needed. For these CSV data, apply
+~~~
+>> flagJ = findJOAstations(stations, 'work/A25/A25_OVIDE_2004_bot_clean_edited_hy1.csv');
+~~~
+to obtain the flag for JOA file.
+
 1. (optional. When Purkey's product is available for this occupation;) Find stations in Purkey's product.
 ~~~
 >> load 'work/P06/ctd_all_gridded_P06.mat' % Purkey's product

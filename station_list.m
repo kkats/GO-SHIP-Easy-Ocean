@@ -1,6 +1,6 @@
 function station_list(s, isInJOA, isInP, isInAtlas, filename)
 %
-% print out stations(:) data defined in read_ctd_nc.m
+% print out stations(:) data defined in read_ctd_nc.m or read_ctd_exchange.m
 %
 %
 %
