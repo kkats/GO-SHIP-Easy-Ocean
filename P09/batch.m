@@ -3,10 +3,10 @@ PREFIX='/local/Shared/';
 MDIR = [PREFIX 'CTD/MATLAB/'];
 DIR = 'P09/';
 fname = 'p09';
-years = {'1994', '2010', '2016'};
+years = {'1994', '2010', '2016', '2022'};
 ll_grid = [-2.87:0.1:34.25];
 pr_grid = [0:10:6500];
-depth_files = {'', '', ''};
+depth_files = {'', '', '', ''};
 
 tic;
 
