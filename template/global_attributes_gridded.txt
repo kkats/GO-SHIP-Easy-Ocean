@@ -12,7 +12,7 @@ S, goship_woce_line_id 		=
 S, all_years_used		= 
 S, instrument                   = CTD
 S, keywords                     = GO-Ship Easy Ocean, CTD, gridded product, WOCE lines, GO-Ship lines
-S, references                   = Katsumata et al., 2021 (in prep), https://www.go-ship.org/,  https://cchdo.ucsd.edu/, IOC, SCOR and IAPSO, 2010: The international thermodynamic equation of seawater - 2010: Calculation and use of thermodynamic properties. Intergovernmental Oceanographic Commission, Manuals and Guides No. 56, UNESCO (English), 196 pp. 
+S, references                   = https://github.com/kkats/GO-SHIP-Easy-Ocean, https://www.go-ship.org/,  https://cchdo.ucsd.edu/, IOC, SCOR and IAPSO, 2010: The international thermodynamic equation of seawater - 2010: Calculation and use of thermodynamic properties. Intergovernmental Oceanographic Commission, Manuals and Guides No. 56, UNESCO (English), 196 pp. 
 
 % where
 % geospatial_bounds
@@ -45,7 +45,7 @@ S, creator_email                = k.katsumata@jamstec.go.jp
 
 % how
 S, lineage                 = Data were created as described at: https://github.com/kkats/GO-SHIP-Easy-Ocean from the datasets listed in source_file
-S, citation                = The citation in a list of references is: "Katsuro Katsumata, Sarah Purkey, Rebecca Cowley, Bernadette M. Sloyan, Stephen C. Diggs Thomas S. Moore II, Lynne D. Talley, James H. Swift 2021. GO-SHIP Easy Ocean: Formatted and gridded ship-based hydrographic section data (in preparation)".
-S, acknowledgement         = Data were collected and made publicly available by the International Global Ship-based Hydrographic Investigations Program (GO-SHIP;http://www.go-ship.org/) and the national programs that contribute to it. Cite Katsumata, et al 2021 (in prep) when using the GO-SHIP Easy Ocean product
+S, citation                = The citation in a list of references is: "K. Katsumata, S. G. Purkey, R. Cowley, B. M. Sloyan, S. C. Diggs, T. S. Moore II, L. D. Talley, J. H. Swift, GO-SHIP Easy Ocean: Gridded ship-based hydrographic section of temperature, salinity, and dissolved oxygen (2022), Scientific Data, doi:10.1038/s41597-022-01212-w".
+S, acknowledgement         = Data were collected and made publicly available by the International Global Ship-based Hydrographic Investigations Program (GO-SHIP;http://www.go-ship.org/) and the national programs that contribute to it. Cite Katsumata, et al 2022, doi:10.1038/s41597-022-01212-w, when using the GO-SHIP Easy Ocean product
 S, disclaimer              = Data, products and services from CCHDO are provided "as is" without any warranty as to fitness for a particular purpose.
 S, license                 = http://creativecommons.org/licenses/by/4.0/
