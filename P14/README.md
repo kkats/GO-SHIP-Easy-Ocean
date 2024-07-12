@@ -9,6 +9,11 @@
 + [49NZ20071122](https://cchdo.ucsd.edu/cruise/49NZ20071122)
 + [49NZ20121128](https://cchdo.ucsd.edu/cruise/49NZ20121128)
 
+### 2023
+
++ [49NZ20231006](https://cchdo.ucsd.edu/cruise/49NZ20231006)
+
+
 ## 2. Glitches
 
 For JOA data, `P14_1992_1996_clean_CTD.joa` has more flags than
