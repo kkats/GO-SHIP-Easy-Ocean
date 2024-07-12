@@ -25,6 +25,8 @@
 
 No Atlas station data available.
 
+
+
 ### 1998
 We need a depth file for 1998, produced from the SUM file. Note station 6, 29 do not
 have depth and need to hand edit `a05_1998.depth` to remove these 2 lines.
@@ -42,3 +44,6 @@ regular "pressure, temperature, salinity, oxygen". Use `read_ctd_exchange_2011.m
 
 ### 2020
 No SUM file as of 26 Jan 2021.
+
+### 2022
+[74EQ20220209](https://cchdo.ucsd.edu/cruise/74EQ20220209) occupied only a segment of about 3 degree longitude length and not included in the product.
