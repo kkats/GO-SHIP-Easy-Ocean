@@ -11,6 +11,10 @@
 ### 2011
 + [49RY20110515](https://cchdo.ucsd.edu/cruise/49RY20110515)
 
+### 2018
++ [49UP20180614](https://cchdo.ucsd.edu/cruise/49UP20180614)
++ [49UP20180806](https://cchdo.ucsd.edu/cruise/49UP20180806)
+
 ## 2. Glitches
 
 ### 1991
