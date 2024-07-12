@@ -15,7 +15,7 @@ for n = 1:length(years)
     mfile = [MDIR fname '_' years{n} '.mat'];
     if ~exist(mfile)
         if n == 4
-            com = ['addpath P02; read_ctd_exchange_2022(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath P02'];
+            com = ['read_ctd_exchange_2023(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
         else
             com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
         end

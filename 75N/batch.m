@@ -2,7 +2,6 @@
 PREFIX='/local/Shared/';
 MDIR = [PREFIX 'CTD/MATLAB/'];
 DIR = '75N/';
-BDIR = '../CTD/75N/';
 fname = '75n';
 years = {'1994', '1995', '1997', '1998', '1999', '2000', '2001', '2006', '2016'};
 ll_grid = [-16.0:0.1:18.0];

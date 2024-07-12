@@ -42,7 +42,8 @@ To visualize a section, e.g. `P16` section occupied in 2015, use;
 This is the clean data with no horizontal interpolation and no vertical interpolation.
 We support Matlab format
 and ASCII CSV in [WHP Exchange format](https://cchdo.ucsd.edu/formats).
-Note: we do not perform any additional quality control. Bad data in the original data set remain in the product.
+Note: we do not perform any additional quality control except for obvious cases listed [below](https://github.com/kkats/GO-SHIP-Easy-Ocean#36-bad-data).
+Bad data in the original data set remain in the product.
 
 ### 1.1 All stations
 It is possible to include all stations in the original CTD file in the `reported` data set, e.g., for float calibration purposes.
@@ -190,7 +191,7 @@ If you notice oxygen in the source but not in the product, please notify us.
 ### 3.6 Bad data
 We do not perform any quality control on top of the [WOCE flags](https://exchange-format.readthedocs.io/en/v1.2.0/quality.html) provided in the source data.
 
-For some obvious cases only, did we manually removed suspect data
+For some obvious cases only, however, did we manually removed suspect data
 even with `flag = 2`(["acceptable measurement"](https://exchange-format.readthedocs.io/en/v1.2.0/quality.html)).
 They are recorded in `README.md`'s and tabulated here.
 | section | year | EXPO code | station | cast | description |
@@ -227,6 +228,40 @@ generated from `README.md`s by `getCTDlist.pl`.
 It is possible to reprocess all sections with `all_batch.m`. Note that
 `PREFIX` in `batch.m` and `batch.sh` is the output directory. This directory is hard-coded in `all_batch.m`.
 Edit all these files as appropriate before running `all_batch.m`.
+
+## 5. GLODAP interface
+
+The list files (e.g. `P16/p16_1992.list`) can be used to extract data from [GLODAP](https://glodap.info/) (tested on GLODAP version 2)
+to plot such bottle data as carbons, nutrients, and CFCs. Relevant Matlab scripts are found under
+[GLODAPinterface](https://github.com/kkats/GO-SHIP-Easy-Ocean/tree/master/GLODAPinterface).
+
+Download the Matlab binary (.mat) of `Merged Master File` from the GLODAP site. The location of this file is hard-coded in line 36
+of [fromGLODAP.m](https://github.com/kkats/GO-SHIP-Easy-Ocean/blob/master/GLODAPinterface/fromGLODAP.m). Then
+
+~~~
+Matlab>> D_reported = fromGLODAP('P16/p16_1992.list', 'cfc12');
+~~~
+
+will extract the CFC12 data along the stations listed in `P16/p16_1992.list` from GLODAP data set and put them
+in the `D_reported` structure (in the `data` field) without gridding.
+For gridding and/or plotting, see an example [plotGLODAP.m](https://github.com/kkats/GO-SHIP-Easy-Ocean/blob/master/GLODAPinterface/plotGLODAP.m).
+
+The parameter `cfc12` can be one of
+~~~
+aou, c13, c14, ccl4, cfc11, cfc113, cfc11, cfc12, chla, doc, doi, don,
+fco2, fco2temp, gamma, h3, he, he3, neon, nitrate, nitrite, o18, oxygen,
+pccl, pcfc11, pcfc113, pcfc12, phosphate, phts25p0, phtsinsitutp,
+psf6, sf6, sigma0, sigma1, sigma2, sigma3, sigma4, silicate,
+talk, tco2, tdn, theta, toc
+~~~
+
+The algorithm to find stations is described in the source code.
+
+For gridding, use your favourite vertical interpolation scheme. Somewhat classical Reiniger-Ross method
+([Deep-Sea Res. 1968](https://doi.org/10.1016/0011-7471(68)90040-5)) is found as `GLODAPinterface/vinterp_rr68.m`.
+The example in `GLODAPinterface/plotGLODAP.m` uses MRST-PCHIP method (Barker and McDougall,
+[J.Atmos.Ocean Tech. 2011](https://doi.org/10.1175/JTECH-D-19-0211.1)) packed in the
+[TEOS-10 GSW Oceanographic Toolbox](https://www.teos-10.org/software.htm).
 
 ## ToDo
 
