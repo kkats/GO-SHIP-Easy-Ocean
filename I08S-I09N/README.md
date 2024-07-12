@@ -13,6 +13,9 @@
 + [33RR20160208](https://cchdo.ucsd.edu/cruise/33RR20160208)
 + [33RR20160321](https://cchdo.ucsd.edu/cruise/33RR20160321)
 
+### 2024
++ [325020240221](https://cchdo.ucsd.edu/cruise/325020240221)
+
 ## 2. Glitches
 
 ### 1995
@@ -37,3 +40,7 @@ CTD data for station 199 was not included in the zip file.
 ### 2016
 
 Depths are missing. At the time of writing, the SUM files are not available.
+
+### 2024
+
+Pressure does not have flag. New US GO-SHIP standard? Use `read_ctd_exchange_2023.m`.
