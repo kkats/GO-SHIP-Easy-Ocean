@@ -14,6 +14,9 @@
 ### 2009
 + [33RR20090320](https://cchdo.ucsd.edu/cruise/33RR20090320)
 
+### 2023
++ [33RR20230722](https://cchdo.ucsd.edu/cruise/33RR20230722)
+
 ## 2. Glitches
 
 ### 1987
@@ -41,3 +44,5 @@ Use bottom file
 ```
 % awk '$8=="BO" {print $1, $3, $4, $16}' i05_33rr20090320su.txt >i05_2009.depth
 ```
+### 2023
+Pressure does not have flag. Use `read_ctd_exchange_2023.m`.

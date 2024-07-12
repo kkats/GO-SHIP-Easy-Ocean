@@ -3,10 +3,10 @@ PREFIX='/local/Shared/';
 MDIR = [PREFIX 'CTD/MATLAB/'];
 DIR = 'I05/';
 fname = 'i05';
-years = {'1987', '1995', '2002', '2009'};
+years = {'1987', '1995', '2002', '2009', '2023'};
 ll_grid = [30.3:0.1:115.4];
 pr_grid = [0:10:6500];
-depth_files = {'', '', 'I05/i05_2002.depth', 'I05/i05_2009.depth'};
+depth_files = {'', '', 'I05/i05_2002.depth', 'I05/i05_2009.depth', ''};
 
 tic;
 
@@ -14,7 +14,11 @@ tic;
 for n = 1:length(years)
     mfile = [MDIR fname '_' years{n} '.mat'];
     if ~exist(mfile)
-        com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
+        if n == 5
+            com = ['addpath I05; read_ctd_exchange_2023(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath I05'];
+        else
+            com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
+        end
         eval(com);
     end
 end
