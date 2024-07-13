@@ -22,6 +22,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  A05 | 2011 |  | 29AH20110128 | no document |
 |  A05 | 2015 |  | 74EQ20151206 | no document |
 |  A05 | 2020 |  | 740H20200119 | P163 |
+|  A05 | 2022 |  | 74EQ20220209 | P164 |
 |  A9.5 | 2009 | A10 | 740H20090307 | P150 |
 |  A9.5 | 2018 | A10 | 740H20180228 | unknown |
 |  A10 | 1992 |  | 06MT22_5 | P120 (undocumented) |
@@ -50,6 +51,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  A16 | 2011 | A16N | 74DI20110715 | unknown |
 |  A16 | 2013 | A16N | 33RO20131803 | P155 |
 |  A16 | 2013 | A16S/A23 | 33RO20131223 | P154 |
+|  A16 | 2023 | A16N | 33RO20230306 | P166 |
 |  A20 | 1997 |  | 316N151_3 | unknown |
 |  A20 | 2003 |  | 316N200309 | P140/P141 |
 |  A20 | 2012 |  | 33AT20120419 | P153 |
@@ -124,6 +126,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  I05 | 1995 | I05E | 316N145_7 | P126 |
 |  I05 | 2002 |  | 74AB20020301 | P140 |
 |  I05 | 2009 |  | 33RR20090320 | P149 |
+|  I05 | 2023 |  | 33RR20230722 | P166 |
 |  I06 | 1993 | I06S | 35MFCIVA_1 | P121 |
 |  I06 | 1996 | I06S | 35MF103_1 | unknown |
 |  I06 | 2008 | I06S | 33RR20080204 | P149 |
@@ -136,6 +139,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  I08N | 2019 |  | 49NZ20191205 | P162 |
 |  I08S | 2007 | I08 | 33RR20070204 | P147 |
 |  I08S | 2016 | I08 | 33RR20080208 | P158 |
+|  I08S | 2024 | I08 | 325020240221 | P167 |
 |  I09N | 1995 | I09 | 316N145_6 | P126 |
 |  I09N | 2007 | I09 | 33RR20070322 | P147 |
 |  I09N | 2016 | I09 | 33RR20160321 | P158 |
@@ -174,6 +178,7 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  P03 | 2013 | P03W | 49UP20130619 | P155 |
 |  P03 | 2021 | P03W | 49UP20210719 | P164 |
 |  P04 | 1989 | P04W/P04C/P04E | 32MW893_1/32MW893_2/32MW893_3 | P97 |
+|  P04 | 2015 | P04W | 49UP20151724 | P157 |
 |  P06 | 1992 | P06C | 316N138_4 | P116 |
 |  P06 | 1992 | P06E | 316N138_3 | P116 |
 |  P06 | 1992 | P06W | 316N138_5 | P116 |
@@ -195,12 +200,14 @@ Undocumented batch numbers are from Purkey through personal communication.
 |  P13 | 1993 |  | 49HH932_1 | P114 |
 |  P13 | 1992 |  | 3220CGC92_0/3220CGC92_1/3220CGC92_2 | P114 |
 |  P13 | 2011 |  | 49RY20110515 | unknown |
+|  P13 | 2018 |  | 49UP20180614/49UP20180806 | P161 |
 |  P14 | 1992 | P14C | 316N138_7 | P120 |
 |  P14 | 1993 | P14N | 325023_1/325024_1 | P122 |
 |  P14 | 1996 | P14S | 31DSCG96_1 | P114 |
 |  P14 | 2007 | P14N | 49NZ20071008 | P148 |
 |  P14 | 2007 | P14C | 49NZ20071122 | P148 |
 |  P14 | 2012 | P14S | 49NZ20121128 | P154 |
+|  P14 | 2023 | P14N | 49NZ20231006 | P166 |
 |  P15 | 1990 | P15S | 3175CG90_1 | P112 |
 |  P15 | 1994 | P15N | 18DD9403_1/18DD9403_2 | P121 |
 |  P15 | 1996 | P14/P14S/P15S | 31DSCG96_1 | P114 |
