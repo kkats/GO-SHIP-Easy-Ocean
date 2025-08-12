@@ -4,7 +4,7 @@ function read_ctd_exchange(directory, outputfname)
 %        and outputfilename (optional)
 %
 % Note: Use only flag == 2 (can be modified though)
-%       For I05 (2023)
+%       For I05 (2023), I08S-I09N (2024)
 %
 %
 if nargin < 1
