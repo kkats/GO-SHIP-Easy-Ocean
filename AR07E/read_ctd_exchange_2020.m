@@ -4,7 +4,6 @@ function read_ctd_exchange(directory, outputfname)
 %        and outputfilename (optional)
 %
 % Note: Use only flag == 2 (can be modified though)
-%       For I05 (2023)
 %
 %
 if nargin < 1
@@ -97,17 +96,18 @@ for i = 1:N
             fclose(fid);
             break;
         end
-        a = sscanf(tline, '%f,%f,%d,%f,%d,%f,%d');
+        % No flag provided -- optimistically assume they all have '2'
+        a = sscanf(tline, '%f,%f,%f');
         m = m + 1;
         p(m) = a(1);
         pf(m) = 2; %a(2);
         t(m)= a(2);
-        tf(m) = a(3);
-        s(m) = a(4);
-        sf(m) = a(5);
-        if length(a) > 6
-            o(m) = a(6);
-            of(m) = a(7);
+        tf(m) = 2; %a(4);
+        s(m) = a(3);
+        sf(m) = 2; %a(6);
+        if length(a) > 7
+            o(m) = a(7);
+            of(m) = a(8);
         else
             o(m) = nan;
             of(m) = nan;

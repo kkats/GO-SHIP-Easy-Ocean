@@ -43,6 +43,9 @@
 ### 2015
 + [58GS20150410](https://cchdo.ucsd.edu/cruise/58GS20150410)
 
+### 2020
++ [64PE20200711](https://cchdo.ucsd.edu/cruise/64PE20200711)
+
 ## 2. Glitches
 
 Atlas data are not found online.
@@ -59,3 +62,10 @@ Data from year 2000 do not have flags. We assume all are good (flag=2) and
 use `read_ctd_exchange_2000.m`. The rightmost column is CTDFLUOR, not oxygen.
 Similarly, the rightmost column for 2005 data is not oxygen. Use
 `read_ctd_exchange_2005.m`.
+
+For year 2020, depth is not provided in the data. Use the [SUM file](https://cchdo.ucsd.edu/data/42485/64PE20200711su.txt)
+to produce the depth file
+```
+% awk 'NR > 4 {print $1, $3, $4, $16}' 64PE20200711su.txt >ar07e_2020.depth
+```
+
