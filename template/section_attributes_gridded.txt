@@ -1,3 +1,4 @@
 S, long_name                 = gridded_section_repeat_number
 N, valid_min                 = 1
 N, valid_max                 = 50
+N, units                     = 1
