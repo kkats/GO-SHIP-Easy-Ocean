@@ -34,6 +34,15 @@
 ### 2005
 + [64PE20050907](https://cchdo.ucsd.edu/cruise/64PE20050907)
 
+### 2007
++ [64PE20070830](https://cchdo.ucsd.edu/cruise/64PE20070830)
+
+### 2009
++ [64PE20090924](https://cchdo.ucsd.edu/cruise/64PE20090924)
+
+### 2011
++ [64PE20110724](https://cchdo.ucsd.edu/cruise/64PE20110724)
+
 ### 2014a
 + [35PK20140515](https://cchdo.ucsd.edu/cruise/35PK20140515)
 
@@ -52,16 +61,14 @@ Atlas data are not found online.
 
 JOA data not available at the time of writing.
 
-The 2007 cruise [64PE20070830](https://cchdo.ucsd.edu/cruise/64PE20070830)
-covered western several stations of A01E but diverts in the central and eastern
-parts and thus not considered here as reoccupation.
 The stations on [45CE20100209](https://cchdo.ucsd.edu/cruise/45CE20100209) in 2010
 are located too far east and not considered as reoccupation.
 
-Data from year 2000 do not have flags. We assume all are good (flag=2) and
+Data from year 2000 and 2009 do not have flags. We assume all are good (flag=2) and
 use `read_ctd_exchange_2000.m`. The rightmost column is CTDFLUOR, not oxygen.
 Similarly, the rightmost column for 2005 data is not oxygen. Use
 `read_ctd_exchange_2005.m`.
+The data from year 2011 do have oxygen. Use `read_ctd_exchange_2011.m`.
 
 For year 2020, depth is not provided in the data. Use the [SUM file](https://cchdo.ucsd.edu/data/42485/64PE20200711su.txt)
 to produce the depth file

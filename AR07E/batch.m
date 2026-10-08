@@ -4,10 +4,11 @@ MDIR = [PREFIX 'CTD/MATLAB/'];
 DIR = 'AR07E/';
 fname = 'ar07e';
 years = {'1990', '1991a', '1991b', '1991c', '1992', '1994', '1995', ...
-         '1996', '1997', '2000', '2005', '2014a', '2014b', '2015', '2020'};
+         '1996', '1997', '2000', '2005', '2007', '2009', '2011', '2014a', '2014b', '2015', '2020'};
 ll_grid = [314.3:0.1:346.0];
 pr_grid = [0:10:6500];
-depth_files = {'', '', '', '', '', '', '', '', '', '', '', '', '', '', 'AR07E/ar07e_2020.depth'};
+depth_files = {'', '', '', '', '', '', '', ...
+         '', '', '', '', '', '', '', '', '', '', 'AR07E/ar07e_2020.depth'};
 
 tic;
 
@@ -19,6 +20,10 @@ for n = 1:length(years)
             com = ['addpath AR07E; read_ctd_exchange_2000(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath AR07E'];
         elseif n == 11
             com = ['addpath AR07E; read_ctd_exchange_2005(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath AR07E'];
+        elseif n == 13
+            com = ['addpath AR07E; read_ctd_exchange_2000(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath AR07E'];
+        elseif n == 14
+            com = ['addpath AR07E; read_ctd_exchange_2011(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath AR07E'];
         elseif n == 16
             com = ['addpath AR07E; read_ctd_exchange_2020(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath AR07E'];
         else
