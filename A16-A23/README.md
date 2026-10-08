@@ -24,6 +24,10 @@
 + [33RO20130803](https://cchdo.ucsd.edu/cruise/33RO20130803)
 + [33RO20131223](https://cchdo.ucsd.edu/cruise/33RO20131223)
 
+### 2023
++ [33RO20230306](https://cchdo.ucsd.edu/cruise/33RO20230306)
++ [33RO20230413](https://cchdo.ucsd.edu/cruise/33RO20230413)
+
 ## 2. Glitches
 
 ### 1988
@@ -65,7 +69,7 @@ We use the "cast 1"s for the CTD data.
 
 No depth data available.
 
-### 2003
+### 2013
 
 #### `findJstations`
 With `A16_2003_2005_clean_bottle.csv`.
@@ -80,3 +84,6 @@ Warning: 3 JOA     1-99     -60.0157    329.1072 2005-01-17 d=2733
 Warning: 3 CCHDO   1-1     -60.0157    329.1072 2005-01-17 d=2734
 ~~~
 Again, we use the CTD data as is.
+
+### 2023
+Use `read_ctd_exchange2023.m` in place of `read_ctd_exchange.m`.
