@@ -20,7 +20,7 @@ end
 
 % initialisation
 N = length(files);
-[pr, te, sa, ox, pr_flg, te_flg, sa_flg, ox_flg] = deal(NaN(7500,N));
+[pr, te, sa, ox, pr_flg, te_flg, sa_flg, ox_flg] = deal(NaN(20000,N));
 stations(1:N) = struct('EXPO',       '', ...
                        'Stnnbr',     '', ...
                        'Cast',        0, ...
@@ -88,7 +88,7 @@ for i = 1:N
     % read body assuming leftmost 8 columns are
     % PRS, PRS_FLAG, TMP, TMP_FLAG, SAL, SAL_FLAG, OXY, OXY_FLAG
     % if not, CTDtemUnit/CTDsalUnit/CTDoxyUnit might show something.
-    [p, pf, t, tf, s, sf, o, of] = deal(NaN(7500,1));
+    [p, pf, t, tf, s, sf, o, of] = deal(NaN(20000,1));
     m = 0;
     while 1
         tline = fgetl(fid);
@@ -115,8 +115,8 @@ for i = 1:N
     end
     if m > mmax
         mmax = m;
-        if mmax > 7500
-            error('read_ctd_exchange.m: 7500 reached');
+        if mmax > 20000
+            error('read_ctd_exchange.m: 20000 reached');
         end
     end
     pr(:,i) = p;

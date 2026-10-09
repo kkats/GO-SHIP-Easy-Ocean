@@ -1,4 +1,4 @@
-% AR07W, 2013b
+% AR07W, 2015
 vinterp_handle = @vinterp_gauss;
 hinterp_handle = @hinterp_bylat;
 MAX_SEPARATION = 2.0;

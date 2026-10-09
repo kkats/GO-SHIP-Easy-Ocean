@@ -25,6 +25,9 @@
 ### 1998
 + [18HU98023_1](https://cchdo.ucsd.edu/cruise/18HU98023_1)
 
+### 2005
++ [18HU20050526](https://cchdo.ucsd.edu/cruise/18HU20050526)
+
 ### 2011b
 + [06MT20110624](https://cchdo.ucsd.edu/cruise/06MT20110624)
 
@@ -40,6 +43,8 @@
 ### 2015
 + [18HU20150504](https://cchdo.ucsd.edu/cruise/18HU20150504)
 
+### 2023
++ [18QL20230524](https://cchdo.ucsd.edu/cruise/18QL20230524)
 
 ## 2. Glitches
 
@@ -58,6 +63,11 @@ A 1994 CTD file `ar07w_e_00046_00001_ct1.csv` has duplicate data at CTDPRS=302.
 ```
 The second line was manually removed. Similarly a 1996 CTD file `ar07w_f_00048_00003_ct1.csv`
 has 2 data for CTDPRS=140.
+
+The CTD files from 2005 (calibrated in 2026) has duplicate sensor included (i.e. two sensors for each T, S, O).
+I take the mean value of two in `read_ctd_exchange_2005.m` and flag is 2 only when both sensors have FLAG=2.
+
+The CTD files for 2023 has a vertical spacing of 0.5 dbar.
 
 ## 3. Uncalibrated data
 
@@ -99,7 +109,6 @@ but you should know what you are doing.
 + [18HU20021129](https://cchdo.ucsd.edu/cruise/18HU20021129)
 + [18HU20030713](https://cchdo.ucsd.edu/cruise/18HU20030713)
 + [18HU20040515](https://cchdo.ucsd.edu/cruise/18HU20040515)
-+ [18HU20050526](https://cchdo.ucsd.edu/cruise/18HU20050526)
 + [18HU20060524](https://cchdo.ucsd.edu/cruise/18HU20060524)
 + [18HU20070510](https://cchdo.ucsd.edu/cruise/18HU20070510)
 + [18HU20080520](https://cchdo.ucsd.edu/cruise/18HU20080520)

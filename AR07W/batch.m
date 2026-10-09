@@ -3,15 +3,15 @@ PREFIX='/local/Shared/';
 MDIR = [PREFIX 'CTD/MATLAB/'];
 DIR = 'AR07W/';
 fname = 'ar07w';
-years = {'1990', '1992', '1993', '1994', '1995', '1996', '1997', '1998', ...
-         '2011b', '2012', '2013a', '2013b', '2015'};
+years = {'1990', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '2005', ...
+         '2011b', '2012', '2013a', '2013b', '2015', '2023'};
 % The following data are NOT calibrated and not included by default. See README.md
 %         '1999', '2001', '2002a', '2002b', '2003', '2004', ...
 %         '2005', '2006', '2007', '2008', '2009', '2010', '2011a'
-ll_grid = [54.9:0.1:60.6];
+ll_grid = [53.7:0.1:60.6];
 pr_grid = [0:10:6500];
-depth_files = {'', '', '', '', '', '', '', '', '', '', '', '', '', '', ...
-         '', '', '', '', '', '', '', '', '', '', '', ''};
+depth_files = {'', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...
+         '', '', '', '', '', '', '', '', '', '', '', '', ''};
 
 
 tic;
@@ -20,7 +20,9 @@ tic;
 for n = 1:length(years)
     mfile = [MDIR fname '_' years{n} '.mat'];
     if ~exist(mfile)
-        if n == 10 || n == 15
+        if n == 9
+            com = ['addpath AR07W; read_ctd_exchange_2005(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath AR07W'];
+        elseif n == 11 || n == 16
             % 'borrow' AR07W/read_ctd_exchange_2000()
             com = ['addpath AR07E; read_ctd_exchange_2000(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath AR07E'];
         else
