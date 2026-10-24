@@ -4,7 +4,7 @@ MDIR = [PREFIX 'CTD/MATLAB/'];
 DIR = 'I09S/';
 fname = 'i09s';
 years = {'1995', '2004', '2012'};
-ll_grid = [-65.4:0.1:-34.4];
+ll_grid = [-65.4:0.1:-32.6];
 pr_grid = [0:10:6500];
 depth_files = {'I09S/i09s_1995.depth', '', ''};
 
