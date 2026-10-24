@@ -11,6 +11,10 @@
 ### 2012
 + [09AR20120105](https://cchdo.ucsd.edu/cruise/09AR20120105)
 
+### 2024
++ [096U20240101](https://cchdo.ucsd.edu/cruise/096U20240101)
+
+
 ## 2. Glitches
 
 ### 1995
