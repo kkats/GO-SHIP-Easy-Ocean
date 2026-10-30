@@ -37,6 +37,9 @@
 ### 2013
 + [74JC20130319](https://cchdo.ucsd.edu/cruise/74JC20130319)
 
+### 2014
++ [74JC20140308](https://cchdo.ucsd.edu/cruise/74JC20140308)
+
 ### 2015a
 + [74JC20150110](https://cchdo.ucsd.edu/cruise/74JC20150110)
 
@@ -64,6 +67,10 @@ and "1133 and 1137 dbar". Manually corrected.
 ### 2013
 According to the cruise document, Standard Seawater batches P153, P154, and P155 were
 used but it is not clear on which station. Salinity bias is treated as unknown for this occupation.
+
+### 2014
+No flag columns in the CTD data. Use `read_ctd_exchange_2014.m`.
+Depth data in `sr01_2014.depth` are extracted from 'Depth from EM122 at arrival time' column in Table A1 of the [cruise report](https://cchdo.ucsd.edu/data/12441/74JC20140308_do.pdf).
 
 ### 2021
 Pressure field does not have `CTDPRS_FLAG_W`. Use `read_ctd_exchange_2021.m`.
