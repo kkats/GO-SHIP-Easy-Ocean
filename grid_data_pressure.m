@@ -5,9 +5,9 @@ function D_pressure = grid_data_pressure(D_reported, ll_grid, pr_grid, forceLong
 %
 
 if nargin > 3
-    forceLon = forceLongitude
+    forceLon = forceLongitude;
 else
-    forceLon = 0
+    forceLon = 0;
 end
 
 %%%
