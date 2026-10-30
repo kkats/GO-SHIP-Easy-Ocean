@@ -1,0 +1,7 @@
+% P04, 2024
+vinterp_handle = @vinterp_gauss;
+hinterp_handle = @hinterp_bylon;
+MAX_SEPARATION = 2.0;
+
+salt_offset([1:84]) = 1.0e-3 * (0.0); % P169 (33H320260511)
+salt_offset([85:211]) = 1.0e-3 * (-0.1); % P167 (49NZ20250405)
