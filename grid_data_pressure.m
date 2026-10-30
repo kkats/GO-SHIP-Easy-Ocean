@@ -1,8 +1,14 @@
-function D_pressure = grid_data_pressure(D_reported, ll_grid, pr_grid)
+function D_pressure = grid_data_pressure(D_reported, ll_grid, pr_grid, forceLongitude)
 %
 % Horizontal & vertical interpolation of `reported_data` D_reported.
 % lat/lon grid `ll_grid` and pressure_grid `pr_grid` are optional
 %
+
+if nargin > 3
+    forceLon = forceLongitude
+else
+    forceLon = 0
+end
 
 %%%
 %%% User defined interpolation functions in configuration.m
@@ -21,7 +27,14 @@ for i = 1:nstn
     tims(i) = stations{i}.Time;
 end
 
-[idx, ll, isAtlantic] = sort_stations(lons, lats);
+% when (meridional range of the section (in distance)) > (zonal range of the section), `ll` is latitude
+%                                                      <                                       longitude
+% Except when `forceLon=1` , `ll` is always longitude. This option is necessary for A17 section
+if forceLon > 0
+    [idx, ll, isAtlantic] = sort_stations_lon(lons, lats);
+else
+    [idx, ll, isAtlantic] = sort_stations(lons, lats);
+end
 ls = ll(idx); % sort
 if isAtlantic
     lons = ll;
