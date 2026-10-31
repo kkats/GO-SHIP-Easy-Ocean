@@ -24,7 +24,7 @@ for n = 1:length(years)
             com = ['addpath AR07E; read_ctd_exchange_2000(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath AR07E'];
         elseif n == 14
             com = ['addpath AR07E; read_ctd_exchange_2011(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath AR07E'];
-        elseif n == 16
+        elseif n == 18
             com = ['addpath AR07E; read_ctd_exchange_2020(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile '''); rmpath AR07E'];
         else
             com = ['read_ctd_exchange(''' PREFIX 'CTD/' DIR years{n} '/'', ''' mfile ''');'];
