@@ -3,4 +3,5 @@ vinterp_handle = @vinterp_gauss;
 hinterp_handle = @hinterp_bylon;
 MAX_SEPARATION = 2.0;
 
-salt_offset(1:33) = 1.0e-3 * 1.9; % P112 (64TR90_3)
+%salt_offset(1:33) = 1.0e-3 * 1.9; % P112 (64TR90_3) %% updated in 2026
+salt_offset(1:33) = 1.0e-3 * 1.3; % P112 (64TR90_3)

@@ -4,6 +4,9 @@ hinterp_handle = @hinterp_bylat;
 MAX_SEPARATION = 2.0;
 
 % 316N19831007/316N19840111
-salt_offset([1:59]) = 1.0e-3 * 0.0; % P90 (offset not determined)
-salt_offset([60:116]) = 1.0e-3 * (-0.2); % P92
-salt_offset([61:137]) = 1.0e-3 * 0.0; % P90 (offset not teremined)
+%salt_offset([1:59]) = 1.0e-3 * 0.0; % P90 (offset not determined) %% updated in 2026
+%salt_offset([60:116]) = 1.0e-3 * (-0.2); % P92 %% updated in 2026
+%salt_offset([61:137]) = 1.0e-3 * 0.0; % P90 (offset not teremined) %% undated in 2026
+salt_offset([1:59]) = 1.0e-3 * (-2.4); % P90
+salt_offset([60:116]) = 1.0e-3 * (-1.6); % P92
+salt_offset([61:137]) = 1.0e-3 * (-2.4); % P90

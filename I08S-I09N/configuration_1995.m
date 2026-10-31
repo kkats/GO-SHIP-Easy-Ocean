@@ -6,5 +6,7 @@ MAX_SEPARATION = 2.0;
 %
 % Given station number, returns salinity offset
 %
-salt_offset([1:146]) = 1.0e-3 * 1.4; %  P128 (I08S, 316N145_5)
-salt_offset([147:276]) = 1.0e-3 * 0.6; %  P126 (I09N, 316N145_6)
+% salt_offset([1:146]) = 1.0e-3 * 1.4; %  P128 (I08S, 316N145_5)  %% revised in 2026 update
+salt_offset([1:146]) = 1.0e-3 * 0.4; % P128 (I08S, 316N145_5)
+% salt_offset([147:276]) = 1.0e-3 * 0.6; %  P126 (I09N, 316N145_6)  %% revised in 2026 update
+salt_offset([147:276]) = 1.0e-3 * (-0.3); % P126 (I09N, 316N145_6)

@@ -4,4 +4,5 @@ hinterp_handle = @hinterp_bylon;
 MAX_SEPARATION = 2.0;
 
 % 06MM20060523
-salt_offset([1:120]) = 1.0e-3 * (-1.5); % P146 (cruise report P.14)
+% salt_offset([1:120]) = 1.0e-3 * (-1.5); % P146 (cruise report P.14)  %% revised in 2026 update
+salt_offset([1:120]) = 1.0e-3 * (-1.9); % P146 (cruise report P.14)

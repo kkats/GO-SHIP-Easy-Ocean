@@ -8,9 +8,12 @@ Information for IAPSO Standard Seawater batch-to-batch offset is found in [SaltB
 K. Katsumata, S. G. Purkey, R. Cowley, B. M. Sloyan, S. C. Diggs, T. S. Moore II, L. D. Talley, J. H. Swift, GO-SHIP Easy Ocean: Gridded ship-based hydrographic section of temperature, salinity, and dissolved oxygen (2022), _Scientific Data_, [doi:10.1038/s41597-022-01212-w](https://doi.org/10.1038/s41597-022-01212-w), also available in [PDF](https://www.nature.com/articles/s41597-022-01212-w.pdf).
 This publication describes version [1.4](https://github.com/kkats/GO-SHIP-Easy-Ocean/releases/tag/v1.4).
 
+# Salinity Batch offset update in 2026
+Since 2026 update, the IAPSO Standard Seawater batch-to-batch offset table is updated from [Kawano et al., 2006](https://doi.org/10.1007/s10872-006-0097-8) to [Uchida et al., 2025](https://doi.org/10.1175/JTECH-D-24-0049.1). Salinities found versions prior to 2025 are thus different from 2026 updates (mostly of the order of 0.001). We did not include temporal drift component of the standard seawater (C<sub>drift</sub> in Eq. (1) of Uchida et al., 2025). When highest accuracy is needed, the user might consider including the drift component.
+
 # Output Formats
 
-Uninterpolated data (station data) are called _reported_ data. Horizontally interpolated and vertically smoothed data are called _gridded_ data. These are stored under separate directories. Remarks common to all formats are;
+Uninterpolated data (station data) are called _reported_ data. Horizontally interpolated and vertically smoothed data are called _gridded_ data. These are stored under separate directories. Remarks common to all formats are
 + Temperature is in ITS-90. Use `t90tot68.m` for conversion to IPTS-68 (e.g. input to [gamma surface calculation](http://www.teos-10.org/preteos10_software/neutral_density.html)). The unit recorded in Matlab `Station` header (e.g. `D_pr(1).Station`) is the unit of the original CTD data, not the unit in our product.
 + Unless otherwise noted (e.g. [I01](https://github.com/kkats/WOCE-GO-SHIP-clean-sections/tree/master/I01/)), only _good_ (as defined by `flag=2`) data are used. This behaviour
 can be changed by modifying the QC section in `read_ctd_exchange.m`.

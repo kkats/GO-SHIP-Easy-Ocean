@@ -3,4 +3,5 @@ vinterp_handle = @vinterp_gauss;
 hinterp_handle = @hinterp_bylon;
 MAX_SEPARATION = 2.0;
 
-salt_offset([1:287]) = 1.0e-3 * 0.2; % P131 (offset 0.1) and P133 (offset 0.3) but usage unknown hence the average (06AQ19990623)
+% salt_offset([1:287]) = 1.0e-3 * 0.2; % P131 (offset 0.1) and P133 (offset 0.3) but usage unknown hence the average (06AQ19990623)  %% revised in 2026 update
+salt_offset([1:287]) = 1.0e-3 * (-0.8); % P131 (offset -0.6) and P133 (offset -1.1) but usage unknown hence the average (06AQ19990623)
